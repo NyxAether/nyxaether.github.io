@@ -1,3 +1,74 @@
-.current {
-    color: green;
+html {
+  line-height: 1.15;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%
+}
+
+body {
+  margin: 0
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+main,
+menu,
+nav,
+section {
+  display: block
+}
+
+h1 {
+  font-size: 2em;
+  margin: .67em 0
+}
+
+body {
+  padding: 0;
+  font-size: 100%;
+  line-height: 1.5;
+  color: #555;
+  font-family: 'Montserrat', sans-serif
+}
+
+.header {
+  text-align: center
+}
+
+.header .site-title {
+  font-size: 50px;
+  display: block;
+  line-height: 1;
+  color: #555
+}
+
+@media only screen and (min-width:550px) {
+  .header .site-title {
+      margin: 0;
+      font-size: 100px
   }
+}
+
+.header .site-description {
+  font-size: 20px;
+  display: block;
+  line-height: 1;
+  color: #555;
+  margin-top: 10px
+}
+
+@media only screen and (min-width:550px) {
+  .header .site-description {
+      font-size: 40px
+  }
+}
+
+#about {
+  width: 90%;
+  margin: 0 auto;
+  max-width: 960px
+}
