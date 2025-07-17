@@ -1,0 +1,13 @@
+---
+layout: default
+title: Trainings
+---
+<h1>Formations</h1>
+hello
+<ul>
+  {% for training in site.trainings %}
+  <li>
+    <h2><a href="{{ training.url }}">{{ training.title }}</a></h2>
+  </li>
+  {% endfor %}
+</ul>

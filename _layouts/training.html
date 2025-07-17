@@ -1,0 +1,44 @@
+---
+layout: default
+---
+<h1>{{ page.title }}</h1>
+<section class="training-infos">
+    <p>
+    <h3>Prix</h3>
+    {{ page.price }}
+    </p>
+    <p>
+    <h3>Durée</h3>
+    {{ page.duration }}
+    </p>
+</section>
+
+<section class="training-short">
+    {{ page.short }}
+</section>
+
+<section class="training-objectives">
+    <h2>Objectifs</h2>
+    <ul>
+        {% for objective in page.objectives %}
+        <li>{{ objective }}</li>
+        {% endfor %}
+    </ul>
+</section>
+
+<section class="training-audience">
+    <h2>Public concerné</h2>
+    {{ page.audience }}
+
+</section>
+
+<section class="training-prerequisites">
+    <h2>Prérequis</h2>
+    {{ page.prerequisites }}
+
+</section>
+
+<section class="training-program">
+    <h2>Programme</h2>
+    {{ content }}
+</section>
