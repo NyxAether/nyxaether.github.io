@@ -2,12 +2,17 @@ html {
   line-height: 1.15;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
-  color: #b2aca2;
-  background-color: #181a1b;
+  color: whitesmoke;
+  background-color: #0f172a;
+
+  max-width: 940px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;  
 }
 
 body {
-  margin: 0
+  margin: 0 auto;
 }
 
 article,
@@ -21,7 +26,7 @@ main,
 menu,
 nav,
 section {
-  display: block
+  display: block;
 }
 
 h1 {
@@ -64,6 +69,44 @@ body {
   .header .site-description {
       font-size: 40px
   }
+}
+
+.training-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px 16px;
+}
+
+.training-card {
+  display: inline-flex;
+  flex-flow: column;
+  height: 100%;
+  padding: 0.5em 1em;
+  border-radius: 0.4rem;
+  // box-shadow: 0px 0px 3px white;
+  background-color: #1e293b;
+}
+
+.training-card:hover{
+  background-color: #1a2536;
+}
+
+.training-cards > a {
+  color: whitesmoke;
+  text-decoration:none;
+}
+
+.card-name:hover {
+  text-decoration: underline;
+}
+
+.card-info {
+  flex: 1 1 auto;
+}
+
+.card-price  {
+  margin-left: auto;
+  font-weight: bold;
 }
 
 #about {
