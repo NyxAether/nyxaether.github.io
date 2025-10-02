@@ -10,7 +10,7 @@ objectives:
 prerequisites: "Pratique d’un langage de programmation ou connaissance de l’algorithmique.\
   \ Vérifiez que vous avez les prérequis nécessaires pour profiter pleinement de cette\
   \ formation en faisant \r\n                    ce test."
-price: 990.0
+price: 850.0
 program:
   parts:
   - items:

@@ -12,7 +12,7 @@ objectives:
 prerequisites: "Maîtrise de Python Vérifiez que vous avez les prérequis nécessaires\
   \ pour profiter pleinement de cette formation en faisant \r\n                  \
   \  ce test."
-price: 990.0
+price: 850.0
 program:
   parts:
   - items:
