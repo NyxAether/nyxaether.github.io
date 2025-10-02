@@ -15,7 +15,7 @@ prerequisites: "Bonnes connaissances en statistiques. Bonnes connaissances du Ma
   \ méthodes et solutions. Expérience requise. Vérifiez que vous avez les prérequis\
   \ nécessaires pour profiter pleinement de cette formation en faisant \r\n      \
   \              ce test."
-price: 850.0
+price: 990.0
 program:
   parts:
   - demo: Présentation des exemples de Machine Learning en classification et régression.
