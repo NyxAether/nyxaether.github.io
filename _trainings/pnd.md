@@ -1,6 +1,7 @@
 ---
 audience: Développeurs, ingénieurs et toute personne analysant les données avec des
   compétences de développement.
+category: Machine Learning -- Data-science
 duration: 2j  -  14h00
 id: PND
 objectives:

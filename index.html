@@ -4,8 +4,11 @@ title: Trainings
 ---
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <h1>Formations</h1>
+{% assign categories = site.trainings | group_by: "category" %}
+{% for category in categories %}
+<h2>{{ category.name }}</h2>
 <div class="training-cards">
-  {% for training in site.trainings %}
+  {% for training in category.items %}
   <a href="{{ training.url }}">
     <div class="training-card">
       <div class="card-name">
@@ -21,4 +24,5 @@ title: Trainings
   </a>
   {% endfor %}
 </div>
+{% endfor %}
 </ul>

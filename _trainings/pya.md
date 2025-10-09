@@ -1,5 +1,6 @@
 ---
 audience: Ingénieurs et développeurs.
+category: Python
 duration: 4j  -  28h00
 id: PYA
 objectives:

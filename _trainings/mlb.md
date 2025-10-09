@@ -1,6 +1,7 @@
 ---
 audience: Ingénieurs/chefs de projet souhaitant considérer les techniques d'apprentissage
   automatique dans la résolution de problèmes industriels.
+category: Machine Learning -- Data-science
 duration: 4j  -  28h00
 id: MLB
 objectives:

@@ -1,6 +1,7 @@
 ---
 audience: Responsables Infocentre (datamining, marketing, qualité…), utilisateurs
   et gestionnaires métiers de bases de données.
+category: Machine Learning -- Data-science
 duration: 4j  -  28h00
 id: BDA
 objectives:

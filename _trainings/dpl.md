@@ -1,6 +1,7 @@
 ---
 audience: Ingénieurs/Chefs de projet IA, consultants IA et toute personne souhaitant
   découvrir les techniques Deep Learning dans la résolution de problèmes industriels.
+category: Machine Learning -- Data-science
 duration: 3j  -  21h00
 id: DPL
 objectives:

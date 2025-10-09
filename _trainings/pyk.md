@@ -1,6 +1,7 @@
 ---
 audience: Ingénieurs, développeurs, chercheurs, data scientists, data analysts et
   toute personne désireuse de se former à l'univers scientifique de Python.
+category: Machine Learning -- Data-science
 duration: 3j  -  21h00
 id: PYK
 objectives:

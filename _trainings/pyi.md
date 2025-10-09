@@ -1,6 +1,7 @@
 ---
 audience: Développeurs Python désirant s'approprier les principaux dispositifs d'apprentissage
   automatisé et de traitement d'image.
+category: Machine Learning -- Data-science
 duration: 3j  -  21h00
 id: PYI
 objectives:
