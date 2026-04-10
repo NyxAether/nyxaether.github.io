@@ -27,7 +27,8 @@
   margin-top: 1rem;
 }
 
-.training-price, .training-duration {
+.training-price,
+.training-duration {
   font-size: 1.1rem;
   font-weight: bold;
   color: $accent-color;
@@ -105,7 +106,8 @@
   line-height: 1.5;
 }
 
-.training-demo, .training-practice {
+.training-demo,
+.training-practice {
   margin-top: 1rem;
   padding: 1rem;
   background-color: rgba(0, 102, 255, 0.05);
@@ -113,12 +115,14 @@
   border-left: 3px solid #0066ff;
 }
 
-.training-demo h4, .training-practice h4 {
+.training-demo h4,
+.training-practice h4 {
   color: #0066ff;
   margin-bottom: 0.5rem;
 }
 
-.training-demo p, .training-practice p {
+.training-demo p,
+.training-practice p {
   margin: 0;
   line-height: 1.5;
 }
@@ -149,7 +153,7 @@
 
 /* Style amélioré pour les pages de formation en mode sombre */
 body.dark-theme .training-page {
-  background-color: $dark-bg-color;
+  background-color: $dark-primary-color;
 }
 
 body.dark-theme .training-section {
