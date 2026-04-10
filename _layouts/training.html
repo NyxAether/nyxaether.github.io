@@ -1,59 +1,76 @@
 ---
 layout: default
 ---
-<h1>{{ page.title }}</h1>
-<section class="training-infos">
-    <p>
-    <h3>Prix</h3>
-    {{ page.price }} €
-    </p>
-    <p>
-    <h3>Durée</h3>
-    {{ page.duration }}
-    </p>
-</section>
+<div class="training-page">
+  <div class="training-header">
+    <h1>{{ page.title }}</h1>
+    <div class="training-meta">
+      <div class="training-price">
+        <strong>Prix :</strong> {{ page.price }} € HT
+      </div>
+      <div class="training-duration">
+        <strong>Durée :</strong> {{ page.duration }}
+      </div>
+    </div>
+  </div>
 
-<section class="training-short">
-    {{ page.short }}
-</section>
+  <div class="training-content">
+    <div class="training-summary">
+      <h2>Ce que vous allez apprendre</h2>
+      <div class="training-short">
+        {{ page.short }}
+      </div>
+    </div>
 
-<section class="training-objectives">
-    <h2>Objectifs</h2>
-    <ul>
+    <div class="training-section">
+      <h2>Objectifs</h2>
+      <ul class="training-objectives">
         {% for objective in page.objectives %}
         <li>{{ objective }}</li>
         {% endfor %}
-    </ul>
-</section>
+      </ul>
+    </div>
 
-<section class="training-audience">
-    <h2>Public concerné</h2>
-    {{ page.audience }}
+    <div class="training-section">
+      <h2>Public concerné</h2>
+      <div class="training-audience">
+        {{ page.audience }}
+      </div>
+    </div>
 
-</section>
+    <div class="training-section">
+      <h2>Prérequis</h2>
+      <div class="training-prerequisites">
+        {{ page.prerequisites }}
+      </div>
+    </div>
 
-<section class="training-prerequisites">
-    <h2>Prérequis</h2>
-    {{ page.prerequisites }}
-
-</section>
-
-<section class="training-program">
-    <h2>Programme</h2>
-    {% for part in page.program.parts %}
-    <h3>{{ part.title }}</h3>
-    <ul>
-        {% for item in part.items %}
-        <li>{{ item }}</li>
+    <div class="training-section">
+      <h2>Programme</h2>
+      <div class="training-program">
+        {% for part in page.program.parts %}
+        <div class="training-program-part">
+          <h3>{{ part.title }}</h3>
+          <ul>
+            {% for item in part.items %}
+            <li>{{ item }}</li>
+            {% endfor %}
+          </ul>
+          {% if part.demo %}
+          <div class="training-demo">
+            <h4>Démonstration</h4>
+            <p>{{part.demo}}</p>
+          </div>
+          {% endif %}
+          {% if part.practice %}
+          <div class="training-practice">
+            <h4>Travaux pratiques</h4>
+            <p>{{part.practice}}</p>
+          </div>
+          {% endif %}
+        </div>
         {% endfor %}
-    </ul>
-    {% if part.demo %}
-    <h4>Démonstration</h4>
-    <p>{{part.demo}}</p>
-    {% endif %}
-    {% if part.practice %}
-    <h4>Travaux pratiques</h4>
-    <p>{{part.practice}}</p>
-    {% endif %}
-    {% endfor %}
-</section>
+      </div>
+    </div>
+  </div>
+</div>

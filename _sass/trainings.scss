@@ -1,53 +1,180 @@
-.training-cards {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 40px 16px;
+@import "sparks-formation-style";
+
+.training-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
 }
 
-
-@media only screen and (max-width: 640px) {
-    .training-cards {
-        grid-template-columns: 1fr;
-        margin: 0 1em;
-    }
+.training-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
 }
 
-.training-card {
-    display: inline-flex;
-    flex-flow: column;
-    height: 100%;
-    padding: 0.5em 1em;
-    border-radius: 0.4rem;
-    // box-shadow: 0px 0px 3px white;
-    background-color: #1e293b;
+.training-header h1 {
+  font-size: 2.5rem;
+  color: $primary-color;
+  margin-bottom: 1rem;
 }
 
-@media only screen and (max-width: 640px) {
-    .training-card {
-        width: 95%;
-    }
+.training-meta {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
 }
 
-.training-card:hover {
-    background-color: #1a2536;
-    transform: scale(1.05);
-    transition: transform ease-in-out 0.3s;
+.training-price, .training-duration {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: $accent-color;
+  background-color: rgba(255, 102, 0, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  display: inline-block;
 }
 
-.training-cards>a {
-    color: whitesmoke;
-    text-decoration: none;
+.training-content {
+  margin-top: 2rem;
 }
 
-.card-name:hover {
-    text-decoration: underline;
+.training-section {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
-.card-info {
-    flex: 1 1 auto;
+.training-section h2 {
+  color: $primary-color;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid $accent-color;
 }
 
-.card-price {
-    margin-left: auto;
-    font-weight: bold;
+.training-short {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.training-objectives {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.training-objectives li {
+  padding: 0.5rem;
+  background-color: rgba(255, 102, 0, 0.05);
+  border-left: 3px solid $accent-color;
+  margin-bottom: 0.5rem;
+}
+
+.training-program {
+  margin-top: 1.5rem;
+}
+
+.training-program-part {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  border-left: 4px solid $secondary-color;
+}
+
+.training-program-part h3 {
+  color: $secondary-color;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.training-program-part ul {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+.training-program-part li {
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+.training-demo, .training-practice {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: rgba(0, 102, 255, 0.05);
+  border-radius: 5px;
+  border-left: 3px solid #0066ff;
+}
+
+.training-demo h4, .training-practice h4 {
+  color: #0066ff;
+  margin-bottom: 0.5rem;
+}
+
+.training-demo p, .training-practice p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+@media only screen and (max-width: 768px) {
+  .training-page {
+    padding: 1rem;
+  }
+
+  .training-header h1 {
+    font-size: 2rem;
+  }
+
+  .training-meta {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .training-objectives {
+    grid-template-columns: 1fr;
+  }
+
+  .training-program-part {
+    padding: 1rem;
+  }
+}
+
+/* Style amélioré pour les pages de formation en mode sombre */
+body.dark-theme .training-page {
+  background-color: $dark-bg-color;
+}
+
+body.dark-theme .training-section {
+  background-color: $dark-light-color;
+}
+
+body.dark-theme .training-short {
+  color: $dark-text-color;
+}
+
+body.dark-theme .training-objectives li {
+  background-color: rgba(255, 102, 0, 0.1);
+  color: $dark-text-color;
+}
+
+body.dark-theme .training-program-part {
+  background-color: #2a2a2a;
+}
+
+body.dark-theme .training-demo,
+body.dark-theme .training-practice {
+  background-color: rgba(0, 102, 255, 0.1);
+}
+
+body.dark-theme .training-demo h4,
+body.dark-theme .training-practice h4 {
+  color: #66ccff;
 }

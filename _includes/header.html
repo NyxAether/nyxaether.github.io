@@ -1,9 +1,35 @@
 <div class="header">
-    <h1>
-        <span class="site-title">Romain Rincé</span>
-        <span class="site-description">Spécialiste en Machine Learning</span>
-    </h1>
-    <div class="links-icons">
-        <a href="https://github.com/nyxaether"><i class="todo"></i></a>
+    <div class="header-content">
+        <div class="header-text">
+            <h1>
+                <span class="site-title">Romain Rincé</span>
+                <span class="site-description">Spécialiste en Machine Learning</span>
+            </h1>
+        </div>
+        <div class="header-icons">
+            <a href="https://github.com/nyxaether" class="header-icon" aria-label="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+            <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme">
+                🌙
+            </button>
+        </div>
     </div>
 </div>
+
+<script>
+  document.getElementById('theme-toggle').addEventListener('click', function() {
+    document.body.classList.toggle('dark-theme');
+    // Sauvegarder le choix dans le localStorage
+    if (document.body.classList.contains('dark-theme')) {
+      localStorage.setItem('theme', 'dark');
+    } else {
+      localStorage.setItem('theme', 'light');
+    }
+  });
+
+  // Vérifier le thème sauvegardé
+  if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark-theme');
+  }
+</script>

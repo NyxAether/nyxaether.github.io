@@ -1,3 +1,5 @@
+@import "sparks-formation-style";
+
 article,
 aside,
 details,
@@ -12,21 +14,40 @@ html {
   line-height: 1.15;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
-  color: whitesmoke;
-  background-color: #0f172a;
+  color: #333;
+  background-color: #fff;
 
-  max-width: 940px;
-  margin: 0 auto;
-  justify-content: center;
+  font-family: $font-main;
+  position: relative;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-color: #fff;
+}
+
+body.dark-theme {
+  background-color: $dark-bg-color;
+}
+
+body {
+  min-height: 100vh;
 }
 
 nav {
-  width: 50%;
+  width: 100%;
   list-style-type: none;
-  display: grid;
-  gap: 0rem;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem 0;
+  margin: 0;
+  background-color: $primary-color;
+  border-radius: 8px;
+  box-shadow: $box-shadow;
 }
 
 @media only screen and (max-width: 640px) {
@@ -38,15 +59,30 @@ nav {
 nav>li {
   display: inline;
   margin: 0;
-  padding: 0.2em 1em;
+  padding: 0.8rem 1.5rem;
   line-height: 32px;
+  border-radius: $button-border-radius;
+  transition: all $transition-speed ease;
+  background-color: transparent;
+  color: white;
+  font-weight: 500;
 }
 
 nav>li:hover {
-  background-color: #1a2536;
-  transform: scale(1.05);
-  transition: transform ease-in-out 0.3s;
-  display: inline;
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+  box-shadow: $box-shadow-hover;
+}
+
+nav>li>a {
+  color: white;
+  text-decoration: none;
+  transition: color $transition-speed ease;
+}
+
+nav>li>a:hover {
+  color: #fff;
+  font-weight: 600;
 }
 
 section {
@@ -54,12 +90,14 @@ section {
 }
 
 a {
-  color: whitesmoke;
+  color: $primary-color;
   text-decoration: none;
+  transition: color $transition-speed ease;
 }
 
 a:hover {
-  font-weight: 900;
+  color: $secondary-color;
+  font-weight: 600;
 }
 
 
@@ -71,19 +109,224 @@ h1 {
 body {
   padding: 0;
   font-size: 100%;
-  line-height: 1.5;
-  font-family: 'Montserrat', sans-serif
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  transition: background-color $transition-speed ease, color $transition-speed ease;
+  min-height: 100vh;
 }
 
+body.dark-theme {
+  color: $dark-text-color;
+  background-color: $dark-bg-color;
+}
+
+body.dark-theme .header {
+  background: linear-gradient(to right, $dark-primary-color, $dark-secondary-color);
+  color: $dark-text-color;
+}
+
+body.dark-theme .header .site-title {
+  color: $dark-text-color;
+}
+
+body.dark-theme .header .site-description {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+body.dark-theme nav {
+  background-color: $dark-primary-color;
+}
+
+body.dark-theme nav>li>a {
+  color: $dark-text-color;
+}
+
+body.dark-theme nav>li:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-theme #about {
+  background-color: $dark-light-color;
+}
+
+body.dark-theme .training-card {
+  background-color: $dark-light-color;
+  box-shadow: $box-shadow;
+}
+
+body.dark-theme .card-button {
+  background-color: $dark-secondary-color;
+}
+
+body.dark-theme .card-button:hover {
+  background-color: darken($dark-secondary-color, 10%);
+}
+
+body.dark-theme .card-name {
+  color: $dark-text-color;
+}
+
+body.dark-theme .card-description {
+  color: $dark-text-color;
+}
+
+body.dark-theme .card-price {
+  color: $dark-accent-color;
+  background-color: rgba(255, 102, 0, 0.1);
+}
+
+body.dark-theme .card-duration {
+  color: $dark-text-color;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+body.dark-theme {
+  color: $dark-text-color;
+  background-color: $dark-bg-color;
+}
+
+body.dark-theme .header {
+  background: linear-gradient(to right, $dark-primary-color, $dark-secondary-color);
+  color: $dark-text-color;
+}
+
+body.dark-theme .header .site-title {
+  color: $dark-text-color;
+}
+
+body.dark-theme .header .site-description {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+body.dark-theme nav {
+  background-color: $dark-primary-color;
+}
+
+body.dark-theme nav>li>a {
+  color: $dark-text-color;
+}
+
+body.dark-theme nav>li:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-theme #about {
+  background-color: $dark-light-color;
+}
+
+body.dark-theme .training-card {
+  background-color: $dark-light-color;
+  box-shadow: $box-shadow;
+}
+
+body.dark-theme .card-button {
+  background-color: $dark-secondary-color;
+}
+
+body.dark-theme .card-button:hover {
+  background-color: darken($dark-secondary-color, 10%);
+}
+
+body.dark-theme .card-name {
+  color: $dark-text-color;
+}
+
+body.dark-theme .card-description {
+  color: $dark-text-color;
+}
+
+body.dark-theme .card-price {
+  color: $dark-accent-color;
+  background-color: rgba(255, 102, 0, 0.1);
+}
+
+body.dark-theme .card-duration {
+  color: $dark-text-color;
+  background-color: rgba(0, 0, 0, 0.2);
+}
 
 .header {
-  text-align: center
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  background: linear-gradient(to right, $primary-color, $secondary-color);
+  border-radius: 0;
+  color: white;
+  box-shadow: $box-shadow;
+  position: relative;
+  z-index: 1;
+  padding: 1rem 0;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.header-text {
+  flex: 1;
+}
+
+.header-icons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header-icon {
+  color: white;
+  font-size: 1.5rem;
+  transition: transform $transition-speed ease;
+}
+
+.header-icon:hover {
+  transform: scale(1.2);
+}
+
+.theme-toggle-btn {
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all $transition-speed ease;
+}
+
+.theme-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.header h1 {
+  margin: 0;
+  padding: 0;
+}
+
+.header .site-title {
+  margin: 0;
+  padding: 0;
+}
+
+.header .site-description {
+  margin: 0;
+  padding: 0;
 }
 
 .header .site-title {
   font-size: 50px;
   display: block;
   line-height: 1;
+  margin: 0.5rem 0;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 @media only screen and (min-width:550px) {
@@ -96,8 +339,10 @@ body {
 .header .site-description {
   font-size: 20px;
   display: block;
-  line-height: 1;
-  margin-top: 10px
+  line-height: 1.4;
+  margin-top: 1rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 @media only screen and (min-width:550px) {
@@ -106,11 +351,42 @@ body {
   }
 }
 
-
-
-
 #about {
-  width: 90%;
-  margin: 0 auto;
-  max-width: 960px
+  width: 100%;
+  margin: 2rem auto;
+  max-width: 1200px;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: $box-shadow;
+}
+
+.card-section {
+  padding: 3rem 0;
+}
+
+.card-section h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+  color: $primary-color;
+  position: relative;
+}
+
+.card-section h2:after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 4px;
+  background: $secondary-color;
+  margin: 0.5rem auto;
+  border-radius: 2px;
+}
+
+.card-section p {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 2rem;
+  font-size: 1.1rem;
+  color: #555;
 }
