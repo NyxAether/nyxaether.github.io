@@ -7,12 +7,25 @@
   <title>{{ page.title }}</title>
   <link rel="stylesheet" href="/assets/css/styles.css">
   <link rel="stylesheet" href="/assets/css/trainings-styles.css">
+  <script src="/assets/js/theme-toggle.js" defer></script>
+  <script src="/assets/js/neural-network.js" defer></script>
 </head>
 
 <body>
-  {% include navigation.html %}
-  {% include header.html %}
+  <div class="hero-section">
+    <canvas id="neural-canvas" class="neural-canvas"></canvas>
+    {% include navigation.html %}
+    {% include header.html %}
+  </div>
   {{ content }}
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof NeuralNetwork !== 'undefined') {
+        new NeuralNetwork('#neural-canvas').init();
+      }
+    });
+  </script>
 </body>
 
 </html>
