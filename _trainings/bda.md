@@ -10,10 +10,7 @@ objectives:
 - Évaluer les performances prédictives d'un algorithme
 - Créer des sélections et des classements dans de grands volumes de données pour dégager
   des tendances
-prerequisites: "Connaissances de base en Python. Connaissances de base en statistiques\
-  \ ou avoir suivi la formation \"Statistiques, maîtriser les fondamentaux\" (Réf.\
-  \ STA). Vérifiez que vous avez les prérequis nécessaires pour profiter pleinement\
-  \ de cette formation en faisant \r\n                    ce test."
+prerequisites: "Connaissances de base en Python. Connaissances de base en statistiques."
 price: 990.0
 program:
   parts:

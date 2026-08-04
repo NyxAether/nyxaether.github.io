@@ -10,8 +10,7 @@ objectives:
 - Savoir manipuler des données Excel/CSV/SQL avec Python
 - Savoir visualiser des données avec Python
 prerequisites: "Pratique d'Excel. Savoir programmer avec des macros Excel ou connaître\
-  \ l’algorithmique. Vérifiez que vous avez les prérequis nécessaires pour profiter\
-  \ pleinement de cette formation en faisant \r\n                    ce test."
+  \ l’algorithmique."
 price: 850.0
 program:
   parts:

@@ -10,9 +10,7 @@ objectives:
 - Découvrir des bibliothèques Python de traitement d'image
 - Transformer une image
 - Extraire des informations d'une image
-prerequisites: "Pratique du langage Python et connaissances de NumPy et SciPy. Vérifiez\
-  \ que vous avez les prérequis nécessaires pour profiter pleinement de cette formation\
-  \ en faisant \r\n                    ce test."
+prerequisites: "Pratique du langage Python et connaissances de NumPy et SciPy."
 price: 850.0
 program:
   parts:

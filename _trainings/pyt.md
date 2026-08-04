@@ -10,9 +10,7 @@ objectives:
 - Concevoir des interfaces graphiques
 - Mettre en œuvre les outils de test et d'évaluation de la qualité d'un programme
   Python
-prerequisites: "Connaissances de base en programmation. Vérifiez que vous avez les\
-  \ prérequis nécessaires pour profiter pleinement de cette formation en faisant \r\
-  \n                    ce test."
+prerequisites: "Connaissances de base en programmation."
 price: 1200.0
 program:
   parts:

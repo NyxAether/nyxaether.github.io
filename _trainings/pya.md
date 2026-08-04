@@ -11,10 +11,7 @@ objectives:
 - Packager et déployer ses artefacts Python
 - 'Exploiter des librairies contribuant au succès du langage : calcul scientifique,
   Intelligence Artificielle, XML, réseau'
-prerequisites: "Bonnes connaissances en développement Python, ou connaissances équivalentes\
-  \ à celles apportées par le cours PYT. Expérience requise. Vérifiez que vous avez\
-  \ les prérequis nécessaires pour profiter pleinement de cette formation en faisant \r\
-  \n                    ce test."
+prerequisites: "Bonnes connaissances en développement Python."
 price: 990.0
 program:
   parts:

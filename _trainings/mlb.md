@@ -10,10 +10,7 @@ objectives:
 - Identifier les méthodes d'apprentissage pertinentes pour résoudre un problème
 - Appliquer et évaluer les méthodes identifiées sur un problème
 - Faire le lien entre les différentes techniques d'apprentissage
-prerequisites: "Connaissances de base en Python et en statistiques de base (ou connaissances\
-  \ équivalentes à celles apportées par le cours \"Modélisation statistique, l'essentiel\"\
-  \ (Réf. STA)). Vérifiez que vous avez les prérequis nécessaires pour profiter pleinement\
-  \ de cette formation en faisant \r\n                    ce test."
+prerequisites: "Connaissances de base en Python et en statistiques de base."
 price: 990.0
 program:
   parts:

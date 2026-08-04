@@ -10,9 +10,7 @@ objectives:
 - Savoir manipuler les tables pivots et les tableaux croisés
 - Acquérir des notions sur l’accélération des calculs avec Pandas
 - Connaître les bonnes pratiques en Data Science
-prerequisites: "Maîtrise de Python Vérifiez que vous avez les prérequis nécessaires\
-  \ pour profiter pleinement de cette formation en faisant \r\n                  \
-  \  ce test."
+prerequisites: "Maîtrise de Python."
 price: 850.0
 program:
   parts:

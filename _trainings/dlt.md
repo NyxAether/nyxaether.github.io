@@ -11,9 +11,7 @@ objectives:
 - Connaître les modules de PyTorch pour charger les données
 - Avoir des notions sur les entraînements distribués
 - Avoir des notions sur les nouvelles méta-architectures telles que les transformers
-prerequisites: "Pratique de Python et du machine learning. Vérifiez que vous avez\
-  \ les prérequis nécessaires pour profiter pleinement de cette formation en faisant \r\
-  \n                    ce test."
+prerequisites: "Pratique de Python et du machine learning."
 price: 990.0
 program:
   parts:

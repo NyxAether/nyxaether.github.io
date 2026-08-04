@@ -8,9 +8,7 @@ objectives:
 - Savoir programmer avec le langage Python
 - Posséder une vue d’ensemble de l’écosystème scientifique de Python
 - Connaître les librairies scientifiques incontournables pour la science des données
-prerequisites: "Pratique d’un langage de programmation ou connaissance de l’algorithmique.\
-  \ Vérifiez que vous avez les prérequis nécessaires pour profiter pleinement de cette\
-  \ formation en faisant \r\n                    ce test."
+prerequisites: "Pratique d’un langage de programmation ou connaissance de l’algorithmique."
 price: 850.0
 program:
   parts:

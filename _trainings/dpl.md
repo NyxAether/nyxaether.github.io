@@ -13,9 +13,7 @@ objectives:
 - Acquérir de l'expérience pratique sur plusieurs problèmes réels
 prerequisites: "Bonnes connaissances en statistiques. Bonnes connaissances du Machine\
   \ Learning, connaissances équivalentes à celles apportées par le cours Machine Learning,\
-  \ méthodes et solutions. Expérience requise. Vérifiez que vous avez les prérequis\
-  \ nécessaires pour profiter pleinement de cette formation en faisant \r\n      \
-  \              ce test."
+  \ méthodes et solutions."
 price: 990.0
 program:
   parts:

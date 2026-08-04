@@ -11,10 +11,8 @@ objectives:
 - Être capable d'installer une librairie Python
 - Savoir réaliser des tâches d'administration système avec des scripts Python
 - Comprendre la syntaxe objet de Python
-prerequisites: "Avoir suivi le cours \"Initiation à la programmation avec Python\"\
-  \ (THO) ou posséder des connaissances de base en algorithmique (variables, tableaux,\
-  \ fonctions). Vérifiez que vous avez les prérequis nécessaires pour profiter pleinement\
-  \ de cette formation en faisant \r\n                    ce test."
+prerequisites: "Posséder des connaissances de base en algorithmique (variables, tableaux,\
+  \ fonctions)."
 price: 850.0
 program:
   parts:
