@@ -1,38 +1,77 @@
 ---
-# Feel free to add content and custom Front Matter to this file.
-# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-# Trying to replicate https://nrandecker.github.io/particle/#
-
-title: Romain Rincé
+title: À propos
 layout: default
 ---
 
-<section id="about">
-    <div class="expertise">
-        <h2>Expertise</h2>
-        <p>Docteur en Machine Learning. Je fournis des conseils, POCs et workshops dans le
-            domaine
-            du Machine Learning et Deep Learning.
-        </p>
-        <p>Je suis également formateur et propose des formations dans les domaines du développement python et de
-            l'apprentissage automatique.</p>
-    </div>
-    <div class="skills">
-        <div class="skill">
+<section id="about" class="card-section">
+    <h2>Expertise</h2>
+    <p class="section-intro">Docteur en Machine Learning, je fournis des conseils, POCs et workshops dans le domaine du
+        Machine Learning et Deep Learning. Je suis également formateur et propose des formations dans les domaines du
+        développement Python et de l'apprentissage automatique.</p>
+
+    <div class="skills-grid">
+        <div class="skill-card">
+            <span class="skill-icon" aria-hidden="true">🧠</span>
             <h3>Machine Learning</h3>
-            <p>Scikit-learn, XGBoost, Sparks</p>
+            <div class="skill-tags">
+                <span class="tag">Scikit-learn</span>
+                <span class="tag">XGBoost</span>
+                <span class="tag">Spark</span>
+            </div>
         </div>
-        <div class="skill">
+
+        <div class="skill-card">
+            <span class="skill-icon" aria-hidden="true">⚡</span>
             <h3>Deep Learning</h3>
-            <p>Tensorflow, Keras, PyTorch</p>
+            <div class="skill-tags">
+                <span class="tag">TensorFlow</span>
+                <span class="tag">Keras</span>
+                <span class="tag">PyTorch</span>
+                <span class="tag">LLM</span>
+            </div>
         </div>
-        <div class="skill">
+
+        <div class="skill-card">
+            <span class="skill-icon" aria-hidden="true">📊</span>
             <h3>Data Science</h3>
-            <p>Pandas, NumPy, SciPy, Matplotlib</p>
+            <div class="skill-tags">
+                <span class="tag">Pandas</span>
+                <span class="tag">NumPy</span>
+                <span class="tag">SciPy</span>
+                <span class="tag">Matplotlib</span>
+            </div>
         </div>
-        <div class="skill">
+
+        <div class="skill-card">
+            <span class="skill-icon" aria-hidden="true">🐍</span>
             <h3>Python</h3>
-            <p>Développement python, déploiement d'applications, d'API ou de CLI </p>
+            <div class="skill-tags">
+                <span class="tag">Développement</span>
+                <span class="tag">API</span>
+                <span class="tag">CLI</span>
+                <span class="tag">Déploiement</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="about-services">
+        <h2>Ce que je propose</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <span class="service-icon" aria-hidden="true">💡</span>
+                <h3>Conseil</h3>
+                <p>Accompagnement stratégique sur vos projets d'intelligence artificielle et de data science.</p>
+            </div>
+            <div class="service-card">
+                <span class="service-icon" aria-hidden="true">🔬</span>
+                <h3>Poc &amp; R&D</h3>
+                <p>Prototypage rapide pour valider la faisabilité de vos modèles et algorithmes.</p>
+            </div>
+            <div class="service-card">
+                <span class="service-icon" aria-hidden="true">🎓</span>
+                <h3>Formation</h3>
+                <p>Workshops et formations sur mesure en Python, Machine Learning et Deep Learning.</p>
+            </div>
         </div>
     </div>
 </section>

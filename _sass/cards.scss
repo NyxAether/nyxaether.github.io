@@ -193,3 +193,77 @@ body.dark-theme .card-button {
 body.dark-theme .card-button:hover {
   background-color: darken($dark-secondary-color, 10%);
 }
+
+// Page title on index (formations) page
+.page-title {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 700;
+  color: $primary-color;
+  margin-bottom: 1rem;
+  position: relative;
+
+  &:after {
+    content: '';
+    display: block;
+    width: 120px;
+    height: 5px;
+    background: linear-gradient(to right, $primary-color, $secondary-color);
+    margin: 0.75rem auto;
+    border-radius: 3px;
+  }
+
+  body.dark-theme & {
+    color: $secondary-color;
+
+    &:after {
+      background: linear-gradient(to right, $dark-secondary-color, $dark-accent-color);
+    }
+  }
+}
+
+// Section intro text
+.section-intro {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  font-size: 1.15rem;
+  color: #555;
+  line-height: 1.7;
+
+  body.dark-theme & {
+    color: $dark-text-color;
+  }
+}
+
+// Category block separator
+.category-block {
+  margin-top: 2.5rem;
+
+  h2 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 600;
+    color: $primary-color;
+    margin-bottom: 1.5rem;
+    position: relative;
+
+    &:after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(to right, $secondary-color, $accent-color);
+      margin: 0.5rem auto;
+      border-radius: 2px;
+    }
+
+    body.dark-theme & {
+      color: $secondary-color;
+
+      &:after {
+        background: linear-gradient(to right, $dark-secondary-color, $dark-accent-color);
+      }
+    }
+  }
+}

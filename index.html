@@ -3,25 +3,37 @@ layout: default
 title: Trainings
 ---
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<h1>Formations</h1>
-{% assign categories = site.trainings | group_by: "category" %}
-{% for category in categories %}
-<h2>{{ category.name }}</h2>
-<div class="training-cards">
-  {% for training in category.items %}
-  <a href="{{ training.url }}">
-    <div class="training-card">
-      <div class="card-name">
-        <h3>{{ training.title }}</h3>
-      </div>
-      <div class="card-info">
-        {{ training.duration }}
-      </div>
-      <div class="card-price">
-        {{training.price}} € HT / pers.
-      </div>
+
+<section class="card-section">
+  <h1 class="page-title">Formations</h1>
+  <p class="section-intro">Des formations sur mesure en Python, Machine Learning et Deep Learning pour monter en
+    compétence rapidement.
+  </p>
+  <p class="section-intro">
+    Toutes les formations peuvent être adaptés sur le programme et la durée sur demande.
+  </p>
+
+  {% assign categories = site.trainings | group_by: "category" %}
+  {% for category in categories %}
+  <div class="category-block">
+    <h2>{{ category.name }}</h2>
+    <div class="training-cards">
+      {% for training in category.items %}
+      <a href="{{ training.url }}">
+        <div class="training-card">
+          <div class="card-name">
+            <h3>{{ training.title }}</h3>
+          </div>
+          <div class="card-info">
+            {{ training.duration }}
+          </div>
+          <div class="card-price">
+            {{training.price}} € HT / pers.
+          </div>
+        </div>
+      </a>
+      {% endfor %}
     </div>
-  </a>
+  </div>
   {% endfor %}
-</div>
-{% endfor %}
+</section>
