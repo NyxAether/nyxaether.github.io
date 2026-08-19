@@ -1,31 +1,85 @@
-<!doctype html>
-<html>
-
+<!DOCTYPE html>
+<html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{{ page.title }}</title>
-  <link rel="stylesheet" href="/assets/css/styles.css">
-  <link rel="stylesheet" href="/assets/css/trainings-styles.css">
-  <script src="/assets/js/theme-toggle.js" defer></script>
-  <script src="/assets/js/neural-network.js" defer></script>
-</head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title | default: site.title }}</title>
+  <meta name="description" content="{{ page.description | default: site.description }}">
 
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
+
+  <!-- SEO -->
+  {% seo %}
+</head>
 <body>
-  <div class="hero-section">
-    <canvas id="neural-canvas" class="neural-canvas"></canvas>
-    {% include navigation.html %}
-    {% include header.html %}
-  </div>
+
+  <!-- ── NAV ── -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="{{ '/' | relative_url }}#hero" class="nav-brand">RR</a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="{{ '/' | relative_url }}#expertise" data-section="expertise">Expertise</a></li>
+        <li><a href="{{ '/' | relative_url }}#formations" data-section="formations">Formations</a></li>
+        <li><a href="{{ '/' | relative_url }}#services" data-section="services">Services</a></li>
+        <li><a href="{{ '/' | relative_url }}#contact" data-section="contact">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button id="themeToggle" class="theme-btn" aria-label="Basculer le thème">
+          <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72 1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79Z"/></svg>
+        </button>
+        <button id="menuToggle" class="menu-btn" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── PAGE CONTENT ── -->
   {{ content }}
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      if (typeof NeuralNetwork !== 'undefined') {
-        new NeuralNetwork('#neural-canvas').init();
-      }
-    });
-  </script>
-</body>
+  <!-- ── FOOTER ── -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; {{ site.time | date: '%Y' }} Romain Rincé — Consultant &amp; Formateur en Intelligence Artificielle</p>
+    </div>
+  </footer>
 
+  <!-- ── TRAINING MODAL ── -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="trainingModal">
+      <button class="modal-close" id="modalClose" aria-label="Fermer">&times;</button>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- ── Training Data (server-side JSON from Jekyll collection) ── -->
+  <script id="training-data" type="application/json">
+[
+{%- for t in site.trainings -%}
+{
+  "id": {{ t.slug | upcase | jsonify }},
+  "title": {{ t.title | jsonify }},
+  "short": {{ t.short | jsonify }},
+  "duration": {{ t.duration | jsonify }},
+  "price": {{ t.price | jsonify }},
+  "category": {{ t.category | jsonify }},
+  "audience": {{ t.audience | jsonify }},
+  "prerequisites": {{ t.prerequisites | jsonify }},
+  "objectives": {{ t.objectives | jsonify }},
+  "program": {{ t.program | jsonify }}
+}{%- unless forloop.last -%},{% endunless -%}
+{%- endfor -%}
+]
+  </script>
+
+  <!-- ── Scripts ── -->
+  <script src="{{ '/assets/js/scripts.js' | relative_url }}"></script>
+</body>
 </html>

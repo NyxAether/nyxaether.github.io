@@ -1,39 +1,234 @@
 ---
 layout: default
-title: Trainings
+title: Romain Rincé — Consultant & Formateur en IA / Machine Learning
+description: Docteur en Machine Learning, je fournis conseil, prototypage et formations en Python, Machine Learning et
+Deep Learning. Basé à Nantes, disponible dans toute la France.
 ---
-<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<section class="card-section">
-  <h1 class="page-title">Formations</h1>
-  <p class="section-intro">Des formations sur mesure en Python, Machine Learning et Deep Learning pour monter en
-    compétence rapidement.
-  </p>
-  <p class="section-intro">
-    Toutes les formations peuvent être adaptés sur le programme et la durée sur demande.
-  </p>
-
-  {% assign categories = site.trainings | group_by: "category" %}
-  {% for category in categories %}
-  <div class="category-block">
-    <h2>{{ category.name }}</h2>
-    <div class="training-cards">
-      {% for training in category.items %}
-      <a href="{{ training.url }}">
-        <div class="training-card">
-          <div class="card-name">
-            <h3>{{ training.title }}</h3>
-          </div>
-          <div class="card-info">
-            {{ training.duration }}
-          </div>
-          <div class="card-price">
-            {{training.price}} € HT / pers.
-          </div>
-        </div>
-      </a>
-      {% endfor %}
+<!-- ── HERO ── -->
+<section class="hero" id="hero">
+  <canvas id="neuralCanvas"></canvas>
+  <div class="hero-content">
+    <span class="hero-badge">Docteur en Machine Learning</span>
+    <h1 class="hero-title">
+      Romain <span class="gradient-text">Rincé</span>
+    </h1>
+    <p class="hero-subtitle">Consultant &amp; Formateur en <em>Intelligence Artificielle</em></p>
+    <p class="hero-desc">
+      Conseil, prototypage et formations sur mesure en Python, Machine Learning et Deep Learning.
+    </p>
+    <div class="hero-cta">
+      <a href="#formations" class="btn btn-primary">Voir les formations</a>
+      <a href="#contact" class="btn btn-outline">Me contacter</a>
     </div>
   </div>
-  {% endfor %}
+  <div class="hero-scroll-indicator">
+    <span></span><span></span><span></span>
+  </div>
+</section>
+
+<!-- ── EXPERTISE ── -->
+<section class="section" id="expertise">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Compétences</span>
+      <h2 class="section-title">Mon expertise</h2>
+      <p class="section-subtitle">
+        Docteur en Machine Learning, j'interviens sur l'ensemble de la chaîne — du conseil stratégique au déploiement
+        production.
+      </p>
+    </div>
+    <div class="expertise-grid">
+      <div class="expertise-card" data-reveal>
+        <div class="card-icon cyan">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 2a7 7 0 0 1 7 7c0 3-2 5.5-3 7l-4 5.5L8 16c-1-1.5-3-4-3-7a7 7 0 0 1 7-7Z" />
+            <circle cx="12" cy="9" r="2" />
+          </svg>
+        </div>
+        <h3>Machine Learning</h3>
+        <p>Modèles prédictifs, apprentissage supervisé et non supervisé, évaluation et déploiement de modèles en
+          production.</p>
+        <div class="tag-list">
+          <span class="tag">Scikit-learn</span><span class="tag">XGBoost</span><span class="tag">Spark MLlib</span>
+        </div>
+      </div>
+
+      <div class="expertise-card" data-reveal>
+        <div class="card-icon violet">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M6 3v18l4-2 4 2 4-2 4 2V3l-4 2-4-2-4 2-4-2Z" />
+            <path d="M6 8h8m-8 4h12" />
+          </svg>
+        </div>
+        <h3>Deep Learning</h3>
+        <p>Réseaux de neurones convolutifs, transformers, LLM, transfer learning et architectures modernes.</p>
+        <div class="tag-list">
+          <span class="tag">TensorFlow</span><span class="tag">Keras</span><span class="tag">PyTorch</span><span
+            class="tag">LLM</span>
+        </div>
+      </div>
+
+      <div class="expertise-card" data-reveal>
+        <div class="card-icon emerald">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="3" y="3" width="18" height="18" rx="2" />
+            <path d="M3 9h18m-7 0v12" />
+          </svg>
+        </div>
+        <h3>Data Science</h3>
+        <p>Analyse exploratoire, visualisation, manipulation de données et pipelines de traitement.</p>
+        <div class="tag-list">
+          <span class="tag">Pandas</span><span class="tag">NumPy</span><span class="tag">SciPy</span><span
+            class="tag">Matplotlib</span>
+        </div>
+      </div>
+
+      <div class="expertise-card" data-reveal>
+        <div class="card-icon amber">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path
+              d="M12 3a9 9 0 0 1 9 9c0 5.5-4.5 10-9 10a9 9 0 0 1-6-2.5L3 21l2.5-2A8.97 8.97 0 0 1 3 12a9 9 0 0 1 9-9Z" />
+            <path d="M10 10l2 2 4-4" />
+          </svg>
+        </div>
+        <h3>Développement Python</h3>
+        <p>Applications robustes, API, scripts d'automatisation et déploiement de solutions Python.</p>
+        <div class="tag-list">
+          <span class="tag">FastAPI</span><span class="tag">CLI</span><span class="tag">Packaging</span><span
+            class="tag">Déploiement</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FORMATIONS ── -->
+<section class="section section-alt" id="formations">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Catalogue</span>
+      <h2 class="section-title">Formations</h2>
+      <p class="section-subtitle">
+        Des formations sur mesure adaptées à votre programme et vos délais. Cliquez sur une formation pour voir les
+        détails.
+      </p>
+    </div>
+
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all">Toutes</button>
+      <button class="filter-btn" data-filter="python">Python</button>
+      <button class="filter-btn" data-filter="ml">Machine Learning &amp; Data-science</button>
+    </div>
+
+    <div class="formations-grid" id="formationsGrid">
+      <!-- Populated by JS from server-side data -->
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICES ── -->
+<section class="section" id="services">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Offres</span>
+      <h2 class="section-title">Ce que je propose</h2>
+      <p class="section-subtitle">
+        Trois axes d'intervention pour répondre à vos besoins en intelligence artificielle.
+      </p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card" data-reveal>
+        <div class="service-number">01</div>
+        <h3>Conseil &amp; Stratégie</h3>
+        <p>Accompagnement sur vos projets IA — identification des opportunités, choix d'architecture et feuille de
+          route.</p>
+        <ul class="service-list">
+          <li>Audit de maturité data</li>
+          <li>Définition de stratégie IA</li>
+          <li>Veille technologique</li>
+        </ul>
+      </div>
+      <div class="service-card featured" data-reveal>
+        <div class="service-number">02</div>
+        <h3>Poc &amp; R&amp;D</h3>
+        <p>Prototypage rapide pour valider la faisabilité de vos modèles et algorithmes avant investissement majeur.</p>
+        <ul class="service-list">
+          <li>POC en quelques semaines</li>
+          <li>Recherche &amp; expérimentation</li>
+          <li>Déploiement de modèles</li>
+        </ul>
+      </div>
+      <div class="service-card" data-reveal>
+        <div class="service-number">03</div>
+        <h3>Formation &amp; Workshops</h3>
+        <p>Montée en compétence de vos équipes en Python, Machine Learning et Deep Learning.</p>
+        <ul class="service-list">
+          <li>Programmes personnalisés</li>
+          <li>Travaux pratiques concrets</li>
+          <li>Suivi post-formation</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section class="section section-alt" id="contact">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Contact</span>
+      <h2 class="section-title">Travaillons ensemble</h2>
+      <p class="section-subtitle">
+        Disponible pour des projets, formations et collaborations autour du Machine Learning et du Deep Learning.
+      </p>
+    </div>
+
+    <div class="contact-grid">
+      <a href="mailto:contact@romainrince.fr" class="contact-card" data-reveal>
+        <div class="contact-icon-wrap">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="2" y="4" width="20" height="16" rx="2" />
+            <path d="M22 4l-10 8L0 4" />
+          </svg>
+        </div>
+        <h3>Email</h3>
+        <p>contact@romainrince.fr</p>
+      </a>
+
+      <div class="contact-card" data-reveal aria-label="Localisation">
+        <div class="contact-icon-wrap">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7Z" />
+            <circle cx="12" cy="9" r="2.5" />
+          </svg>
+        </div>
+        <h3>Localisation</h3>
+        <p>Nantes — déplacement dans toute la France</p>
+      </div>
+
+      <a href="https://www.linkedin.com/in/rrince/" target="_blank" rel="noopener noreferrer" class="contact-card"
+        data-reveal>
+        <div class="contact-icon-wrap">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M20.45 21.55h-3.75v-5.56c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.95v5.65H8.95V9h3.6v1.56h.05c.5-0.95 1.7-1.95 3.5-1.95 3.75 0 4.45 2.47 4.45 5.68v7.26zM4.46 5.54a1.54 1.54 0 0 1-1.54-1.54 1.54 1.54 0 0 1 1.54-1.54 1.53 1.53 0 0 1 1.54 1.54 1.53 1.53 0 0 1-1.54 1.54zM5.96 21.55H2.28V9h3.68v12.55zM22.55 0H1.45A1.45 1.45 0 0 0 0 1.45v21.1A1.45 1.45 0 0 0 1.45 24h21.1A1.45 1.45 0 0 0 24 22.55V1.45A1.45 1.45 0 0 0 22.55 0z" />
+          </svg>
+        </div>
+        <h3>LinkedIn</h3>
+        <p>Voir mon profil →</p>
+      </a>
+
+      <a href="https://github.com/nyxaether" target="_blank" rel="noopener noreferrer" class="contact-card" data-reveal>
+        <div class="contact-icon-wrap">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12 .5C5.37.5 0 5.78 0 12.29c0 5.21 3.43 9.64 8.2 11.21.6.11.82-.26.82-.58v-2.01c-3.34.72-4.04-1.41-4.04-1.41-.55-1.37-1.33-1.74-1.33-1.74-1.09-.74.08-.72.08-.72 1.2.08 1.84 1.23 1.84 1.23 1.07 1.83 2.81 1.3 3.5 1 .1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6.02 0c2.3-1.55 3.3-1.23 3.3-1.23.66 1.66.25 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.82.58A12.3 12.3 0 0 0 24 12.29C24 5.78 18.63.5 12 .5z" />
+          </svg>
+        </div>
+        <h3>GitHub</h3>
+        <p>Voir mon profil →</p>
+      </a>
+    </div>
+  </div>
 </section>
