@@ -28,16 +28,22 @@ function loadTrainings() {
 }
 
 
-// ── Neural Network Canvas Animation ──
-class NeuralNetwork {
+// ── ASCII Field Animation (hero background) ──
+const ASCII_RAMP = ' .·:-=+*';
+
+class AsciiField {
   constructor(canvasId) {
     this.canvas = document.querySelector(canvasId);
     if (!this.canvas) return;
     this.ctx = this.canvas.getContext('2d');
-    this.particles = [];
     this.mouse = { x: null, y: null };
     this.raf = null;
     this.resizeTimer = null;
+    this.cell = 16;
+    this.t = 0;
+    this.lastFrame = 0;
+    this.running = false;
+    this.reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     this.init();
   }
 
@@ -46,145 +52,94 @@ class NeuralNetwork {
     const rect = this.canvas.parentElement.getBoundingClientRect();
     this.canvas.width = rect.width * dpr;
     this.canvas.height = rect.height * dpr;
-    this.ctx.scale(dpr, dpr);
+    this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     this.w = rect.width;
     this.h = rect.height;
+    this.cols = Math.ceil(this.w / this.cell) + 1;
+    this.rows = Math.ceil(this.h / this.cell) + 1;
   }
 
-  getParticleCount() {
-    const w = window.innerWidth;
-    if (w < 640) return 20;
-    if (w < 1024) return 35;
-    return 50;
-  }
-
-  createParticles() {
-    this.particles = [];
-    for (let i = 0; i < this.getParticleCount(); i++) {
-      this.particles.push({
-        x: Math.random() * this.w,
-        y: Math.random() * this.h,
-        vx: (Math.random() - 0.5) * 0.6,
-        vy: (Math.random() - 0.5) * 0.6,
-        radius: Math.random() * 2 + 1,
-        opacity: Math.random() * 0.4 + 0.2,
-        pulsePhase: Math.random() * Math.PI * 2
-      });
-    }
-  }
-
-  isDark() {
-    return document.documentElement.getAttribute('data-theme') !== 'light';
-  }
-
-  update(dt) {
-    for (const p of this.particles) {
-      // Mouse repulsion
-      if (this.mouse.x !== null) {
-        const dx = p.x - this.mouse.x;
-        const dy = p.y - this.mouse.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 150) {
-          const force = (150 - dist) / 150;
-          const angle = Math.atan2(dy, dx);
-          p.vx += Math.cos(angle) * force * 0.4;
-          p.vy += Math.sin(angle) * force * 0.4;
-        }
-      }
-
-      // Clamp speed
-      const speed = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
-      if (speed > 1.5) {
-        p.vx = (p.vx / speed) * 1.5;
-        p.vy = (p.vy / speed) * 1.5;
-      }
-
-      // Slow down + random drift
-      p.vx *= 0.998;
-      p.vy *= 0.998;
-      const currentSpeed = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
-      if (currentSpeed < 0.15) {
-        p.vx += (Math.random() - 0.5) * 0.3;
-        p.vy += (Math.random() - 0.5) * 0.3;
-      }
-
-      p.x += p.vx;
-      p.y += p.vy;
-
-      // Bounce off walls
-      if (p.x < 0 || p.x > this.w) p.vx *= -1;
-      if (p.y < 0 || p.y > this.h) p.vy *= -1;
-      p.x = Math.max(0, Math.min(this.w, p.x));
-      p.y = Math.max(0, Math.min(this.h, p.y));
-
-      // Pulse
-      p.pulsePhase += 0.02;
-    }
+  readColor() {
+    this.color = getComputedStyle(document.documentElement).getPropertyValue('--ascii-ink').trim() || 'rgba(0,0,0,0.2)';
   }
 
   draw() {
-    this.ctx.clearRect(0, 0, this.w, this.h);
-    const dark = this.isDark();
+    const ctx = this.ctx;
+    ctx.clearRect(0, 0, this.w, this.h);
+    ctx.font = '11px "JetBrains Mono", monospace';
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = this.color;
 
-    // Connection color
-    const r = 0, g = 168, b = 255;
+    for (let row = 0; row < this.rows; row++) {
+      const y = row * this.cell;
+      for (let col = 0; col < this.cols; col++) {
+        const x = col * this.cell;
 
-    // Draw connections
-    for (let i = 0; i < this.particles.length; i++) {
-      for (let j = i + 1; j < this.particles.length; j++) {
-        const a = this.particles[i];
-        const b_ = this.particles[j];
-        const dx = a.x - b_.x;
-        const dy = a.y - b_.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        const maxDist = 140;
+        let v = Math.sin(col * 0.35 + this.t) + Math.cos(row * 0.35 - this.t * 0.8);
 
-        if (dist < maxDist) {
-          const opacity = (1 - dist / maxDist) * 0.25;
-          this.ctx.beginPath();
-          this.ctx.moveTo(a.x, a.y);
-          this.ctx.lineTo(b_.x, b_.y);
-          this.ctx.strokeStyle = `rgba(${r},${g},${b},${opacity.toFixed(3)})`;
-          this.ctx.lineWidth = 0.7;
-          this.ctx.stroke();
+        if (this.mouse.x !== null) {
+          const dx = x - this.mouse.x;
+          const dy = y - this.mouse.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 160) v += (1 - dist / 160) * 2.2;
         }
+
+        // normalize roughly to [0, ramp.length)
+        const n = (v + 2.4) / 4.8;
+        const idx = Math.max(0, Math.min(ASCII_RAMP.length - 1, Math.floor(n * ASCII_RAMP.length)));
+        const ch = ASCII_RAMP[idx];
+        if (ch !== ' ') ctx.fillText(ch, x, y);
       }
-    }
-
-    // Draw particles
-    for (const p of this.particles) {
-      const pulse = Math.sin(p.pulsePhase) * 0.1 + p.opacity;
-
-      // Glow
-      this.ctx.beginPath();
-      this.ctx.arc(p.x, p.y, p.radius * 3, 0, Math.PI * 2);
-      this.ctx.fillStyle = `rgba(${r},${g},${b},${(pulse * 0.12).toFixed(3)})`;
-      this.ctx.fill();
-
-      // Core
-      this.ctx.beginPath();
-      this.ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-      this.ctx.fillStyle = `rgba(${r},${g},${b},${pulse.toFixed(3)})`;
-      this.ctx.fill();
     }
   }
 
-  loop() {
-    this.update(1);
-    this.draw();
-    this.raf = requestAnimationFrame(() => this.loop());
+  loop(now) {
+    if (!this.running) return;
+    if (now - this.lastFrame >= 50) { // ~20fps
+      this.lastFrame = now;
+      this.t += 0.05;
+      this.draw();
+    }
+    this.raf = requestAnimationFrame(ts => this.loop(ts));
+  }
+
+  start() {
+    if (this.running) return;
+    this.running = true;
+    this.raf = requestAnimationFrame(ts => this.loop(ts));
+  }
+
+  stop() {
+    this.running = false;
+    if (this.raf) cancelAnimationFrame(this.raf);
   }
 
   init() {
     this.resize();
-    this.createParticles();
-    this.loop();
+    this.readColor();
+
+    if (this.reduced) {
+      this.draw();
+    } else {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !document.hidden) this.start();
+          else this.stop();
+        });
+      }, { threshold: 0.01 });
+      observer.observe(this.canvas);
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) this.stop();
+        else if (this.canvas.getBoundingClientRect().bottom > 0) this.start();
+      });
+    }
 
     window.addEventListener('resize', () => {
       clearTimeout(this.resizeTimer);
       this.resizeTimer = setTimeout(() => {
         this.resize();
-        this.createParticles();
+        if (this.reduced || !this.running) this.draw();
       }, 250);
     });
 
@@ -197,6 +152,11 @@ class NeuralNetwork {
     this.canvas.addEventListener('mouseleave', () => {
       this.mouse.x = null;
       this.mouse.y = null;
+    });
+
+    document.addEventListener('themechange', () => {
+      this.readColor();
+      if (this.reduced || !this.running) this.draw();
     });
   }
 }
@@ -229,21 +189,13 @@ function renderCards(filter = 'all') {
     card.style.transitionDelay = `${idx * 0.06}s`;
     card.addEventListener('click', () => openModal(t));
 
-    const catColor = t._category === 'python' ? '#fbbf24' : '#00c8ff';
-
     card.innerHTML = `
-      <div class="formation-id" style="color:${catColor}">${t.id}</div>
+      <div class="formation-id ${t._category}">${t.id}</div>
       <h3>${esc(t.title)}</h3>
       <p>${esc(t.short)}</p>
       <div class="formation-meta">
-        <span>
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          ${esc(t.duration)}
-        </span>
-        <span>
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M16 8l-8 8"/></svg>
-          ${formatPrice(t.price)} € HT / pers.
-        </span>
+        <span><b>durée ──</b> ${esc(t.duration)}</span>
+        <span><b>tarif ──</b> ${formatPrice(t.price)} € HT / pers.</span>
       </div>
     `;
 
@@ -322,19 +274,14 @@ function closeModal() {
 
 // ── Theme Toggle ──
 function initTheme() {
-  const stored = localStorage.getItem('theme');
-  if (stored) {
-    document.documentElement.setAttribute('data-theme', stored);
-  } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-    document.documentElement.setAttribute('data-theme', 'light');
-  }
-
+  // data-theme is already set inline in <head> (defaults to 'light') to avoid a flash.
   const btn = document.getElementById('themeToggle');
   btn?.addEventListener('click', () => {
     const current = document.documentElement.getAttribute('data-theme');
-    const next = current === 'light' ? 'dark' : 'light';
+    const next = current === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', next);
     localStorage.setItem('theme', next);
+    document.dispatchEvent(new CustomEvent('themechange', { detail: { theme: next } }));
   });
 }
 
@@ -350,7 +297,7 @@ function initMobileMenu() {
 
   // Close on link click
   links?.querySelectorAll('a').forEach(a => {
-    a.addEventListener('link.click', () => {
+    a.addEventListener('click', () => {
       links.classList.remove('open');
     });
   });
@@ -412,8 +359,8 @@ function esc(str) {
 
 // ── Init ──
 function init() {
-  // Neural network animation
-  new NeuralNetwork('#neuralCanvas');
+  // ASCII field animation
+  new AsciiField('#asciiCanvas');
 
   // Load training data from embedded JSON (server-side via Jekyll)
   loadTrainings();

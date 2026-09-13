@@ -9,10 +9,20 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <!-- Styles -->
   <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
+
+  <!-- Theme (applied before paint to avoid a flash) -->
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem('theme');
+        document.documentElement.setAttribute('data-theme', stored === 'dark' ? 'dark' : 'light');
+      } catch (e) {}
+    })();
+  </script>
 
   <!-- SEO -->
   {% seo %}
@@ -22,12 +32,12 @@
   <!-- ── NAV ── -->
   <nav class="nav" id="nav">
     <div class="nav-inner">
-      <a href="{{ '/' | relative_url }}#hero" class="nav-brand">RR</a>
+      <a href="{{ '/' | relative_url }}#hero" class="nav-brand">rr<span>/</span></a>
       <ul class="nav-links" id="navLinks">
-        <li><a href="{{ '/' | relative_url }}#expertise" data-section="expertise">Expertise</a></li>
-        <li><a href="{{ '/' | relative_url }}#formations" data-section="formations">Formations</a></li>
-        <li><a href="{{ '/' | relative_url }}#services" data-section="services">Services</a></li>
-        <li><a href="{{ '/' | relative_url }}#contact" data-section="contact">Contact</a></li>
+        <li><a href="{{ '/' | relative_url }}#expertise" data-section="expertise">expertise</a></li>
+        <li><a href="{{ '/' | relative_url }}#formations" data-section="formations">formations</a></li>
+        <li><a href="{{ '/' | relative_url }}#services" data-section="services">services</a></li>
+        <li><a href="{{ '/' | relative_url }}#contact" data-section="contact">contact</a></li>
       </ul>
       <div class="nav-actions">
         <button id="themeToggle" class="theme-btn" aria-label="Basculer le thème">
@@ -47,7 +57,7 @@
   <!-- ── FOOTER ── -->
   <footer class="footer">
     <div class="container">
-      <p>&copy; {{ site.time | date: '%Y' }} Romain Rincé — Consultant &amp; Formateur en Intelligence Artificielle</p>
+      <p>&copy; {{ site.time | date: '%Y' }} — Romain Rincé, consultant &amp; formateur en intelligence artificielle</p>
     </div>
   </footer>
 
