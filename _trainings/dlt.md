@@ -1,7 +1,7 @@
 ---
 audience: Concepteurs-développeurs en machine learning, data scientists, ingénieurs
   en IA.
-category: Machine Learning -- Data-science
+category: Deep Learning
 duration: 4j  -  28h00
 id: DLT
 objectives:

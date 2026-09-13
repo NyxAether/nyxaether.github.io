@@ -19,7 +19,11 @@ function loadTrainings() {
     // data is an object keyed by filename stem (bda, dlt, …)
     TRAININGS = Object.values(data).map(t => {
       // Normalize category for filtering
-      t._category = /python/i.test(t.category) ? 'python' : 'ml';
+      t._category = /python/i.test(t.category)
+        ? 'python'
+        : /deep learning/i.test(t.category)
+          ? 'dl'
+          : 'ml';
       return t;
     }).sort((a, b) => a.id.localeCompare(b.id));
   } catch (e) {
@@ -369,7 +373,6 @@ async function initHeroTerminal() {
 
   if (REDUCED) {
     dds.forEach(dd => dd.classList.add('typed'));
-    dds[dds.length - 1]?.appendChild(makeCursor());
     return;
   }
 
@@ -379,6 +382,7 @@ async function initHeroTerminal() {
     await typeText(dd, dd.textContent, 20, cursor);
     await sleep(80);
   }
+  cursor.remove();
 }
 
 // Types out each section tag (Compétences, Catalogue, …) the first time it
