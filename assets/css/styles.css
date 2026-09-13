@@ -234,6 +234,21 @@ a { color: inherit; }
 
 .hero-label span { color: var(--accent); }
 
+/* ── Blinking terminal cursor ── */
+.cursor {
+  display: inline-block;
+  width: 0.6em;
+  height: 1.1em;
+  margin-left: 0.15em;
+  vertical-align: text-bottom;
+  background: var(--accent);
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
 .hero-title {
   font-family: var(--font-serif);
   font-size: clamp(3.5rem, 9vw, 7.5rem);
@@ -285,6 +300,11 @@ a { color: inherit; }
 .hero-meta dd::before {
   content: '└─ ';
   color: var(--text-muted);
+}
+
+/* Hidden until JS types them in, so there's no flash of the finished text */
+.js [data-type]:not(.typed) {
+  visibility: hidden;
 }
 
 .hero-cta {
@@ -868,6 +888,7 @@ a.contact-card:hover { background: var(--bg-card); }
   html { scroll-behavior: auto; }
   [data-reveal] { opacity: 1; transform: none; transition: none; }
   .modal { animation: none; }
+  .cursor { animation: none; }
 }
 
 /* ── Responsive ── */
