@@ -28,6 +28,10 @@ function loadTrainings() {
 }
 
 
+// ── Reduced Motion ──
+const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+
 // ── ASCII Field Animation (hero background) ──
 const ASCII_RAMP = ' .·:-=+*';
 
@@ -43,7 +47,7 @@ class AsciiField {
     this.t = 0;
     this.lastFrame = 0;
     this.running = false;
-    this.reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.reduced = REDUCED;
     this.init();
   }
 
@@ -332,6 +336,79 @@ function initNavScroll() {
 }
 
 
+// ── Terminal Effects ──
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function makeCursor() {
+  const span = document.createElement('span');
+  span.className = 'cursor';
+  span.setAttribute('aria-hidden', 'true');
+  return span;
+}
+
+// Types text into el character by character, keeping a blinking cursor
+// right after the last typed character.
+async function typeText(el, text, speed = 20, cursor = null) {
+  el.textContent = '';
+  el.classList.add('typed');
+  if (cursor) el.appendChild(cursor);
+  for (const ch of text) {
+    if (cursor) cursor.insertAdjacentText('beforebegin', ch);
+    else el.textContent += ch;
+    await sleep(speed + Math.random() * 20 - 10);
+  }
+}
+
+// Types out the hero's Statut / Domaines / Lieu values one after another,
+// like lines printing in a terminal, with a cursor following the text.
+async function initHeroTerminal() {
+  const dds = document.querySelectorAll('#heroMeta dd[data-type]');
+  if (!dds.length) return;
+
+  if (REDUCED) {
+    dds.forEach(dd => dd.classList.add('typed'));
+    dds[dds.length - 1]?.appendChild(makeCursor());
+    return;
+  }
+
+  const cursor = makeCursor();
+  await sleep(250);
+  for (const dd of dds) {
+    await typeText(dd, dd.textContent, 20, cursor);
+    await sleep(80);
+  }
+}
+
+// Types out each section tag (Compétences, Catalogue, …) the first time it
+// scrolls into view, cursor included.
+function initSectionTypers() {
+  const tags = document.querySelectorAll('.section-tag[data-type]');
+  if (!tags.length) return;
+
+  if (REDUCED) {
+    tags.forEach(tag => {
+      tag.classList.add('typed');
+      tag.appendChild(makeCursor());
+    });
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const tag = entry.target;
+        typeText(tag, tag.textContent, 20, makeCursor());
+        observer.unobserve(tag);
+      }
+    });
+  }, { threshold: 0.6 });
+
+  tags.forEach(tag => observer.observe(tag));
+}
+
+
 // ── Scroll Reveal ──
 function observeRevealElements() {
   const els = document.querySelectorAll('[data-reveal]:not(.revealed)');
@@ -395,6 +472,10 @@ function init() {
 
   // Scroll reveal
   observeRevealElements();
+
+  // Terminal effect
+  initHeroTerminal();
+  initSectionTypers();
 }
 
 document.addEventListener('DOMContentLoaded', init);

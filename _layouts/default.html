@@ -17,6 +17,7 @@
   <!-- Theme (applied before paint to avoid a flash) -->
   <script>
     (function () {
+      document.documentElement.classList.add('js');
       try {
         var stored = localStorage.getItem('theme');
         document.documentElement.setAttribute('data-theme', stored === 'dark' ? 'dark' : 'light');
