@@ -32,6 +32,28 @@ function loadTrainings() {
 }
 
 
+// ── Testimonials Loader (random subset picked on each page load) ──
+const TESTIMONIALS_SHOWN = 7;
+const TESTIMONIALS_SPEED = 28; // px per second
+let TESTIMONIALS = [];
+
+function loadTestimonials() {
+  const el = document.getElementById('testimonials-data');
+  if (!el) return;
+  try {
+    const data = JSON.parse(el.textContent) || [];
+    // Fisher-Yates shuffle
+    for (let i = data.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [data[i], data[j]] = [data[j], data[i]];
+    }
+    TESTIMONIALS = data.slice(0, TESTIMONIALS_SHOWN);
+  } catch (e) {
+    console.warn('Failed to parse testimonials data:', e);
+  }
+}
+
+
 // ── Reduced Motion ──
 const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -280,6 +302,100 @@ function closeModal() {
 }
 
 
+// ── Testimonials ──
+function renderTestimonials() {
+  const log = document.getElementById('testimonialsLog');
+  if (!log) return;
+
+  const items = TESTIMONIALS.map(t => `
+    <li class="log-entry">
+      <div class="log-meta">
+        <span class="log-date">[${esc(t.date)}]</span>
+        <span class="log-author">${esc(t.author)}</span>
+        <span>· ${esc(t.training)} ·</span>
+        <span class="log-rating">${Number(t.rating).toFixed(1).replace('.', ',')}/5</span>
+      </div>
+      <p class="log-comment">${esc(t.comment)}</p>
+    </li>
+  `).join('');
+
+  // Rendered twice so the scroll can loop seamlessly; the copy is hidden from
+  // assistive tech. With reduced motion the single list just scrolls natively.
+  log.classList.toggle('static', REDUCED);
+  log.innerHTML = REDUCED
+    ? `<ol class="log-list">${items}</ol>`
+    : `<div class="log-scroll"><ol class="log-list">${items}</ol><ol class="log-list" aria-hidden="true">${items}</ol></div>`;
+}
+
+// Scrolls the log upward continuously, like `tail -f`, while the section is
+// visible. Hovering or focusing pauses it; on touch screens a tap toggles it.
+function initTestimonialLog() {
+  const section = document.getElementById('avis');
+  const log = document.getElementById('testimonialsLog');
+  if (!section || !log) return;
+  if (!TESTIMONIALS.length) {
+    section.hidden = true;
+    return;
+  }
+
+  const status = document.getElementById('testimonialsStatus');
+  const inner = log.querySelector('.log-scroll');
+  if (!inner) {
+    status?.remove();
+    return;
+  }
+
+  const pauses = new Set();
+  let pos = 0;
+  let last = 0;
+  let raf = null;
+  let visible = false;
+
+  function setPause(reason, on) {
+    if (on) pauses.add(reason);
+    else pauses.delete(reason);
+    if (status) {
+      status.textContent = pauses.size ? 'pause' : 'live';
+      status.classList.toggle('paused', pauses.size > 0);
+    }
+  }
+
+  function frame(now) {
+    if (!pauses.size && last) pos += TESTIMONIALS_SPEED * Math.min(now - last, 100) / 1000;
+    last = now;
+    const loop = inner.firstElementChild.offsetHeight;
+    if (loop) pos %= loop;
+    inner.style.transform = `translateY(${-pos}px)`;
+    raf = requestAnimationFrame(frame);
+  }
+
+  function update() {
+    if (visible && !document.hidden) {
+      if (raf === null) {
+        last = 0;
+        raf = requestAnimationFrame(frame);
+      }
+    } else if (raf !== null) {
+      cancelAnimationFrame(raf);
+      raf = null;
+    }
+  }
+
+  log.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') setPause('hover', true); });
+  log.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') setPause('hover', false); });
+  log.addEventListener('pointerup', e => { if (e.pointerType !== 'mouse') setPause('tap', !pauses.has('tap')); });
+  log.addEventListener('focus', () => setPause('focus', true));
+  log.addEventListener('blur', () => setPause('focus', false));
+
+  new IntersectionObserver(entries => {
+    visible = entries[0].isIntersecting;
+    update();
+  }, { threshold: 0.1 }).observe(log);
+
+  document.addEventListener('visibilitychange', update);
+}
+
+
 // ── Theme Toggle ──
 function initTheme() {
   // data-theme is already set inline in <head> (defaults to 'light') to avoid a flash.
@@ -455,6 +571,11 @@ function init() {
       renderCards(btn.dataset.filter);
     });
   });
+
+  // Testimonials log
+  loadTestimonials();
+  renderTestimonials();
+  initTestimonialLog();
 
   // Modal close
   document.getElementById('modalClose')?.addEventListener('click', closeModal);
