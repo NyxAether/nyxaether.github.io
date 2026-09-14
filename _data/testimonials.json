@@ -1,0 +1,226 @@
+[
+  {
+    "author": "Thomas L.",
+    "training": "Python",
+    "date": "2024-01",
+    "rating": 5.0,
+    "comment": "Très bonne formation et formateur ! Revoir les bases de programmation / du Python pour ensuite pousser l'apprentissage de fonctions plus évoluées est parfait et permet de se remettre dans le bain, même pour moi qui n'ait pas vraiment fait de programmation depuis mes études."
+  },
+  {
+    "author": "Vincent N.",
+    "training": "Python",
+    "date": "2024-01",
+    "rating": 5.0,
+    "comment": "Romain est très pédagogue et patient. Merci beaucoup"
+  },
+  {
+    "author": "Pierre-Yves L.",
+    "training": "Python pour la Data Science",
+    "date": "2024-06",
+    "rating": 5.0,
+    "comment": "Cette formation a parfaitement répondu à mes attentes qui correspondait à une introduction au ML. Le formateur a présenté l'ensemble du domaine, la partie code mais aussi la partie analyse et compréhension de la manipulation de données. A l'issue de cette formation, je peux commencer à dialoguer avec un data scientiste ou un expert du domaine. Cette formation s'est parfaitement déroulée en distanciel sous Teams."
+  },
+  {
+    "author": "Pierre N.",
+    "training": "Python pour la Data Science",
+    "date": "2024-07",
+    "rating": 4.2,
+    "comment": "Une formation dense qu'il faudrait peut être raccourcir, pour se focaliser uniquement sur le domaine de l'élève."
+  },
+  {
+    "author": "Alpha D.",
+    "training": "Deep Learning avec TensorFlow",
+    "date": "2024-09",
+    "rating": 4.6,
+    "comment": "Je suis très satisfait du contenu de la formation. J'aurai voulu que l'on se focalise plus sur les données structurées à la place des images qui je pense n'auront pas d'utilité pour moi."
+  },
+  {
+    "author": "Stéphane D.",
+    "training": "Deep Learning avec TensorFlow",
+    "date": "2024-09",
+    "rating": 4.6,
+    "comment": "Je me suis inscrit à cette formation pour comprendre les principes de Machine Learning, Deep Learning, LLM. Les notions associées de couche, neuronnes, gradient, epoch, batch, matrices, fonction d'activation ..., regression, classification, convolution, encodeur, tf- idf ... Je suis très cotent car la formation m'a permis de clarifier beaucoup de ces concepts. Je remercie énormément Romain pour son expertise et ses explications claires sur ces concepts bien compliqués."
+  },
+  {
+    "author": "Olivier R.",
+    "training": "Machine Learning",
+    "date": "2024-10",
+    "rating": 4.6,
+    "comment": "Une formation très dense, qui demanderait à durer 1 à 2 jours de plus pour pouvoir passer plus de temps sur certaines notions, et sur les TPs."
+  },
+  {
+    "author": "Arnaud W.",
+    "training": "Python pour la Data Science",
+    "date": "2024-12",
+    "rating": 5.0,
+    "comment": "Formateur au TOP !"
+  },
+  {
+    "author": "Lucas D.",
+    "training": "Python",
+    "date": "2024-12",
+    "rating": 4.6,
+    "comment": "Merci beaucoup à Romain qui a été à l'écoute et qui nous a donné beaucoup de conseil et de leçon pour découvrir le python et même plus"
+  },
+  {
+    "author": "Thomas A.",
+    "training": "Python",
+    "date": "2024-12",
+    "rating": 4.6,
+    "comment": "Très bon formateur Un peu lent à mon gout mais inévitable à cause de l'hétérogénéité des niveau des participants"
+  },
+  {
+    "author": "Fanny P.",
+    "training": "Python",
+    "date": "2025-01",
+    "rating": 4.2,
+    "comment": "Bonne reprise en main après quelques années sans coder."
+  },
+  {
+    "author": "Emmanuel G.",
+    "training": "Python",
+    "date": "2025-01",
+    "rating": 5.0,
+    "comment": "Formation très intéressante, bien menée par le formateur, qui a répondu globalement à mes attentes. J'aurais aimé avoir un peu plus de temps pour creuser certaines notions et avoir plus de temps pour pratiquer."
+  },
+  {
+    "author": "Arnaud M.",
+    "training": "Python",
+    "date": "2025-03",
+    "rating": 5.0,
+    "comment": "Très bonne formation. Je regrette simplement le fait qu'elle s'adresse des personnes ayant déjà plus que des notions. Différence de niveaux aussi dans le groupe"
+  },
+  {
+    "author": "Stephane B.",
+    "training": "Python",
+    "date": "2025-04",
+    "rating": 5.0,
+    "comment": "Il faut obligatoirement avoir des bases de programmation afin de suivre ce cours Python. Je comprend les principes mais il faut avoir une maitrise avant de la faire"
+  },
+  {
+    "author": "Julien V.",
+    "training": "Python",
+    "date": "2025-04",
+    "rating": 4.8,
+    "comment": "3 jour en visio : assez fatiguant. pause interstitielle ?"
+  },
+  {
+    "author": "Yann F.",
+    "training": "Python",
+    "date": "2025-04",
+    "rating": 5.0,
+    "comment": "quelques soucis de qualité image / audio"
+  },
+  {
+    "author": "Christophe P.",
+    "training": "Python",
+    "date": "2025-04",
+    "rating": 5.0,
+    "comment": "J'aurais bien passé plus de temps sur cette formation mais mes activités ne me le permettent pas. Ou du moins elles en pâtiraient. Comme d'habitude, j'aurais préféré une formation en présentiel, que je trouve beaucoup plus intéressantes qu'à distance."
+  },
+  {
+    "author": "Samir A.",
+    "training": "Python pour la Data Science",
+    "date": "2025-05",
+    "rating": 5.0,
+    "comment": "Très bonne formation, formateur très pédagogue !"
+  },
+  {
+    "author": "Thibaud L.",
+    "training": "Python pour la Data Science",
+    "date": "2025-06",
+    "rating": 4.8,
+    "comment": "J'ai trouvé la formation très complète, elle est allée au delà de ce que je recherchais, cela permet d'avoir une perspective sur l'application de ce qui a été vu. Une partie n'a pas pu être abordée, je suppose qu'en 3 jours cela reste compliqué de tout voir."
+  },
+  {
+    "author": "Alexandre R.",
+    "training": "Python pour la Data Science",
+    "date": "2025-06",
+    "rating": 5.0,
+    "comment": "Formation très intéressante, mais beaucoup de notions à intégrer en peu de temps"
+  },
+  {
+    "author": "Paritosh K.",
+    "training": "Python pour la Data Science",
+    "date": "2025-06",
+    "rating": 4.6,
+    "comment": "I liked the course design, pace and the enthusiasm of the trainer. Thanks"
+  },
+  {
+    "author": "Tanguy C.",
+    "training": "Python",
+    "date": "2025-07",
+    "rating": 5.0,
+    "comment": "La formation a pleinement permis de répondre aux besoins ressentis avant cette session. Le rythme a été parfaitement adapté avec un bon équilibre entre la théorie et la pratique sur des TP. L'adaptation de la fin de formation aux besoins futurs de la pratique est un réel plus qui est très apprécié."
+  },
+  {
+    "author": "Christophe K.",
+    "training": "Python",
+    "date": "2025-07",
+    "rating": 4.8,
+    "comment": "Le formateur a essayé de nous donner plus d'info que prévu, alors le temps fut un peu étroit,. Cependant, je pense que le temps était juste sur les objectif du cours."
+  },
+  {
+    "author": "Florian R.",
+    "training": "Machine learning méthodes et solutions",
+    "date": "2025-09",
+    "rating": 5.0,
+    "comment": "Formation très passionnante, complète et très bien structuré, mais énormément d'informations en 4 jours. Heureusement, les ateliers sont la pour mettre en pratique la théorie, pendant ou après la formation."
+  },
+  {
+    "author": "Marine M.",
+    "training": "Machine learning méthodes et solutions",
+    "date": "2025-10",
+    "rating": 5.0,
+    "comment": "Très bonne formation, dense mais très intéressante. Le formateur est à l'écoute et explique très bien. Ne nombreux exemples et représentation qui aide à l'apprentissage. La partie théorique et pratique est très bien séparée."
+  },
+  {
+    "author": "Geoffrey G.",
+    "training": "Python",
+    "date": "2025-10",
+    "rating": 5.0,
+    "comment": "très satisfait, formateur agréable et à l'écoute"
+  },
+  {
+    "author": "Xavier B.",
+    "training": "Python",
+    "date": "2025-10",
+    "rating": 4.4,
+    "comment": "le formateur est a l'écoute de nos interrogations. merci bien"
+  },
+  {
+    "author": "Emmanuel C.",
+    "training": "Python",
+    "date": "2025-10",
+    "rating": 5.0,
+    "comment": "Quand on connait l'objet comme Java, finalement ce qu'on a besoin, c'est surtout un besoin lexical. Mais très bien sinon."
+  },
+  {
+    "author": "Neda L.",
+    "training": "Python pour la Data Science",
+    "date": "2025-11",
+    "rating": 5.0,
+    "comment": "Merci beaucoup !"
+  },
+  {
+    "author": "Hervé C.",
+    "training": "Python Perfectionnement",
+    "date": "2026-03",
+    "rating": 5.0,
+    "comment": "Formateur au top !"
+  },
+  {
+    "author": "Léane G.",
+    "training": "Deep Learning avec TensorFlow",
+    "date": "2026-05",
+    "rating": 4.6,
+    "comment": "Un peu plus de pratique pour orienter vers le choix d'une bonne architecture dans la partie CNN aurait été un plus mais c'était déjà très bien. La dernière journée est beaucoup plus théorique (équation mathématique) donc il faut plus s'accrocher."
+  },
+  {
+    "author": "Selim B.",
+    "training": "Python Perfectionnement",
+    "date": "2026-07",
+    "rating": 5.0,
+    "comment": "Très bonne formation, très instructif même après quelques années de Python dans les bras. Une très petite équipe de stagiaires qui facilite les échanges. Je redoutais le mode visio mais c'était finalement très bien adapté."
+  }
+]

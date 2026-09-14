@@ -25,6 +25,7 @@ exclude:
   - Gemfile.lock
   - README.md
   - _data
+  - tools
 
 # Plugins (only those supported by GitHub Pages)
 plugins:

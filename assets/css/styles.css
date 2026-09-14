@@ -688,6 +688,94 @@ a { color: inherit; }
 .service-list li:last-child::before,
 .modal-section ul li:last-child::before { content: '└─'; }
 
+/* ── Testimonials (terminal log) ── */
+.testimonials-log {
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+  font-family: var(--font-mono);
+}
+
+.log-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 16px;
+  padding: 10px 20px;
+  border-bottom: 1px dashed var(--line);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.log-bar b {
+  font-weight: 400;
+  color: var(--accent);
+}
+
+.log-status::before {
+  content: '●';
+  margin-right: 6px;
+  color: var(--sage);
+}
+
+.log-status.paused::before {
+  content: '‖';
+  color: var(--text-muted);
+}
+
+.log-body {
+  height: 420px;
+  overflow: hidden;
+  outline-offset: -2px;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent);
+}
+
+.log-body.static {
+  overflow-y: auto;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+.log-scroll { will-change: transform; }
+
+.log-list { list-style: none; }
+
+.log-entry {
+  padding: 18px 20px;
+  border-bottom: 1px dashed var(--line);
+}
+
+.log-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 8px;
+  margin-bottom: 6px;
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+.log-date   { color: var(--dusk); }
+.log-author { color: var(--text-primary); font-weight: 500; }
+.log-rating { color: var(--accent); }
+
+.log-comment {
+  position: relative;
+  max-width: 90ch;
+  padding-left: 2ch;
+  font-size: 0.86rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+.log-comment::before {
+  content: '>';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
 /* ── Contact ── */
 .contact-grid {
   display: grid;
@@ -917,6 +1005,10 @@ a.contact-card:hover { background: var(--bg-card); }
   .hero { padding: 96px 16px 88px; }
   .section { padding: 80px 0; }
   .section-header { margin-bottom: 40px; }
+
+  .log-body { height: 460px; }
+  .log-bar,
+  .log-entry { padding-inline: 16px; }
 
   .modal-body { padding: 32px 24px; }
 }
