@@ -1,5 +1,131 @@
 [
   {
+    "author": "Brendan J.",
+    "training": "Deep Learning par la pratique",
+    "date": "2023-06",
+    "rating": 4.46,
+    "comment": "Contenu très intéressant. Le sujet est très large donc nous ne passant pas forcément beaucoup de temps sur tous les sujets. Toutefois, cela donne les bases pour approfondir par la suite. Les TP sont très complets et peuvent être repris par la suite. Les slides sont difficiles à reprendre en dehors de la formation."
+  },
+  {
+    "author": "Célya F.",
+    "training": "Deep Learning par la pratique",
+    "date": "2023-06",
+    "rating": 5.0,
+    "comment": "Bon équilibre slides sur la théorie et cas pratiques. Enseignement riche pour un temps de stage court."
+  },
+  {
+    "author": "Damien P.",
+    "training": "Deep Learning par la pratique",
+    "date": "2023-06",
+    "rating": 5.0,
+    "comment": "Très grande qualité de la formation, aussi bien au niveau de la pédagogie du formateur que du contenu. Les TP sont particulièrement bien faits et permettent de rattrapper le train si on décroche à un moment."
+  },
+  {
+    "author": "Julie A.",
+    "training": "Deep Learning par la pratique",
+    "date": "2023-06",
+    "rating": 4.29,
+    "comment": "Support de cours + détaillé serait mieux compris"
+  },
+  {
+    "author": "Ricardo C.",
+    "training": "Machine learning méthodes et solutions",
+    "date": "2023-08",
+    "rating": 4.64,
+    "comment": "La formation m'a permis d'avoir une vue plus globale et en même temps plus précise des méthodes de ML. C'est ce que je recherchais."
+  },
+  {
+    "author": "Sébastien C.",
+    "training": "Machine learning méthodes et solutions",
+    "date": "2023-08",
+    "rating": 4.11,
+    "comment": "La thématique est très dense et il est très ambitieux de traiter de tout en 4 jours. Monsieur Rincé a su mener et nous guider d'une façon constante durant cette session de formation. Pedagogue, simple et accessible"
+  },
+  {
+    "author": "Emilien D.",
+    "training": "Machine learning méthodes et solutions",
+    "date": "2023-10",
+    "rating": 4.64,
+    "comment": "contenu dense mais très intéressant"
+  },
+  {
+    "author": "Fabien L.",
+    "training": "Machine learning méthodes et solutions",
+    "date": "2023-10",
+    "rating": 3.93,
+    "comment": "Passer encore + de temps sur des TP"
+  },
+  {
+    "author": "Maxime A.",
+    "training": "Machine learning méthodes et solutions",
+    "date": "2023-10",
+    "rating": 4.82,
+    "comment": "Contenu adapté à mes attentes et bon rythme durant la formation"
+  },
+  {
+    "author": "Valentin L.",
+    "training": "Machine learning méthodes et solutions",
+    "date": "2023-10",
+    "rating": 5.0,
+    "comment": "Très bonnes explications, les \"crayonnés/dessin\" réalisé en support d'explication sur les slides aident beaucoup. Un peu dense mais permet de passer en revue pas mal de méthodes."
+  },
+  {
+    "author": "Antoine A.",
+    "training": "Traitement d'image avec Python",
+    "date": "2023-11",
+    "rating": 4.11,
+    "comment": "idéalement avoir des cas d'étude plus \"concrets\" dans les TP avec pourquoi pas un fil rouge sur le long de la formation durée de formation un peu courte sentiment de ne pas avoir assez de pré-requis pour bien suivre l'ensemble de la formation (de mon point de vue, je pense que je manquait de compétence en python + machine learning)"
+  },
+  {
+    "author": "Jules L.",
+    "training": "Traitement d'image avec Python",
+    "date": "2023-11",
+    "rating": 5.0,
+    "comment": "Vraiment bien structuré, bon équilibre entre explications et exercices en autonomie, animateur à l'écoute et s'adapte bien aux stagiaires. Très content de cette formation! La durée de 3 jours m'a semblé pertinente également. On pourrait bien sûr approfondir d'avantage mais c'est deja suffisant et puis nous avons les supports de cours pour approfondir de notre coté."
+  },
+  {
+    "author": "Magali R.",
+    "training": "Traitement d'image avec Python",
+    "date": "2023-11",
+    "rating": 5.0,
+    "comment": "Cette formation est vraiment très intéressante et de très haute qualité. Toutes les informations nécessaires à la mise en pratique ainsi que les exercices eux-mêmes permettent de se projeter dans l'utilisation des outils d'analyse d'images."
+  },
+  {
+    "author": "Stéphane K.",
+    "training": "Traitement d'image avec Python",
+    "date": "2023-11",
+    "rating": 4.82,
+    "comment": "Formation assez complète, montrant un bon aperçu de l'état de l'art sur le machine learning. TP très intéressant et conduisant à une bonne progression individuelle."
+  },
+  {
+    "author": "Valentin L.",
+    "training": "Traitement d'image avec Python",
+    "date": "2023-11",
+    "rating": 3.75,
+    "comment": "Très bonn formation mais prérequis python important"
+  },
+  {
+    "author": "Arnaud B.",
+    "training": "Machine learning méthodes et solutions",
+    "date": "2023-12",
+    "rating": 5.0,
+    "comment": "Très bien."
+  },
+  {
+    "author": "Frédéric D.",
+    "training": "Machine learning méthodes et solutions",
+    "date": "2023-12",
+    "rating": 5.0,
+    "comment": "Super formateur très compétent, flexible, répond a nos questions specifiques, adapte le rythme et s'intéresse a notre besoin"
+  },
+  {
+    "author": "Michel V.",
+    "training": "Machine learning méthodes et solutions",
+    "date": "2023-12",
+    "rating": 5.0,
+    "comment": "Très bon contenu theorique accompagné par des examples concrètes."
+  },
+  {
     "author": "Thomas L.",
     "training": "Python",
     "date": "2024-01",
@@ -19,6 +145,34 @@
     "date": "2024-06",
     "rating": 5.0,
     "comment": "Cette formation a parfaitement répondu à mes attentes qui correspondait à une introduction au ML. Le formateur a présenté l'ensemble du domaine, la partie code mais aussi la partie analyse et compréhension de la manipulation de données. A l'issue de cette formation, je peux commencer à dialoguer avec un data scientiste ou un expert du domaine. Cette formation s'est parfaitement déroulée en distanciel sous Teams."
+  },
+  {
+    "author": "Arnaud R.",
+    "training": "Apprendre à programmer (avec Python)",
+    "date": "2024-06",
+    "rating": 4.75,
+    "comment": "TB"
+  },
+  {
+    "author": "Bernard H.",
+    "training": "Apprendre à programmer (avec Python)",
+    "date": "2024-06",
+    "rating": 5.0,
+    "comment": "Points forts : - compétence et disponibilité du formateur - moyens pédagogiques mis à disposition. Ce stage a parfaitement répondu à mes attentes Je compte suivre la formation Phyton 2 après avoir mis en application des connaissances acquises durant la formation."
+  },
+  {
+    "author": "Clothilde C.",
+    "training": "Apprendre à programmer (avec Python)",
+    "date": "2024-06",
+    "rating": 5.0,
+    "comment": "- bonne alternance des cours et TP ce qui permet de bien pratiquer python et assimiler le cours. - groupe avec des stagiaires de niveau très hétérogènes, le formateur s'y est bien adapté proposant des choses supplémentaires à ceux qui étaient plus avancé. - La formation est un peu longue pour le programme initial, nous avons donc été plus loin que le programme en fonction des besoins de chacun."
+  },
+  {
+    "author": "Gregory L.",
+    "training": "Apprendre à programmer (avec Python)",
+    "date": "2024-06",
+    "rating": 4.0,
+    "comment": "Objectif de la formation initial atteint facilement. 4 jours aurait suffit. Il manque un listing/descriptif des principales librairies disponible."
   },
   {
     "author": "Pierre N.",
@@ -42,11 +196,53 @@
     "comment": "Je me suis inscrit à cette formation pour comprendre les principes de Machine Learning, Deep Learning, LLM. Les notions associées de couche, neuronnes, gradient, epoch, batch, matrices, fonction d'activation ..., regression, classification, convolution, encodeur, tf- idf ... Je suis très cotent car la formation m'a permis de clarifier beaucoup de ces concepts. Je remercie énormément Romain pour son expertise et ses explications claires sur ces concepts bien compliqués."
   },
   {
+    "author": "Ahrmed M.",
+    "training": "Machine learning méthodes et solutions",
+    "date": "2024-09",
+    "rating": 3.75,
+    "comment": "Formation super intéressante par contre les supports ne rappelle pas tout ce que qui est dit pendant la formation afin de pouvoir les revoir plus tard"
+  },
+  {
+    "author": "Eliane C.",
+    "training": "Machine learning méthodes et solutions",
+    "date": "2024-09",
+    "rating": 3.57,
+    "comment": "Formateur très compétent, cours intéressant, je croyais qu'on aurait le temps de voir davantage de méthodes plus poussées. Le temps attribué aux TP est trop long à mon goût, même s'ils sont bien conçu, je me suis ennuyée."
+  },
+  {
+    "author": "Sébastien J.",
+    "training": "Machine learning méthodes et solutions",
+    "date": "2024-09",
+    "rating": 4.46,
+    "comment": "Très bon formateur, clair et donnant des exemples précis. Pré-requis forts en mathématiques pour la partie théorique et en Python pour la partie pratique."
+  },
+  {
+    "author": "Yehya N.",
+    "training": "Machine learning méthodes et solutions",
+    "date": "2024-09",
+    "rating": 3.57,
+    "comment": "Parfait"
+  },
+  {
+    "author": "Zied J.",
+    "training": "Machine learning méthodes et solutions",
+    "date": "2024-09",
+    "rating": 4.82,
+    "comment": "Excellent formateur qui maitrise parfaitement le sujet et aborde tous les aspects avec pédagogie, exemples et fait parfaitement le lien entre théorique et pratique"
+  },
+  {
     "author": "Olivier R.",
     "training": "Machine Learning",
     "date": "2024-10",
     "rating": 4.6,
     "comment": "Une formation très dense, qui demanderait à durer 1 à 2 jours de plus pour pouvoir passer plus de temps sur certaines notions, et sur les TPs."
+  },
+  {
+    "author": "Simon R.",
+    "training": "Deep Learning par la pratique",
+    "date": "2024-11",
+    "rating": 5.0,
+    "comment": "Super, un peu condensé sur la dernière hournée mais le planning a été défini comme cela."
   },
   {
     "author": "Arnaud W.",
@@ -119,11 +315,46 @@
     "comment": "J'aurais bien passé plus de temps sur cette formation mais mes activités ne me le permettent pas. Ou du moins elles en pâtiraient. Comme d'habitude, j'aurais préféré une formation en présentiel, que je trouve beaucoup plus intéressantes qu'à distance."
   },
   {
+    "author": "Mohamed B.",
+    "training": "Machine learning méthodes et solutions",
+    "date": "2025-04",
+    "rating": 4.82,
+    "comment": "Formation très intéressante, je remercie le formateur pour sa pédagogie, ses connaissances et ses explications. le cours est très bien fait ainsi que les exercices"
+  },
+  {
     "author": "Samir A.",
     "training": "Python pour la Data Science",
     "date": "2025-05",
     "rating": 5.0,
     "comment": "Très bonne formation, formateur très pédagogue !"
+  },
+  {
+    "author": "Colin M.",
+    "training": "Data Analytics avec Python",
+    "date": "2025-05",
+    "rating": 3.93,
+    "comment": "Contenu très riche, parfois presque trop. Il aurait pu être intéressant de se focaliser un peu plus sur quelques modèles et de les implémenter de manière un peu plus détaillée, par exemple en choisissant des jeux de données proches des problématiques rencontrées par les participants."
+  },
+  {
+    "author": "Fabienne P.",
+    "training": "Data Analytics avec Python",
+    "date": "2025-05",
+    "rating": 3.75,
+    "comment": "Contenu difficile à appréhender lorsqu'on découvre l'outil, mais les exemples utilisés et les exercices aident beaucoup."
+  },
+  {
+    "author": "Kevin O.",
+    "training": "Data Analytics avec Python",
+    "date": "2025-05",
+    "rating": 5.0,
+    "comment": "Le mixte entre cours/pratique est très appréciable. Très bonne animation, merci !"
+  },
+  {
+    "author": "Philippe G.",
+    "training": "Data Analytics avec Python",
+    "date": "2025-05",
+    "rating": 4.82,
+    "comment": "Contenu très intéressant. La programmation reste à assimiler"
   },
   {
     "author": "Thibaud L.",
