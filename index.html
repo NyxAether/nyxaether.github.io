@@ -170,8 +170,33 @@ description: >-
   </div>
 </section>
 
+<!-- ── AVIS ── -->
+<section class="section section-alt" id="avis">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag" data-type>Témoignages</span>
+      <h2 class="section-title">Ils ont suivi mes formations</h2>
+      <p class="section-subtitle">
+        Quelques retours de stagiaires, recueillis à l'issue des sessions de formation.
+      </p>
+    </div>
+
+    <div class="testimonials-log" data-reveal>
+      <div class="log-bar">
+        <span><b>~/avis</b> $ tail -f stagiaires.log<span class="cursor" aria-hidden="true"></span></span>
+        <span class="log-status" id="testimonialsStatus" aria-hidden="true">live</span>
+      </div>
+      <div class="log-body" id="testimonialsLog" tabindex="0" aria-label="Avis de stagiaires">
+        <!-- Populated by JS from server-side data -->
+      </div>
+    </div>
+  </div>
+
+  <script id="testimonials-data" type="application/json">{{ site.data.testimonials | jsonify }}</script>
+</section>
+
 <!-- ── CONTACT ── -->
-<section class="section section-alt" id="contact">
+<section class="section" id="contact">
   <div class="container">
     <div class="section-header">
       <span class="section-tag" data-type>Contact</span>
