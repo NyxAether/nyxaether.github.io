@@ -12,7 +12,10 @@ Usage:
 PDFs are only read, never modified.
 
 The CSV (full names, all scores) is meant to stay outside the repository. The site data
-only keeps trainees who allowed publication and left a comment, signed "Firstname L.".
+keeps every trainee who left a comment. Those who allowed publication are signed
+"Firstname L."; the others are published anonymously, as "Un.e stagiaire", since a comment
+with no name or initial left in it is no longer personal data under RGPD and their refusal
+to be named no longer applies.
 Comments containing any --redact word (case-insensitive) are left out of the site data.
 """
 
@@ -165,9 +168,13 @@ def parse_pdf(pdf: Path) -> dict:
 
 
 def to_testimonial(row: dict) -> dict:
-    first, last = split_name(row["stagiaire"])
+    if row["publication_autorisee"]:
+        first, last = split_name(row["stagiaire"])
+        author = f"{first} {last[:1]}." if first else f"{last[:1]}."
+    else:
+        author = "Un.e stagiaire"
     return {
-        "author": f"{first} {last[:1]}." if first else f"{last[:1]}.",
+        "author": author,
         "training": re.sub(r"\s*\(en anglais\)$", "", row["formation"]),
         "date": row["date_reponse"][:7],
         "rating": row["moyenne"],
@@ -206,7 +213,7 @@ def main() -> int:
         redact = [w.lower() for w in args.redact]
         testimonials = [
             to_testimonial(r) for r in rows
-            if r["publication_autorisee"] and r["commentaire"]
+            if r["commentaire"]
             and not any(w in r["commentaire"].lower() for w in redact)
         ]
         args.site_data.parent.mkdir(parents=True, exist_ok=True)
