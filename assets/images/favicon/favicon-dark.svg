@@ -9,7 +9,7 @@
       text { font-family: 'JBM Logo', monospace; font-weight: 700; }
     </style>
   </defs>
-  <rect width="512" height="512" fill="#1D1917"/>
+  <rect width="512" height="512" rx="96" ry="96" fill="#1D1917"/>
   <text x="50%" y="52%" text-anchor="middle" dominant-baseline="central"
         font-size="190" letter-spacing="-6">
     <tspan fill="#F0E2D8">rr</tspan><tspan fill="#E2A385">/</tspan>
