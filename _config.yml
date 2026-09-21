@@ -37,6 +37,10 @@ defaults:
       path: ""
     values:
       layout: default
+      image:
+        path: /assets/images/og-image.png
+        width: 1200
+        height: 630
       seo:
         title: "Romain Rincé"
         description: "Consultant & Formateur en Intelligence Artificielle, Machine Learning et Deep Learning."
@@ -54,3 +58,6 @@ social:
   links:
     - https://github.com/nyxaether
     - https://www.linkedin.com/in/rrince/
+
+twitter:
+  card: summary_large_image
