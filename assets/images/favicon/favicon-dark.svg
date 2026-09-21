@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="rr/">
+  <defs>
+    <style>
+      @font-face {
+        font-family: 'JBM Logo';
+        font-weight: 700;
+        src: url(data:font/woff2;base64,d09GMgABAAAAAAJMAA4AAAAABQwAAAH8AAJN0wAAAAAAAAAAAAAAAAAAAAAAAAAAGhQbIBwqBmAAPBEICmBpATYCJAMICwgABCAFhA4HIBsaBAAuC7IxBJu9lzg1KbvTjfqI5488vYOKh+fHfZ37RlKbRLdZKUNJCW0dokphCVTdULZ9XK1tH7NMYjYhZlG1mR9zvw9eIq3RgqUPnHA55Sc661eaocnmf9mW5Y6zxNsBSPPH1pZggi1oyyjRIHmr5s2zBNOI0mO43FCzqYZAJSB8jnKdLIS1jUoHNAohD8CoYXayMtOFc3QAM5IHheloequIdC8dBXbrA+O0YCyBRBmAAICdFQBPzeAFmdwnCjIxCQSk4fQDvVRIKEAjuUAjhVGgWKGQzOB5GDf/0WMBCJGnBiwGZ0sr0AdAoYlVjYUVRRVefK24/5nyuP2h/N476dAt/fVz1tv5F7nOqe04/JwOhv3BVKwpdbHp/508DgTS/kdfu5q5/6U1Bf/gLzdqdncv5UrZwrMExRIIvsGmowiZbysBAIh01MhYmoCCeOmSO5UAAAUCJY6Ti8IyvKVH6PRGUuobCsz6oNBwNKPIQcz1FRuMJ1YxR1fc2tIKQUH+/BuoY2UOlcyRIm5s7UCEqpgDBjVwzMbcFEEFErLCcCJkt0LIkSjJx2dpjaxIJrymmD2fUvictPMdm923iNmZCfIK8QtLKSlKsRrPZMybCSl6nhOtb1PUqyNCFsYkhFnZ+wmyOwnwivMK84rxiJiJmHBs6OSCXn5BIAAA) format('woff2');
+      }
+      text { font-family: 'JBM Logo', monospace; font-weight: 700; }
+    </style>
+  </defs>
+  <rect width="512" height="512" fill="#1D1917"/>
+  <text x="50%" y="52%" text-anchor="middle" dominant-baseline="central"
+        font-size="190" letter-spacing="-6">
+    <tspan fill="#F0E2D8">rr</tspan><tspan fill="#E2A385">/</tspan>
+  </text>
+</svg>
