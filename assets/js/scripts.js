@@ -33,7 +33,7 @@ function loadTrainings() {
 
 
 // ── Testimonials Loader (random subset picked on each page load) ──
-const TESTIMONIALS_SHOWN = 7;
+const TESTIMONIALS_SHOWN = 9;
 const TESTIMONIALS_SPEED = 28; // px per second
 let TESTIMONIALS = [];
 
@@ -550,7 +550,7 @@ function observeRevealElements() {
 // ── HTML Escape ──
 function esc(str) {
   if (typeof str !== 'string') return String(str ?? '');
-  return str.replace(/[&<>"'']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+  return str.replace(/[&<>"'']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[c]));
 }
 
 
