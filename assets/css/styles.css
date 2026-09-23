@@ -572,6 +572,7 @@ a { color: inherit; }
 
 .formation-card[data-cat="ml"] { --cat: var(--dusk); }
 .formation-card[data-cat="dl"] { --cat: var(--sage); }
+.formation-card[data-cat="ia"] { --cat: var(--lilac); }
 
 .formation-head {
   display: flex;

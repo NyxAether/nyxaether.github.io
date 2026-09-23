@@ -19,11 +19,13 @@ function loadTrainings() {
     // data is an object keyed by filename stem (bda, dlt, …)
     TRAININGS = Object.values(data).map(t => {
       // Normalize category for filtering
-      t._category = /python/i.test(t.category)
-        ? 'python'
-        : /deep learning/i.test(t.category)
-          ? 'dl'
-          : 'ml';
+      t._category = /agent|générative/i.test(t.category)
+        ? 'ia'
+        : /python/i.test(t.category)
+          ? 'python'
+          : /deep learning/i.test(t.category)
+            ? 'dl'
+            : 'ml';
       return t;
     }).sort((a, b) => a.id.localeCompare(b.id));
   } catch (e) {
@@ -204,7 +206,7 @@ function getParts(prog) {
 
 
 // ── Render Training Cards ──
-const CATEGORY_LABELS = { python: 'python', ml: 'ml · data-science', dl: 'deep learning' };
+const CATEGORY_LABELS = { python: 'python', ml: 'ml · data-science', dl: 'deep learning', ia: 'ia générative' };
 
 function renderCards(filter = 'all') {
   const grid = document.getElementById('formationsGrid');
