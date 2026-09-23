@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════
    ROMAIN RINCÉ — Professional Website
-   Editorial pastel design, discreet ASCII touches
+   Sage & plum palette, discreet ASCII touches
    ═══════════════════════════════════════════ */
 
 /* ── Reset & Base ── */
@@ -10,24 +10,24 @@
   color-scheme: light;
 
   /* Light pastel theme (default) */
-  --bg-primary:    #F1DACD;
-  --bg-secondary:  #E9C7B5;
-  --bg-card:       #F6E6DC;
+  --bg-primary:    #E4E7DD;
+  --bg-secondary:  #D7DCCD;
+  --bg-card:       #EEF0E8;
 
-  --text-primary:   #1E1916;
-  --text-secondary: #4B403A;
-  --text-muted:     #7A6A61;
+  --text-primary:   #1A1F19;
+  --text-secondary: #444C42;
+  --text-muted:     #6A7367;
 
-  --line:        rgba(30, 25, 22, 0.18);
-  --line-strong: rgba(30, 25, 22, 0.42);
+  --line:        rgba(26, 31, 25, 0.18);
+  --line-strong: rgba(26, 31, 25, 0.42);
 
-  --accent: #A4553A;
-  --sage:   #5F7A5E;
-  --dusk:   #56708A;
-  --lilac:  #7A6596;
+  --accent: #7A2E4F;
+  --sage:   #3B6A4B;
+  --dusk:   #3F6283;
+  --lilac:  #8A5A2B;
 
-  --ascii-ink: rgba(30, 25, 22, 0.22);
-  --overlay:   rgba(30, 25, 22, 0.45);
+  --ascii-ink: rgba(26, 31, 25, 0.22);
+  --overlay:   rgba(26, 31, 25, 0.45);
 
   --font-serif: 'Newsreader', 'Iowan Old Style', Georgia, serif;
   --font-sans:  'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -45,24 +45,24 @@
 [data-theme="dark"] {
   color-scheme: dark;
 
-  --bg-primary:   #1D1917;
-  --bg-secondary: #24201D;
-  --bg-card:      #2B2522;
+  --bg-primary:   #161A16;
+  --bg-secondary: #1C211C;
+  --bg-card:      #242A24;
 
-  --text-primary:   #F0E2D8;
-  --text-secondary: #CDBDB2;
-  --text-muted:     #9C8B80;
+  --text-primary:   #E4EADF;
+  --text-secondary: #BAC4B5;
+  --text-muted:     #8C9788;
 
-  --line:        rgba(240, 226, 216, 0.14);
-  --line-strong: rgba(240, 226, 216, 0.38);
+  --line:        rgba(228, 234, 223, 0.14);
+  --line-strong: rgba(228, 234, 223, 0.38);
 
-  --accent: #E2A385;
-  --sage:   #A9C1A5;
-  --dusk:   #A3B8CC;
-  --lilac:  #BFAED6;
+  --accent: #E39CBB;
+  --sage:   #A6CDB0;
+  --dusk:   #9FBEDA;
+  --lilac:  #D9B488;
 
-  --ascii-ink: rgba(240, 226, 216, 0.16);
-  --overlay:   rgba(10, 8, 7, 0.65);
+  --ascii-ink: rgba(228, 234, 223, 0.16);
+  --overlay:   rgba(7, 9, 7, 0.65);
 }
 
 html { scroll-behavior: smooth; }
@@ -438,7 +438,6 @@ a { color: inherit; }
 
 /* ASCII corner brackets on hover: ┌ ┐ └ ┘ */
 .expertise-card::after,
-.formation-card::after,
 .service-card::after,
 .contact-card::after {
   content: '';
@@ -461,12 +460,10 @@ a { color: inherit; }
 }
 
 .expertise-card:hover::after,
-.formation-card:hover::after,
 .service-card:hover::after,
 .contact-card:hover::after { opacity: 1; }
 
 .expertise-card:hover,
-.formation-card:hover,
 .service-card:hover,
 .contact-card:hover { border-color: var(--line-strong); }
 
@@ -562,28 +559,61 @@ a { color: inherit; }
   gap: 20px;
 }
 
+/* Terminal window: an ASCII title bar that takes the category color on hover */
 .formation-card {
-  padding: 28px;
+  --cat: var(--accent);
+  border-color: var(--line-strong);
+  background: var(--bg-primary);
   cursor: pointer;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
-.formation-card:hover { background: var(--bg-card); }
+.formation-card[data-cat="ml"] { --cat: var(--dusk); }
+.formation-card[data-cat="dl"] { --cat: var(--sage); }
+
+.formation-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 8px 20px;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-mono);
+  transition: background-color var(--transition-fast);
+}
 
 .formation-id {
-  font-family: var(--font-mono);
   font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 12px;
+  color: var(--cat);
 }
 
-.formation-id.python { color: var(--accent); }
-.formation-id.ml     { color: var(--dusk); }
-.formation-id.dl     { color: var(--sage); }
+.formation-id::before { content: '┌─ '; color: var(--text-muted); }
+.formation-id::after  { content: '.md'; text-transform: none; letter-spacing: 0; color: var(--text-muted); }
+
+.formation-cat {
+  font-size: 0.7rem;
+  text-transform: lowercase;
+  color: var(--text-muted);
+}
+
+.formation-card:hover .formation-head { background: var(--cat); }
+
+.formation-card:hover .formation-head *,
+.formation-card:hover .formation-id::before,
+.formation-card:hover .formation-id::after { color: var(--bg-primary); }
+
+.formation-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px 18px;
+}
 
 .formation-card h3 {
   font-family: var(--font-serif);
@@ -591,6 +621,7 @@ a { color: inherit; }
   font-weight: 400;
   line-height: 1.25;
   margin-bottom: 12px;
+  text-wrap: balance;
 }
 
 .formation-card p {
@@ -606,8 +637,8 @@ a { color: inherit; }
 .formation-meta {
   margin-top: auto;
   display: flex;
-  flex-direction: column;
-  gap: 2px;
+  flex-wrap: wrap;
+  gap: 4px 16px;
   font-family: var(--font-mono);
   font-size: 0.76rem;
   color: var(--text-secondary);
@@ -617,6 +648,18 @@ a { color: inherit; }
   font-weight: 400;
   color: var(--text-muted);
 }
+
+.formation-cta {
+  margin-top: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  transition: color var(--transition-fast);
+}
+
+.formation-cta::before { content: '$ '; color: var(--cat); }
+
+.formation-card:hover .formation-cta { color: var(--text-primary); }
 
 /* ── Services ── */
 .services-grid {

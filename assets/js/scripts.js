@@ -204,6 +204,8 @@ function getParts(prog) {
 
 
 // ── Render Training Cards ──
+const CATEGORY_LABELS = { python: 'python', ml: 'ml · data-science', dl: 'deep learning' };
+
 function renderCards(filter = 'all') {
   const grid = document.getElementById('formationsGrid');
   if (!grid) return;
@@ -215,17 +217,24 @@ function renderCards(filter = 'all') {
   filtered.forEach((t, idx) => {
     const card = document.createElement('div');
     card.className = 'formation-card';
+    card.dataset.cat = t._category;
     card.setAttribute('data-reveal', '');
     card.style.transitionDelay = `${idx * 0.06}s`;
     card.addEventListener('click', () => openModal(t));
 
     card.innerHTML = `
-      <div class="formation-id ${t._category}">${t.id}</div>
-      <h3>${esc(t.title)}</h3>
-      <p>${esc(t.short)}</p>
-      <div class="formation-meta">
-        <span><b>durée ──</b> ${esc(t.duration)}</span>
-        <span><b>tarif ──</b> ${formatPrice(t.price)} € HT / pers.</span>
+      <div class="formation-head">
+        <span class="formation-id">${t.id}</span>
+        <span class="formation-cat">${CATEGORY_LABELS[t._category]}</span>
+      </div>
+      <div class="formation-body">
+        <h3>${esc(t.title)}</h3>
+        <p>${esc(t.short)}</p>
+        <div class="formation-meta">
+          <span><b>--durée=</b>${esc(t.duration)}</span>
+          <span><b>--tarif=</b>${formatPrice(t.price)} € HT / pers.</span>
+        </div>
+        <span class="formation-cta">voir le programme</span>
       </div>
     `;
 
