@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<title>og:image — Romain Rincé</title>
+<!-- Source of assets/images/og-image.png, rendered at 1200x630 (see tools/render_assets.py). -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,600;1,600&family=Inter:wght@400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary:     #E4E7DD;
+    --text-primary:   #1A1F19;
+    --text-secondary: #444C42;
+    --text-muted:     #6A7367;
+    --line:        rgba(26, 31, 25, 0.18);
+    --line-strong: rgba(26, 31, 25, 0.3);
+    --accent: #7A2E4F;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body { width: 1200px; height: 630px; background: var(--bg-primary); }
+
+  body {
+    padding: 72px 80px 0;
+    color: var(--text-primary);
+    font-family: 'Inter', -apple-system, 'Segoe UI', sans-serif;
+  }
+
+  .label {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-family: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+    font-size: 23px;
+    color: var(--text-secondary);
+  }
+
+  .label b { font-size: 32px; font-weight: 700; color: var(--text-primary); letter-spacing: -1px; }
+  .label b span { color: var(--accent); }
+  .cursor { display: inline-block; width: 13px; height: 23px; margin-left: -4px; background: var(--accent); align-self: flex-start; margin-top: 2px; }
+
+  h1 {
+    margin-top: 36px;
+    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 600;
+    font-size: 132px;
+    line-height: 0.92;
+    letter-spacing: -2px;
+  }
+
+  h1 em { display: block; font-style: italic; color: var(--accent); }
+
+  .subtitle { margin-top: 44px; font-size: 35px; color: var(--text-secondary); }
+
+  .tags { display: flex; gap: 12px; margin-top: 24px; }
+
+  .tags span {
+    font-family: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+    font-size: 21px;
+    padding: 5px 16px;
+    border: 1px solid var(--line-strong);
+    border-radius: 2px;
+    color: var(--text-secondary);
+  }
+
+  .foot {
+    margin-top: 22px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+    text-align: right;
+    font-family: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+    font-size: 22px;
+    color: var(--text-muted);
+  }
+</style>
+</head>
+<body>
+  <p class="label"><b>rr<span>/</span></b> consultant ia <span class="cursor"></span></p>
+  <h1>Romain <em>Rincé</em></h1>
+  <p class="subtitle">Consultant &amp; Formateur en Intelligence Artificielle</p>
+  <div class="tags"><span>Machine Learning</span><span>Deep Learning</span><span>Python</span><span>Formation</span></div>
+  <p class="foot">romainrince.fr</p>
+</body>
+</html>
