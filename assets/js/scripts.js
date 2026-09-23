@@ -208,11 +208,18 @@ function getParts(prog) {
 // ── Render Training Cards ──
 const CATEGORY_LABELS = { python: 'python', ml: 'ml · data-science', dl: 'deep learning', ia: 'ia générative' };
 
+// Two full rows of cards, and never fewer than 3 on a single-column layout
+function visibleCardLimit(grid) {
+  const cols = getComputedStyle(grid).gridTemplateColumns.split(' ').length;
+  return Math.max(cols * 2, 3);
+}
+
 function renderCards(filter = 'all') {
   const grid = document.getElementById('formationsGrid');
   if (!grid) return;
 
   const filtered = filter === 'all' ? TRAININGS : TRAININGS.filter(t => t._category === filter);
+  const limit = visibleCardLimit(grid);
 
   grid.innerHTML = '';
 
@@ -221,7 +228,8 @@ function renderCards(filter = 'all') {
     card.className = 'formation-card';
     card.dataset.cat = t._category;
     card.setAttribute('data-reveal', '');
-    card.style.transitionDelay = `${idx * 0.06}s`;
+    card.hidden = idx >= limit;
+    card.style.transitionDelay = `${(idx % limit) * 0.06}s`;
     card.addEventListener('click', () => openModal(t));
 
     card.innerHTML = `
@@ -243,7 +251,37 @@ function renderCards(filter = 'all') {
     grid.appendChild(card);
   });
 
+  updateMoreButton(filtered.length - limit);
+
   // Re-observe for scroll reveal
+  observeRevealElements();
+}
+
+function updateMoreButton(hiddenCount) {
+  const btn = document.getElementById('formationsMore');
+  if (!btn) return;
+  btn.hidden = hiddenCount <= 0;
+  btn.setAttribute('aria-expanded', 'false');
+  btn.textContent = hiddenCount === 1
+    ? 'afficher 1 autre formation'
+    : `afficher les ${hiddenCount} autres formations`;
+}
+
+function toggleMoreCards() {
+  const grid = document.getElementById('formationsGrid');
+  const btn = document.getElementById('formationsMore');
+  if (!grid || !btn) return;
+
+  if (btn.getAttribute('aria-expanded') === 'true') {
+    // Collapse back to the initial rows and bring the list header into view
+    renderCards(document.querySelector('.filter-btn.active')?.dataset.filter);
+    document.getElementById('formations')?.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth' });
+    return;
+  }
+
+  grid.querySelectorAll('.formation-card[hidden]').forEach(card => { card.hidden = false; });
+  btn.setAttribute('aria-expanded', 'true');
+  btn.textContent = 'afficher moins';
   observeRevealElements();
 }
 
@@ -582,6 +620,7 @@ function init() {
       renderCards(btn.dataset.filter);
     });
   });
+  document.getElementById('formationsMore')?.addEventListener('click', toggleMoreCards);
 
   // Testimonials log
   loadTestimonials();
