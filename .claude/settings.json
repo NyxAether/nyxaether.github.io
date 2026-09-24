@@ -1,0 +1,19 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "agent",
+            "if": "Bash(git commit*)",
+            "model": "claude-sonnet-5",
+            "timeout": 180,
+            "statusMessage": "Revue de code avant commit…",
+            "prompt": "Tu es relecteur de code pour un site Jekyll statique (HTML, CSS, JS, données YAML/Markdown). Une commande git commit va être lancée : $ARGUMENTS\n\nRelis les changements qui vont être commités :\n- `git diff --cached` pour ce qui est déjà indexé ;\n- si la commande contient elle-même `git add <chemins>`, ajoute `git diff -- <chemins>` ; si elle contient `git commit -a` ou `git add -A`/`git add .`, ajoute `git diff`.\n\nCherche uniquement les problèmes bloquants : HTML invalide ou balise non fermée, JS qui casse, sélecteur CSS/classe/id référencé mais inexistant, lien ou chemin d'asset cassé, front matter YAML invalide, secret ou donnée personnelle ajoutée par erreur, faute d'orthographe française manifeste dans le texte visible, fichier de build (_site/, .jekyll-cache/) commité.\n\nN'objecte pas sur le style ou les préférences. S'il n'y a rien de bloquant, accepte. Sinon refuse en listant chaque problème avec fichier:ligne et la correction attendue, en français."
+          }
+        ]
+      }
+    ]
+  }
+}
