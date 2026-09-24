@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════
    ROMAIN RINCÉ — Professional Website
-   Neural network animation, modals, theme, etc.
+   ASCII hero field, training cards & modal, theme, reviews log, etc.
    Training data loaded from server-side JSON (Jekyll _data)
    ═══════════════════════════════════════════ */
 
@@ -230,7 +230,13 @@ function renderCards(filter = 'all') {
     card.setAttribute('data-reveal', '');
     card.hidden = idx >= limit;
     card.style.transitionDelay = `${(idx % limit) * 0.06}s`;
+    card.tabIndex = 0;
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-label', `${t.title} : voir le programme`);
     card.addEventListener('click', () => openModal(t));
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(t); }
+    });
 
     card.innerHTML = `
       <div class="formation-head">
@@ -287,6 +293,8 @@ function toggleMoreCards() {
 
 
 // ── Modal ──
+let lastFocus = null;  // element to refocus when the modal closes
+
 function openModal(training) {
   const overlay = document.getElementById('modalOverlay');
   const body = document.getElementById('modalBody');
@@ -338,15 +346,19 @@ function openModal(training) {
     </div>
   `;
 
+  lastFocus = document.activeElement;
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
+  document.getElementById('trainingModal')?.focus();
 }
 
 function closeModal() {
   const overlay = document.getElementById('modalOverlay');
   if (overlay) {
+    if (!overlay.classList.contains('open')) return;
     overlay.classList.remove('open');
     document.body.style.overflow = '';
+    lastFocus?.focus();
   }
 }
 
@@ -447,7 +459,7 @@ function initTestimonialLog() {
 
 // ── Theme Toggle ──
 function initTheme() {
-  // data-theme is already set inline in <head> (defaults to 'light') to avoid a flash.
+  // data-theme is already set inline in <head> (stored choice, else system preference) to avoid a flash.
   const btn = document.getElementById('themeToggle');
   btn?.addEventListener('click', () => {
     const current = document.documentElement.getAttribute('data-theme');
@@ -465,13 +477,15 @@ function initMobileMenu() {
   const links = document.getElementById('navLinks');
 
   toggle?.addEventListener('click', () => {
-    links.classList.toggle('open');
+    const open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(open));
   });
 
   // Close on link click
   links?.querySelectorAll('a').forEach(a => {
     a.addEventListener('click', () => {
       links.classList.remove('open');
+      toggle?.setAttribute('aria-expanded', 'false');
     });
   });
 }
@@ -484,7 +498,7 @@ function initNavScroll() {
   const navLinks = document.querySelectorAll('.nav-links a[data-section]');
 
   window.addEventListener('scroll', () => {
-    // Nav shadow on scroll
+    // Nav bottom border on scroll
     if (nav) {
       nav.classList.toggle('scrolled', window.scrollY > 40);
     }

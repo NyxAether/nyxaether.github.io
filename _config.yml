@@ -26,6 +26,7 @@ exclude:
   - README.md
   - _data
   - tools
+  - rr-design.toml
 
 # Plugins (only those supported by GitHub Pages)
 plugins:
