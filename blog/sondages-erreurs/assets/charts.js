@@ -83,6 +83,19 @@
     mounted.forEach(draw);
   }
 
+  function keepTipVisible(el) {
+    const tip = el.querySelector('g[aria-label="tip"]');
+    if (!tip) return;
+    const marge = 8;
+    const box = tip.getBoundingClientRect();
+    const dx = box.left < marge ? marge - box.left
+      : box.right > document.documentElement.clientWidth - marge ? document.documentElement.clientWidth - marge - box.right
+      : 0;
+    if (!dx) return;
+    const m = /translate\(\s*(-?[\d.e+-]+)[\s,]+(-?[\d.e+-]+)\s*\)/.exec(tip.getAttribute("transform") || "");
+    if (m) tip.setAttribute("transform", `translate(${+m[1] + dx},${m[2]})`);
+  }
+
   /** Monte un graphique : `render(t, width)` renvoie un nœud Plot, redessiné au resize et au changement de thème. */
   function mount(el, render) {
     const entry = { el, render, width: 0 };
@@ -94,6 +107,9 @@
       clearTimeout(timer);
       timer = setTimeout(() => draw(entry), 80);
     }).observe(el);
+    // Plot centre l'infobulle sur le point : sur écran étroit elle déborde de la fenêtre.
+    // Après chaque mouvement, on la décale pour qu'elle reste visible.
+    el.addEventListener("pointermove", () => requestAnimationFrame(() => keepTipVisible(el)));
     return { redraw: () => draw(entry) };
   }
 

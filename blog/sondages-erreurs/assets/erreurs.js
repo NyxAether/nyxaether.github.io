@@ -76,7 +76,7 @@
           Plot.line(marge, { x: "n", y: (d) => -d.m, stroke: t.series[0], strokeWidth: 1.5 }),
           baseline(t),
           Plot.dot(points, { x: "n", y: "residu", r: 2.5, fill: t.series[1], fillOpacity: 0.55 }),
-          Plot.tip(points, Plot.pointer({
+          Plot.tip(points, Plot.pointer({ lineWidth: width < 520 ? 38 : 60,
             x: "n", y: "residu",
             channels: { pays: "pays", année: "annee", sondage: "poll", résultat: "vote" },
             format: { x: (v) => `${fmt.int(v)} sondés`, y: (v) => pts(v), sondage: (v) => fmt.pct(v), résultat: (v) => fmt.pct(v), année: (v) => String(v) },
@@ -116,7 +116,7 @@
           Plot.line(long, { x: "n", y: "e", z: "serie", stroke: "serie", strokeWidth: 2 }),
           Plot.dot(long, { x: "n", y: "e", fill: "serie", r: 4, stroke: t.surface, strokeWidth: 2 }),
           Plot.ruleX(rows, Plot.pointerX({ x: "n", stroke: t.muted })),
-          Plot.tip(rows, Plot.pointerX({
+          Plot.tip(rows, Plot.pointerX({ lineWidth: width < 520 ? 38 : 60,
             x: "n", y: "obs",
             channels: { observée: "obs", attendue: "th", "taille équivalente": "n_equiv", lignes: "lignes" },
             format: {
@@ -289,7 +289,7 @@
         marks: [
           Plot.line(long, { x: "x", y: "y", z: "serie", stroke: "serie", strokeWidth: 2 }),
           Plot.ruleX(glissante, Plot.pointerX({ x: "poll_sample", stroke: t.muted })),
-          Plot.tip(glissante, Plot.pointerX({
+          Plot.tip(glissante, Plot.pointerX({ lineWidth: width < 520 ? 38 : 60,
             x: "poll_sample", y: "optimal_kl",
             channels: Object.fromEntries(cles.map((m) => [mesures[m], m])),
             format: { x: (v) => `taille réelle ≈ ${fmt.int(Math.round(v))}`, y: false, ...Object.fromEntries(cles.map((m) => [mesures[m], (v) => fmt.int(Math.round(v))])) },
@@ -336,7 +336,7 @@
           Plot.ruleX(rows, { x: "tranche", y1: "bas", y2: "haut", stroke: t.muted }),
           Plot.barY(rows, { x: "tranche", y1: "q1", y2: "q3", fill: t.series[1], fillOpacity: 0.35, stroke: t.series[1], rx: 2 }),
           Plot.tickY(rows, { x: "tranche", y: "med", stroke: t.series[1], strokeWidth: 2.5 }),
-          Plot.tip(rows, Plot.pointerX({
+          Plot.tip(rows, Plot.pointerX({ lineWidth: width < 520 ? 38 : 60,
             x: "tranche", y: "med",
             channels: { sondages: "effectif", "1er quartile": "q1", "3e quartile": "q3" },
             format: { x: true, y: (v) => `médiane ${fmt.int(Math.round(v))}`, sondages: fmt.int, "1er quartile": (v) => fmt.int(Math.round(v)), "3e quartile": (v) => fmt.int(Math.round(v)) },
@@ -393,11 +393,12 @@
           Plot.ruleX([M.consensus_hasard_median], { stroke: t.muted, strokeDasharray: "4 3" }),
           Plot.text([M.consensus_hasard_median], { x: (d) => d, frameAnchor: "top", dy: -14, dx: 4, textAnchor: "start", text: () => "hasard (médiane)", fill: t.ink2 }),
           Plot.dot(rows, { x: "consensus", y: "resserrement", fill: "cat", r: 4.5, stroke: t.surface, strokeWidth: 1.5 }),
-          Plot.tip(rows, Plot.pointer({
+          Plot.tip(rows, Plot.pointer({ lineWidth: width < 520 ? 38 : 60,
             x: "consensus", y: "resserrement",
-            channels: { élection: "nom", sondages: "sondages", "hasard (consensus)": "consensus_hasard", "rang consensus": "rang_consensus", "rang resserrement": "rang_resserrement" },
+            // Libellés courts : ceux des axes sont des phrases entières, qui élargissent trop l'infobulle.
+            channels: { élection: "nom", consensus: "consensus", resserrement: "resserrement", sondages: "sondages", "hasard (consensus)": "consensus_hasard", "rang consensus": "rang_consensus", "rang resserrement": "rang_resserrement" },
             format: {
-              élection: true, x: (v) => fmt.num(v, 2), y: (v) => fmt.num(v, 2), sondages: fmt.int,
+              élection: true, x: false, y: false, consensus: (v) => fmt.num(v, 2), resserrement: (v) => fmt.num(v, 2), sondages: fmt.int,
               "hasard (consensus)": (v) => fmt.num(v, 2), "rang consensus": rang, "rang resserrement": rang,
             },
           })),
