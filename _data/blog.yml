@@ -1,0 +1,8 @@
+# Articles du blog, du plus récent au plus ancien.
+# Chaque article vit dans son propre dossier blog/<slug>/ (HTML libre).
+- title: Erreur empirique des sondages
+  date: 2026-09-29
+  slug: sondages-erreurs
+  url: /blog/sondages-erreurs/
+  summary: Les sondages publiés juste avant une élection sont-ils aussi précis que leur marge d'erreur le laisse croire ? Comparaison avec les résultats des scrutins dans 45 pays.
+  tags: [sondages, statistiques, élections]

@@ -24,6 +24,14 @@ embarqué — plus besoin de `fetch()` ni de parser YAML côté client.
 Pour ajouter une formation, crée un fichier `.yml` dans `_data/trainings/`
 suivant le format existant (id, title, short, duration, price, …).
 
+## Blog
+
+La page `/blog/` liste les articles déclarés dans `_data/blog.yml`
+(titre, date, slug, URL, résumé, tags). Chaque article est une page autonome
+(HTML libre) dans son propre dossier `blog/<slug>/`, avec ses assets et
+ses données. Pour publier : créer le dossier, puis ajouter une entrée en
+tête de `_data/blog.yml`.
+
 ## Build local
 
 ```bash

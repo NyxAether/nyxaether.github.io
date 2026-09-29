@@ -1,0 +1,11 @@
+/* Styles propres à cette étude. Le reste (mise en page, graphiques, tableaux…)
+   vient de rr-article.css (charte rr/), chargé avant cette feuille. */
+
+/* Rappel sur chaque graphique quand le périmètre « France » est actif */
+:root[data-scope="france"] figure.chart > .chart-title::after {
+  content: ' · France, peu de données';
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--warning);
+  white-space: nowrap;
+}
