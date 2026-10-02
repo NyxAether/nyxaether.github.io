@@ -30,18 +30,26 @@
     try { return localStorage.getItem("theme"); } catch { return null; }
   }
 
-  function applyTheme(value, persist) {
+  // `differer` : les graphiques marqués deferTheme (WebGL) ne sont pas reconstruits pendant la
+  // transition, mais juste après (redrawDeferred), sinon l'animation fige.
+  function applyTheme(value, persist, differer = false) {
     document.documentElement.dataset.theme = value;
     if (persist) {
       try { localStorage.setItem("theme", value); } catch { /* stockage indisponible */ }
     }
-    redrawAll();
+    mounted.forEach((entry) => { if (!(differer && entry.deferTheme)) draw(entry); });
+  }
+
+  function redrawDeferred() {
+    mounted.filter((entry) => entry.deferTheme).forEach(draw);
   }
 
   function initThemeToggle() {
     applyTheme(readStoredTheme() || (systemDark.matches ? "dark" : "light"), false);
-    document.querySelector(".theme-btn")?.addEventListener("click", () => {
-      applyTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark", true);
+    const btn = document.querySelector(".theme-btn");
+    btn?.addEventListener("click", () => {
+      const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+      window.rrThemeTransition(btn, () => applyTheme(next, true, true)).then(redrawDeferred);
     });
     systemDark.addEventListener("change", (e) => {
       if (!readStoredTheme()) applyTheme(e.matches ? "dark" : "light", false);
@@ -79,10 +87,6 @@
     entry.el.replaceChildren(entry.render(theme(), width));
   }
 
-  function redrawAll() {
-    mounted.forEach(draw);
-  }
-
   function keepTipVisible(el) {
     const tip = el.querySelector('g[aria-label="tip"]');
     if (!tip) return;
@@ -97,8 +101,8 @@
   }
 
   /** Monte un graphique : `render(t, width)` renvoie un nœud Plot, redessiné au resize et au changement de thème. */
-  function mount(el, render) {
-    const entry = { el, render, width: 0 };
+  function mount(el, render, { deferTheme = false } = {}) {
+    const entry = { el, render, width: 0, deferTheme };
     mounted.push(entry);
     draw(entry);
     let timer;

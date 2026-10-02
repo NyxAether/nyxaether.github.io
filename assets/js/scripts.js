@@ -288,6 +288,13 @@ class AsciiField {
       this.mouse.y = null;
     });
 
+    // Pause pendant la transition de thème : la page est re-rastérisée à chaque image, autant lui laisser la main.
+    document.addEventListener('rrthemetransition', e => {
+      if (this.reduced) return;
+      if (e.detail.phase === 'start') this.stop();
+      else if (this.canvas.getBoundingClientRect().bottom > 0 && !document.hidden) this.start();
+    });
+
     document.addEventListener('themechange', () => {
       this.readColor();
       this.readAccent();
@@ -573,22 +580,7 @@ function initTheme() {
       localStorage.setItem('theme', next);
       document.dispatchEvent(new CustomEvent('themechange', { detail: { theme: next } }));
     };
-    if (!document.startViewTransition || REDUCED) { apply(); return; }
-
-    // Cercle qui s'étend depuis le bouton. La forme de départ est posée en CSS (--vt-from)
-    // pour éviter un flash du nouveau thème avant le début de l'animation.
-    const b = btn.getBoundingClientRect();
-    const x = b.left + b.width / 2, y = b.top + b.height / 2;
-    const r = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
-    const clip = [`circle(0px at ${x}px ${y}px)`, `circle(${r}px at ${x}px ${y}px)`];
-    root.style.setProperty('--vt-from', clip[0]);
-    root.setAttribute('data-vt', '');
-    const vt = document.startViewTransition(apply);
-    vt.ready.then(() => root.animate({ clipPath: clip }, {
-      duration: 750, easing: 'cubic-bezier(.65,0,.35,1)', fill: 'forwards',
-      pseudoElement: '::view-transition-new(root)'
-    })).catch(() => {});
-    vt.finished.finally(() => root.removeAttribute('data-vt'));
+    window.rrThemeTransition(btn, apply);
   });
 }
 

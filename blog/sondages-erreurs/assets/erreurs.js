@@ -239,7 +239,7 @@
         el.on("plotly_relayout", (e) => { if (e["scene.camera"]) camera = e["scene.camera"]; });
       });
       return el;
-    });
+    }, { deferTheme: true });
 
     const legende = [...fig.querySelectorAll(".legend li")];
     radio($(".presets", fig), (value) => {
