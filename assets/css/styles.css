@@ -128,6 +128,15 @@ a { color: inherit; }
 [data-theme="dark"] .icon-sun { display: block; }
 [data-theme="dark"] .icon-moon { display: none; }
 
+/* Transition de thème : cercle qui s'étend depuis le bouton (View Transitions API, cf. initTheme) */
+::view-transition-old(root),
+::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+::view-transition-group(root) { animation: none; }
+::view-transition-image-pair(root) { isolation: auto; }
+:root[data-vt]::view-transition-new(root) { clip-path: var(--vt-from); z-index: 2; }
+/* pas de fondu des couleurs pendant la capture, sinon le nouveau thème est photographié à mi-chemin */
+:root[data-vt] *, :root[data-vt] *::before, :root[data-vt] *::after { transition: none !important; }
+
 .menu-btn {
   display: none;
   width: 36px; height: 36px;

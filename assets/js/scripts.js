@@ -567,9 +567,28 @@ function initTheme() {
   btn?.addEventListener('click', () => {
     const current = document.documentElement.getAttribute('data-theme');
     const next = current === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem('theme', next);
-    document.dispatchEvent(new CustomEvent('themechange', { detail: { theme: next } }));
+    const root = document.documentElement;
+    const apply = () => {
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      document.dispatchEvent(new CustomEvent('themechange', { detail: { theme: next } }));
+    };
+    if (!document.startViewTransition || REDUCED) { apply(); return; }
+
+    // Cercle qui s'étend depuis le bouton. La forme de départ est posée en CSS (--vt-from)
+    // pour éviter un flash du nouveau thème avant le début de l'animation.
+    const b = btn.getBoundingClientRect();
+    const x = b.left + b.width / 2, y = b.top + b.height / 2;
+    const r = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+    const clip = [`circle(0px at ${x}px ${y}px)`, `circle(${r}px at ${x}px ${y}px)`];
+    root.style.setProperty('--vt-from', clip[0]);
+    root.setAttribute('data-vt', '');
+    const vt = document.startViewTransition(apply);
+    vt.ready.then(() => root.animate({ clipPath: clip }, {
+      duration: 750, easing: 'cubic-bezier(.65,0,.35,1)', fill: 'forwards',
+      pseudoElement: '::view-transition-new(root)'
+    })).catch(() => {});
+    vt.finished.finally(() => root.removeAttribute('data-vt'));
   });
 }
 
