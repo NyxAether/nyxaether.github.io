@@ -62,6 +62,7 @@ const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // ── ASCII Field Animation (hero background) ──
 const ASCII_RAMP = ' .·:-=+*';
+const ASCII_VARIANTS = ['drawField', 'drawPlasma', 'drawLife'];
 
 class AsciiField {
   constructor(canvasId) {
@@ -89,10 +90,32 @@ class AsciiField {
     this.h = rect.height;
     this.cols = Math.ceil(this.w / this.cell) + 1;
     this.rows = Math.ceil(this.h / this.cell) + 1;
+    this.life = null;
   }
 
   readColor() {
     this.color = getComputedStyle(document.documentElement).getPropertyValue('--ascii-ink').trim() || 'rgba(0,0,0,0.2)';
+  }
+
+  // Variante tirée au hasard à chaque chargement, jamais deux fois de suite la même
+  pickVariant() {
+    let last = null;
+    try { last = localStorage.getItem('asciiVariant'); } catch (e) {}
+    const pool = ASCII_VARIANTS.filter(v => v !== last);
+    const v = pool[Math.floor(Math.random() * pool.length)];
+    try { localStorage.setItem('asciiVariant', v); } catch (e) {}
+    return v;
+  }
+
+  readAccent() {
+    this.accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#7A2E4F';
+  }
+
+  put(col, row, ch, accent) {
+    this.ctx.fillStyle = accent ? this.accent : this.color;
+    this.ctx.globalAlpha = accent ? 0.45 : 1;
+    this.ctx.fillText(ch, col * this.cell, row * this.cell);
+    this.ctx.globalAlpha = 1;
   }
 
   draw() {
@@ -101,7 +124,84 @@ class AsciiField {
     ctx.font = '11px "JetBrains Mono", monospace';
     ctx.textBaseline = 'middle';
     ctx.fillStyle = this.color;
+    this[this.variant]();
+  }
 
+  // Mouse position in grid cells, or null
+  mouseCell() {
+    return this.mouse.x === null ? null : { c: this.mouse.x / this.cell, r: this.mouse.y / this.cell };
+  }
+
+  drawPlasma() {
+    const { cols, rows, t } = this;
+    const m = this.mouseCell();
+    const cx = cols / 2, cy = rows / 2;
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        let v = Math.sin(c * 0.13 + t) + Math.sin(r * 0.3 + t * 1.3)
+          + Math.sin((c + r) * 0.1 - t) + Math.sin(Math.hypot((c - cx) * 0.5, r - cy) * 0.5 - t * 1.6);
+        if (m) v += Math.max(0, 1 - Math.hypot((c - m.c) * 0.5, r - m.r) / 8) * 3;
+        const n = (v + 4) / 8;
+        const idx = Math.max(0, Math.min(ASCII_RAMP.length - 1, Math.floor(n * ASCII_RAMP.length)));
+        if (idx > 0) this.put(c, r, ASCII_RAMP[idx], idx >= ASCII_RAMP.length - 1);
+      }
+    }
+  }
+
+  lifeSeed() {
+    const n = this.cols * this.rows;
+    this.life = { g: new Uint8Array(n), age: new Uint8Array(n), still: 0, tick: 0 };
+    for (let i = 0; i < n; i++) this.life.g[i] = Math.random() < 0.22 ? 1 : 0;
+  }
+
+  lifeStep() {
+    const { cols, rows } = this;
+    const L = this.life, next = new Uint8Array(L.g.length);
+    let pop = 0, diff = 0;
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        let s = 0;
+        for (let dr = -1; dr <= 1; dr++) {
+          for (let dc = -1; dc <= 1; dc++) {
+            if (dr || dc) s += L.g[((r + dr + rows) % rows) * cols + (c + dc + cols) % cols];
+          }
+        }
+        const i = r * cols + c;
+        const alive = L.g[i] ? (s === 2 || s === 3) : s === 3;
+        next[i] = alive ? 1 : 0;
+        L.age[i] = alive ? Math.min(255, L.g[i] ? L.age[i] + 1 : 0) : 0;
+        pop += next[i];
+        if (next[i] !== L.g[i]) diff++;
+      }
+    }
+    L.g = next;
+    L.still = diff < 4 ? L.still + 1 : 0;
+    if (pop < cols * rows * 0.02 || L.still > 12) this.lifeSeed();
+  }
+
+  drawLife() {
+    const { cols, rows } = this;
+    if (!this.life) this.lifeSeed();
+    const m = this.mouseCell();
+    if (m) {
+      for (let dr = -1; dr <= 1; dr++) {
+        for (let dc = -1; dc <= 1; dc++) {
+          const r = Math.floor(m.r) + dr, c = Math.floor(m.c) + dc;
+          if (r >= 0 && r < rows && c >= 0 && c < cols && Math.random() < 0.5) this.life.g[r * cols + c] = 1;
+        }
+      }
+    }
+    if (!this.reduced && ++this.life.tick % 3 === 0) this.lifeStep();
+    const { g, age } = this.life;
+    for (let i = 0; i < g.length; i++) {
+      if (!g[i]) continue;
+      const a = age[i];
+      this.put(i % cols, Math.floor(i / cols), a < 1 ? '·' : a < 4 ? 'o' : a < 10 ? 'O' : '@', a < 1);
+    }
+  }
+
+  drawField() {
+    const ctx = this.ctx;
     for (let row = 0; row < this.rows; row++) {
       const y = row * this.cell;
       for (let col = 0; col < this.cols; col++) {
@@ -147,8 +247,10 @@ class AsciiField {
   }
 
   init() {
+    this.variant = this.pickVariant();
     this.resize();
     this.readColor();
+    this.readAccent();
 
     if (this.reduced) {
       this.draw();
@@ -188,6 +290,7 @@ class AsciiField {
 
     document.addEventListener('themechange', () => {
       this.readColor();
+      this.readAccent();
       if (this.reduced || !this.running) this.draw();
     });
   }
