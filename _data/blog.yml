@@ -1,5 +1,11 @@
 # Articles du blog, du plus récent au plus ancien.
 # Chaque article vit dans son propre dossier blog/<slug>/ (HTML libre).
+- title: Le processus de la skill sdlc
+  date: 2026-10-08
+  slug: skill-sdlc
+  url: /blog/skill-sdlc/
+  summary: "Comment la skill /sdlc applique le playbook AI-native SDLC d'Anthropic : des artefacts versionnés à chaque étape, puis un cycle de chantiers conduit par un coordinateur, des agents de phase et des hooks."
+  tags: [claude code, skills, génie logiciel]
 - title: Erreur empirique des sondages
   date: 2026-09-29
   slug: sondages-erreurs

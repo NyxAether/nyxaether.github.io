@@ -1,0 +1,84 @@
+/* Page « skill sdlc » : composants propres à l'article (le socle vient de rr-article.css). */
+.flow { margin: 24px 0 8px; padding: 18px 20px; background: var(--bg-card); border: 1px solid var(--line); border-radius: 4px; font: 0.82rem/1.9 var(--font-mono); color: var(--text-secondary); overflow-x: auto; white-space: nowrap; }
+.flow i { color: var(--accent); font-style: normal; } .flow b { color: var(--text-primary); font-weight: 500; }
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 16px; margin: 20px 0; }
+.box { background: var(--bg-card); border: 1px solid var(--line); border-radius: 4px; padding: 14px 18px; min-width: 0; }
+.box h4 { margin: 0 0 6px; font: 500 0.78rem var(--font-mono); color: var(--accent); }
+.box p { margin: 0; font-size: .93rem; }
+.steps { list-style: none; padding: 0; margin: 20px 0; display: grid; gap: 12px; }
+.steps li { background: var(--bg-card); border: 1px solid var(--line); border-radius: 4px; padding: 14px 18px; margin: 0; }
+.k { display: block; font: 0.74rem var(--font-mono); color: var(--accent); }
+.t { font: 1.2rem var(--font-serif); color: var(--text-primary); }
+.steps p { margin: 4px 0 0; font-size: .95rem; }
+.note { border-left: 1px dashed var(--line-strong); padding: 4px 0 4px 18px; font-size: .95rem; color: var(--text-secondary); margin: 24px 0; }
+.note::before { content: 'à retenir'; display: block; font: 500 0.74rem var(--font-mono); color: var(--accent); }
+.note.warning { border-left: 2px solid var(--warning); } .note.warning::before { content: 'attention'; color: var(--warning); }
+.wrap { overflow-x: auto; margin: 16px 0 24px; }
+main table { border-collapse: collapse; width: 100%; font: 0.8rem var(--font-mono); }
+main th, main td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--line); color: var(--text-secondary); vertical-align: top; }
+main th { color: var(--text-muted); font-weight: 400; border-bottom-color: var(--line-strong); white-space: nowrap; }
+main td b { color: var(--accent); font-weight: 500; }
+main ul { padding-left: 1.2em; } li + li { margin-top: 6px; }
+main pre { margin: 16px 0; padding: 14px 18px; background: var(--bg-card); border: 1px solid var(--line); border-radius: 4px; font: 0.8rem/1.7 var(--font-mono); color: var(--text-secondary); overflow-x: auto; }
+main pre b { color: var(--text-primary); font-weight: 500; }
+/* ── Graphe animé du chantier ── */
+.graphe { margin: 24px 0 32px; border: 1px solid var(--line); border-radius: 4px; background: var(--bg-card); }
+.graphe .scene { overflow-x: auto; padding: 12px 8px 4px; }
+.graphe svg { display: block; width: 100%; min-width: 720px; height: auto; }
+.graphe figcaption { border-top: 1px solid var(--line); padding: 14px 18px 16px; display: grid; gap: 12px; }
+.ctrl { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.ctrl button { font: 0.76rem var(--font-mono); color: var(--text-secondary); background: transparent; border: 1px solid var(--line-strong); border-radius: 3px; padding: 5px 10px; cursor: pointer; }
+.ctrl button:hover { color: var(--accent); border-color: var(--accent); }
+.ctrl button[aria-pressed="true"], .ctrl .phase.cur { color: var(--accent); border-color: var(--accent); background: color-mix(in srgb, var(--accent) 14%, transparent); }
+.ctrl .sep { flex: 1 1 8px; }
+.legende { min-height: 4.6em; }
+.legende .ph { display: block; font: 0.74rem var(--font-mono); color: var(--accent); }
+.legende .ph .porte { color: var(--bg-primary); background: var(--accent); border-radius: 2px; padding: 0 5px; margin-left: 6px; }
+.legende .ph .refus { color: var(--bg-primary); background: var(--warning); border-radius: 2px; padding: 0 5px; margin-left: 6px; }
+.legende p { margin: 2px 0 0; font-size: .95rem; color: var(--text-primary); }
+.cles { font: 0.72rem var(--font-mono); color: var(--text-muted); display: flex; flex-wrap: wrap; gap: 4px 18px; }
+.cles span::before { content: ''; display: inline-block; width: 18px; height: 0; border-top: 2px solid var(--accent); vertical-align: middle; margin-right: 6px; }
+.cles .lu::before { border-top: 2px dashed var(--line-strong); }
+.cles .bloque::before { border-top: 2px solid var(--warning); }
+
+.g-node rect { fill: var(--bg-primary); stroke: var(--line-strong); stroke-width: 1; transition: stroke .3s, fill .3s; }
+.g-node .nm { font: 500 13px var(--font-sans); fill: var(--text-primary); }
+.g-node .sub { font: 10px var(--font-mono); fill: var(--text-muted); }
+.g-node.on rect { stroke: var(--accent); stroke-width: 2; fill: color-mix(in srgb, var(--accent) 14%, transparent); }
+.g-node .badge { opacity: 0; transition: opacity .3s; }
+.g-node .badge rect { fill: var(--accent); stroke: none; }
+.g-node .badge text { font: 500 10px var(--font-mono); fill: var(--bg-primary); }
+.g-node.gate .badge { opacity: 1; }
+.g-doc rect { stroke-dasharray: 0; }
+.g-edge path { fill: none; stroke: var(--line-strong); stroke-width: 1.2; marker-end: url(#fl); transition: stroke .3s; }
+.g-edge.bi path { marker-start: url(#fl); }
+.g-edge.lu path { stroke-dasharray: 4 4; }
+.g-edge.on path { stroke: var(--accent); stroke-width: 2; marker-end: url(#fl-on); stroke-dasharray: 7 5; animation: flux 0.9s linear infinite; }
+.g-edge.bi.on path { marker-start: url(#fl-on); }
+.g-edge text, .g-lbl { font: 10px var(--font-mono); fill: var(--text-muted); }
+.g-edge.on text { fill: var(--accent); }
+@keyframes flux { to { stroke-dashoffset: -24; } }
+.g-bloc { opacity: 0; transition: opacity .3s; }
+.g-bloc path { fill: none; stroke: var(--warning); stroke-width: 2; }
+.g-bloc text { font: 500 10px var(--font-mono); fill: var(--warning); }
+.g-bloc.on { opacity: 1; }
+.g-garde line { stroke: var(--warning); stroke-width: 1.5; stroke-dasharray: 2 5; opacity: .55; transition: opacity .3s, stroke-width .3s; }
+.g-garde text { font: 500 11px var(--font-mono); fill: var(--warning); }
+.g-garde.on line { opacity: 1; stroke-width: 3; }
+.g-main { stroke: var(--line-strong); stroke-width: 2; fill: none; }
+.g-branche { stroke: var(--line-strong); stroke-width: 1.5; fill: none; stroke-dasharray: 4 4; transition: stroke .3s; }
+.g-branche.on { stroke: var(--accent); stroke-dasharray: 0; }
+.g-commit circle { fill: var(--bg-primary); stroke: var(--line-strong); stroke-width: 1.5; transition: fill .3s, stroke .3s; }
+.g-commit text { font: 10px var(--font-mono); fill: var(--text-muted); }
+.g-commit.fait circle { fill: var(--accent); stroke: var(--accent); }
+.g-commit.fait text { fill: var(--text-primary); }
+.g-pk { fill: var(--accent); }
+.g-titre { font: 10px var(--font-mono); fill: var(--text-muted); letter-spacing: .04em; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .g-edge.on path { animation: none; stroke-dasharray: 0; }
+  .g-edge.lu.on path { stroke-dasharray: 4 4; }
+}
+.ctrl.phases { flex-wrap: nowrap; overflow-x: auto; gap: 6px; padding-bottom: 4px; }
+.ctrl.phases button { flex: none; padding: 5px 8px; white-space: nowrap; }

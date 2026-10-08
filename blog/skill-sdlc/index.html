@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Le processus de la skill sdlc</title>
+  <meta name="description" content="Comment la skill /sdlc applique le playbook AI-native SDLC d'Anthropic : artefacts versionnés, cycle de chantiers, agents de phase et hooks.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="/assets/images/favicon/favicon-light.svg" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/svg+xml" href="/assets/images/favicon/favicon-dark.svg" media="(prefers-color-scheme: dark)">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/favicon-180.png">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Le processus de la skill sdlc">
+  <meta property="og:description" content="Comment la skill /sdlc applique le playbook AI-native SDLC d'Anthropic : artefacts versionnés, cycle de chantiers, agents de phase et hooks.">
+  <meta property="og:image" content="https://nyxaether.github.io/assets/images/og-image.png">
+  <link rel="stylesheet" href="/assets/css/rr-tokens.css">
+  <link rel="stylesheet" href="/assets/css/rr-article.css">
+  <link rel="stylesheet" href="/assets/css/rr-theme.css">
+  <link rel="stylesheet" href="assets/style.css">
+  <script>
+    try { var t = localStorage.getItem("theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+</head>
+<body class="rr-article">
+  <nav class="nav">
+    <div class="nav-inner">
+      <span class="nav-path"><a href="/" class="nav-brand">rr<span>/</span></a><a href="/blog/" class="nav-crumb">blog</a><span class="nav-here" aria-current="page">skill-sdlc</span></span>
+      <button class="theme-btn" type="button" aria-label="Basculer le thème">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72 1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79Z"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+  <span class="page-tag">~/skills/sdlc</span>
+  <h1>Le processus de la skill <em>sdlc</em></h1>
+  <p class="lede">La skill <code>/sdlc</code> applique le playbook « AI-native SDLC » d'Anthropic à un projet : chaque étape du développement devient un fichier versionné, relu avant de passer à la suivante. Elle met la structure en place, puis, en option, installe un cycle de chantiers conduit par un coordinateur, qui lance un agent neuf par phase et ne sollicite l'utilisateur que pour trancher.</p>
+
+  <nav class="toc" aria-label="Sommaire">
+    <strong>Sommaire</strong>
+    <ol>
+      <li><a href="#idee">L'idée directrice</a></li>
+      <li><a href="#mode">Étape 0 : détecter le mode</a></li>
+      <li><a href="#existant">Mode existant : auditer puis adopter</a></li>
+      <li><a href="#nouveau">Mode nouveau : cadrer puis construire</a></li>
+      <li><a href="#phases">Les six phases du playbook</a></li>
+      <li><a href="#chantiers">Le cycle de chantiers</a></li>
+      <li><a href="#graphe">Graphe animé d'un chantier</a></li>
+      <li><a href="#installation">Installer la brique</a></li>
+      <li><a href="#principes">Principes appliqués partout</a></li>
+      <li><a href="#sortie">Sortie finale</a></li>
+    </ol>
+  </nav>
+
+  <h2 id="idee">L'idée directrice</h2>
+  <p>Écrire du code n'est plus le goulot d'étranglement : ce sont le cadrage, le test et le déploiement. Le playbook transforme donc chaque étape en <strong>artefact versionné</strong> :</p>
+  <div class="flow"><b>intent.md</b> <i>→</i> <b>spec.md</b> <i>→</i> <b>plan.md</b> <i>→</i> <b>code + tests</b> <i>→</i> <b>revue</b> <i>→</i> <b>incident</b></div>
+  <p>La configuration (<code>CLAUDE.md</code>, skills, hooks, evals) est traitée comme du code : versionnée et relue. Les humains gardent les décisions ; les <strong>hooks</strong> (déterministes) bloquent, les <strong>skills</strong> et <code>CLAUDE.md</code> (consultatifs) guident.</p>
+  <p>La skill travaille à deux niveaux : elle <strong>met en place</strong> la structure une fois, puis le <strong>cycle de chantiers</strong> (brique optionnelle) la <strong>maintient</strong> au quotidien. Deux règles gouvernent toute la skill :</p>
+  <div class="cols">
+    <div class="box"><h4>rien n'est écrit avant validation</h4><p>Sur un existant, on risque d'écraser des conventions ; sur un neuf, de construire à côté du besoin. Un plan validé par l'utilisateur précède toute modification.</p></div>
+    <div class="box"><h4>proportionnalité</h4><p>Un script de 50 lignes n'a pas besoin de spec, de plan, de CI et d'evals. La skill propose la version minimale viable et l'utilisateur monte en charge.</p></div>
+  </div>
+  <p>Les questions sont posées par lots de 2 à 4, avec des options concrètes et la recommandation en premier.</p>
+
+  <h2 id="mode">Étape 0 : détecter le mode</h2>
+  <p>La skill inspecte le dossier courant en lecture seule : <code>git log</code>, manifestes (<code>pyproject.toml</code>, <code>package.json</code>, <code>go.mod</code>…), code source, <code>CLAUDE.md</code>, <code>.claude/</code>, README, CI.</p>
+  <div class="wrap"><table>
+    <thead><tr><th>Constat</th><th>Mode</th></tr></thead>
+    <tbody>
+      <tr><td>code ou historique git présent</td><td>existant (étape A)</td></tr>
+      <tr><td>dossier vide ou quasi vide</td><td>nouveau (étape B)</td></tr>
+      <tr><td>ambigu (quelques fichiers)</td><td>demande à l'utilisateur</td></tr>
+    </tbody>
+  </table></div>
+  <p>Le mode détecté est annoncé en une phrase. Si la session est dans un dossier temporaire alors que l'utilisateur parle d'un projet existant, la skill demande ou déplace la session vers le bon dossier avant de lire quoi que ce soit.</p>
+
+  <h2 id="existant">Mode existant : auditer puis adopter</h2>
+  <ol class="steps">
+    <li><span class="k">a1</span><span class="t">Audit en lecture seule</span>
+      <p>Comparaison du dépôt à une checklist : <code>CLAUDE.md</code>, commande unique build+test, dossier d'artefacts, source de vérité des exigences, hooks, permissions, subagent <code>verifier</code>, skills de politiques, <code>REVIEW.md</code>, CI et evals, gate de production, surveillance. Chaque ligne est notée présent, partiel ou absent, avec le chemin comme preuve. Les conventions déjà documentées sont repérées pour être préservées.</p></li>
+    <li><span class="k">a2</span><span class="t">Questions à l'utilisateur</span>
+      <p>Ce qui coince aujourd'hui, périmètre d'adoption (tout ou certaines briques), taille d'équipe et hébergement, source de vérité des exigences (dépôt, outil existant type Jira, ou simple lien d'ID), contraintes à respecter, emplacement des artefacts, et le cycle de chantiers : le projet va-t-il évoluer par évolutions successives, qui valide les portes et qui fusionne, quels dossiers non versionnés partager entre worktrees.</p></li>
+    <li><span class="k">a3</span><span class="t">Plan d'adoption à valider</span>
+      <p>Pour chaque brique : créer, fusionner ou ignorer, avec fichiers touchés, risque et ordre. Trois niveaux : gains rapides sans risque, garde-fous (hooks, permissions), optionnel et coûteux (CI d'evals, <code>REVIEW.md</code>, monitoring, cycle de chantiers avec son coordinateur, ses agents de phase, ses hooks et ses scripts de worktree). La skill attend un « oui » explicite.</p></li>
+    <li><span class="k">a4</span><span class="t">Application brique par brique</span>
+      <p>Petits changements relisibles, sans jamais écraser un fichier existant (fusion, diff montré), sans toucher au code applicatif. Les commandes de vérification sont lancées après chaque brique et leur sortie réelle est rapportée. Aucun commit sans permission.</p></li>
+  </ol>
+  <div class="note warning">Une limite posée par l'utilisateur prime sur la correction d'un défaut. Si l'audit révèle un défaut dans un fichier interdit (test qui échoue, lint préexistant), la skill ne le corrige pas : elle le note dans une section « Problèmes connus » de <code>CLAUDE.md</code> avec la commande de contournement, le liste dans le plan comme « correctif proposé, hors périmètre », et configure les hooks pour ne pas bloquer dessus.</div>
+
+  <h2 id="nouveau">Mode nouveau : cadrer puis construire</h2>
+  <ol class="steps">
+    <li><span class="k">b1</span><span class="t">Découverte du besoin</span>
+      <p>Brainstorming par questions : problème et public, critères de réussite, systèmes concernés, contraintes (stack, hébergement, budget, délais, conformité, données personnelles), hors périmètre, questions ouvertes. Le besoin est reformulé pour faire corriger les malentendus avant d'écrire.</p></li>
+    <li><span class="k">b2</span><span class="t">Évaluer la complexité</span>
+      <p><strong>Simple</strong> (script, un seul flux, peu d'inconnues) : <code>intent.md</code> seul et <code>CLAUDE.md</code>. <strong>Complexe</strong> (plusieurs composants, intégrations, données sensibles, choix d'architecture, jalons) : chaîne complète <code>intent.md → spec.md → plan.md</code> avec validation à chaque étape.</p></li>
+    <li><span class="k">b3</span><span class="t">Artefacts</span>
+      <p>Dans <code>docs/sdlc/</code>, ou dans <code>docs/chantiers/&lt;AAAA-MM&gt;-&lt;slug&gt;/</code> si le cycle de chantiers est adopté. <code>intent.md</code> (statut <code>ouvert</code>, validé par l'utilisateur, qui joue le product owner). <code>spec.md</code> dérivée de l'intent, politiques appliquées pendant la rédaction, contradictions signalées plutôt que tranchées en silence. <code>plan.md</code> établi en lecture seule : fichiers à créer, ordre, risques, preuves.</p></li>
+    <li><span class="k">b4</span><span class="t">Squelette du projet</span>
+      <p>Version minimale après validation : stack choisie avec l'utilisateur, <code>CLAUDE.md</code> d'une page, une commande unique de vérification et un premier test qui passe (pytest via <code>uv</code>, vitest en JS/TS), hooks essentiels si pertinent. Le subagent <code>verifier</code>, <code>REVIEW.md</code>, les evals en CI et le cycle de chantiers restent optionnels. <code>git init</code> et premier commit seulement avec permission.</p></li>
+  </ol>
+
+  <h2 id="phases">Les six phases du playbook</h2>
+  <div class="wrap"><table>
+    <thead><tr><th>Phase</th><th>Artefact</th><th>Idée clé</th><th>Décideur</th></tr></thead>
+    <tbody>
+      <tr><td>1 Plan</td><td>intent.md</td><td>intention en langage naturel, itérée jusqu'à clarté</td><td>product owner</td></tr>
+      <tr><td>2 Design</td><td>spec.md</td><td>politiques appliquées pendant la rédaction, contradictions signalées</td><td>PO (+ lead tech)</td></tr>
+      <tr><td>3 Build</td><td>plan.md, code, CLAUDE.md</td><td>plan en lecture seule, hooks, worktrees, subagents</td><td>ingénieur</td></tr>
+      <tr><td>4 Test</td><td>tests, evals</td><td>Claude vérifie avant la relecture humaine</td><td>CI</td></tr>
+      <tr><td>5 Deploy</td><td>REVIEW.md, gates</td><td>l'agent qui code n'approuve pas</td><td>code owner</td></tr>
+      <tr><td>6 Maintain</td><td>intent d'incident</td><td>surveillance déterministe, diagnostic en lecture seule</td><td>service owner</td></tr>
+    </tbody>
+  </table></div>
+
+  <details class="annexe">
+    <summary><h3>Détail : CLAUDE.md, hooks et skills</h3></summary>
+    <p><code>CLAUDE.md</code> tient sur environ une page : <strong>Commands</strong>, <strong>Conventions</strong>, <strong>Things Claude gets wrong</strong>, <strong>Verifying your work</strong> (coller la sortie avant de dire terminé, ne jamais supprimer ni ignorer un test). Deux erreurs identiques valent une entrée.</p>
+    <p>Hooks typiques : bloquer l'édition de chemins protégés, auto-formater après édition, garder les secrets hors des diffs, geler les tests pendant un bug fix, exiger une autorisation avant la production. Un hook bloque en sortant avec le code 2 ; il doit être testé avec du JSON simulé, car un hook qui plante (code 1) ne bloque rien sans prévenir.</p>
+  </details>
+  <details class="annexe">
+    <summary><h3>Détail : test, revue et maintenance</h3></summary>
+    <p><strong>Test :</strong> cible quantifiable, bug fix = test qui échoue d'abord, subagent <code>verifier</code> (lance l'app, exerce le changement et deux flux adjacents, rapporte sans corriger), evals de configuration de 20 à 50 cas rejoués en CI quand <code>CLAUDE.md</code> ou <code>.claude/**</code> changent.</p>
+    <p><strong>Revue :</strong> <code>REVIEW.md</code> avec trois passes (bugs, sécurité, conformité à la spec), nits plafonnés, un même finding deux fois alimente <code>CLAUDE.md</code>.</p>
+    <p><strong>Maintenance :</strong> un script de surveillance déclenche Claude en lecture seule au franchissement d'un seuil ; Claude écrit un <code>intent.md</code> d'incident avec preuves, le correctif suit le pipeline normal et ajoute un eval.</p>
+  </details>
+
+  <h2 id="chantiers">Le cycle de chantiers</h2>
+  <p>Une fois la structure posée, le projet évolue par <strong>chantiers</strong> : un par évolution, avec ses propres <code>intent.md</code>, <code>spec.md</code> et <code>plan.md</code>, sa branche <code>chantier/&lt;slug&gt;</code> et son worktree. La brique ne convient pas à un script ni à un projet sans évolution prévue.</p>
+  <p>Le cycle est conduit par un <strong>coordinateur</strong> : le skill <code>/chantier</code>, qui tourne dans la session de l'utilisateur. Il n'écrit ni document, ni test, ni code. Il lance un <strong>agent neuf par phase</strong>, trie ses questions, commite et tient un journal. L'utilisateur n'est sollicité que pour <strong>trancher</strong> : valider l'intention, valider la conception (spec et plan ensemble), merger. Des hooks tiennent chaque agent dans son rôle et réservent le merge à l'utilisateur.</p>
+
+  <h3>Les phases et les trois portes</h3>
+  <div class="wrap"><table>
+    <thead><tr><th>Phase</th><th>Agent</th><th>Produit</th><th>Ce qui arrête l'utilisateur</th></tr></thead>
+    <tbody>
+      <tr><td>0 Ouverture</td><td>(coordinateur)</td><td>worktree, journal.md</td><td>une question : le brief et la permission de commit</td></tr>
+      <tr><td>1 Intention</td><td>chantier-intention</td><td>intent.md</td><td><b>porte</b> : questions sur les trous du brief, puis validation</td></tr>
+      <tr><td>2 Conception</td><td>chantier-conception + relecteur neuf</td><td>spec.md</td><td>seulement une décision que l'amont ne tranche pas</td></tr>
+      <tr><td>3 Plan</td><td>chantier-plan + relecteur neuf</td><td>plan.md</td><td><b>porte</b> : validation du dossier de conception (spec + plan)</td></tr>
+      <tr><td>4 Tests</td><td>chantier-tests + relecteur neuf</td><td>tests en échec pour la bonne raison</td><td>rien, sauf escalade</td></tr>
+      <tr><td>5 Code</td><td>chantier-code</td><td>suite verte, mesure atteinte</td><td>rien, sauf escalade</td></tr>
+      <tr><td>6 Merge</td><td>(coordinateur)</td><td>fusion dans la branche principale</td><td><b>porte</b> : l'utilisateur tape <code>/chantier merge</code></td></tr>
+    </tbody>
+  </table></div>
+  <p>Le statut vit dans l'en-tête d'<code>intent.md</code> : <code>ouvert</code>, puis <code>clos</code> (avec la date) ou <code>abandonné</code> (avec une ligne de raison). La phase en cours vit dans <code>journal.md</code>. Chaque phase est commitée avant la suivante, ce que le coordinateur vérifie avec <code>git log</code> et <code>git status</code> dans le worktree.</p>
+
+  <h3 id="graphe">Graphe animé d'un chantier</h3>
+  <p>Le graphe montre qui parle à qui pendant un chantier complet : la session de l'utilisateur, le coordinateur, les six agents, les documents qu'ils ont le droit d'écrire, le hook <code>garde.py</code> qui filtre chaque écriture, et la branche du chantier qui reçoit un commit par porte franchie.</p>
+  <figure class="graphe">
+    <div class="scene">
+      <svg viewBox="0 0 840 570" role="img" aria-label="Le coordinateur relie l'utilisateur aux six agents de phase ; chaque agent n'écrit que son document, à travers garde.py ; chaque phase validée ajoute un commit sur la branche du chantier, que l'utilisateur fusionne dans main avec /chantier merge.">
+        <defs>
+          <marker id="fl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill: var(--line-strong)" /></marker>
+          <marker id="fl-on" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill: var(--accent)" /></marker>
+        </defs>
+
+        <text class="g-titre" x="20" y="22">session principale</text>
+        <text class="g-titre" x="490" y="16">agents de phase</text>
+        <text class="g-titre" x="700" y="16">docs/chantiers/…</text>
+
+        <!-- garde.py : barrière entre agents et fichiers -->
+        <g class="g-garde" id="garde">
+          <line x1="672" y1="26" x2="672" y2="350" />
+          <text x="672" y="366" text-anchor="middle">garde.py</text>
+        </g>
+
+        <!-- arêtes -->
+        <g class="g-edge bi" id="e-uc"><path d="M172 66 C215 66 205 172 248 172" /><text x="186" y="140">brief</text><text x="186" y="152">décisions</text></g>
+        <g class="g-edge" id="e-ucmd"><path d="M95 94 L95 186" /><text x="103" y="144">/chantier merge</text></g>
+        <g class="g-edge" id="e-cmdetat"><path d="M95 236 L95 296" /><text x="103" y="270">pose</text></g>
+        <g class="g-edge" id="e-cj"><path d="M320 222 L320 296" /><text x="328" y="262">tient</text></g>
+        <g class="g-edge" id="e-cg"><path d="M405 222 L405 466" /><text x="413" y="400">commit</text><text x="413" y="412">merge</text></g>
+
+        <g class="g-edge bi" id="e-c-int"><path d="M422 180 C456 180 456 50 488 50" /></g>
+        <g class="g-edge bi" id="e-c-con"><path d="M422 182 C456 182 456 105 488 105" /></g>
+        <g class="g-edge bi" id="e-c-pla"><path d="M422 184 C456 184 456 160 488 160" /></g>
+        <g class="g-edge bi" id="e-c-rel"><path d="M422 188 C456 188 456 215 488 215" /></g>
+        <g class="g-edge bi" id="e-c-tes"><path d="M422 190 C456 190 456 270 488 270" /></g>
+        <g class="g-edge bi" id="e-c-cod"><path d="M422 192 C456 192 456 325 488 325" /></g>
+        <text class="g-lbl" x="452" y="248" text-anchor="middle" transform="rotate(-90 452 248)">lance · SendMessage</text>
+
+        <g class="g-edge" id="e-int-doc"><path d="M640 50 L698 50" /></g>
+        <g class="g-edge" id="e-con-doc"><path d="M640 105 L698 105" /></g>
+        <g class="g-edge" id="e-pla-doc"><path d="M640 160 L698 160" /></g>
+        <g class="g-edge" id="e-tes-doc"><path d="M640 270 L698 270" /></g>
+        <g class="g-edge" id="e-cod-doc"><path d="M640 325 L698 325" /></g>
+        <g class="g-edge lu" id="e-rel-spec"><path d="M640 208 C664 208 676 118 698 118" /></g>
+        <g class="g-edge lu" id="e-rel-plan"><path d="M640 213 C664 213 676 172 698 172" /></g>
+        <g class="g-edge lu" id="e-rel-tests"><path d="M640 222 C664 222 676 260 698 260" /></g>
+
+        <!-- écritures refusées -->
+        <g class="g-bloc" id="b-con-int"><path d="M640 96 L664 66" /><path d="M666 52 L678 64 M678 52 L666 64" /><text x="686" y="86">refus</text></g>
+        <g class="g-bloc" id="b-cod-tes"><path d="M640 316 L664 286" /><path d="M666 272 L678 284 M678 272 L666 284" /><text x="686" y="302">refus</text></g>
+
+        <!-- nœuds : session principale -->
+        <g class="g-node" id="n-user"><rect x="20" y="40" width="150" height="52" rx="3" /><text class="nm" x="32" y="62">Utilisateur</text><text class="sub" x="32" y="79">tranche, merge</text>
+          <g class="badge"><rect x="118" y="32" width="46" height="16" rx="2" /><text x="141" y="44" text-anchor="middle">porte</text></g></g>
+        <g class="g-node" id="n-cmd"><rect x="20" y="188" width="150" height="46" rx="3" /><text class="nm" x="32" y="208">commande.py</text><text class="sub" x="32" y="224">UserPromptSubmit</text></g>
+        <g class="g-node" id="n-etat"><rect x="20" y="298" width="150" height="46" rx="3" /><text class="nm" x="32" y="318">.claude/etat/</text><text class="sub" x="32" y="334">approbation de merge</text></g>
+        <g class="g-node" id="n-coord"><rect x="250" y="150" width="170" height="70" rx="3" /><text class="nm" x="262" y="176">Coordinateur</text><text class="sub" x="262" y="194">skill /chantier</text><text class="sub" x="262" y="208">trie · commite</text></g>
+        <g class="g-node g-doc" id="n-journal"><rect x="250" y="298" width="140" height="46" rx="3" /><text class="nm" x="262" y="318">journal.md</text><text class="sub" x="262" y="334">décisions, déroulé</text></g>
+
+        <!-- agents -->
+        <g class="g-node" id="n-int"><rect x="490" y="30" width="150" height="40" rx="3" /><text class="nm" x="502" y="55">chantier-intention</text></g>
+        <g class="g-node" id="n-con"><rect x="490" y="85" width="150" height="40" rx="3" /><text class="nm" x="502" y="110">chantier-conception</text></g>
+        <g class="g-node" id="n-pla"><rect x="490" y="140" width="150" height="40" rx="3" /><text class="nm" x="502" y="165">chantier-plan</text></g>
+        <g class="g-node" id="n-rel"><rect x="490" y="195" width="150" height="40" rx="3" /><text class="nm" x="502" y="214">chantier-relecteur</text><text class="sub" id="rel-sub" x="502" y="228">un neuf par phase</text></g>
+        <g class="g-node" id="n-tes"><rect x="490" y="250" width="150" height="40" rx="3" /><text class="nm" x="502" y="275">chantier-tests</text></g>
+        <g class="g-node" id="n-cod"><rect x="490" y="305" width="150" height="40" rx="3" /><text class="nm" x="502" y="330">chantier-code</text></g>
+
+        <!-- documents -->
+        <g class="g-node g-doc" id="d-int"><rect x="700" y="30" width="120" height="40" rx="3" /><text class="nm" x="712" y="55">intent.md</text></g>
+        <g class="g-node g-doc" id="d-spec"><rect x="700" y="85" width="120" height="40" rx="3" /><text class="nm" x="712" y="110">spec.md</text></g>
+        <g class="g-node g-doc" id="d-plan"><rect x="700" y="140" width="120" height="40" rx="3" /><text class="nm" x="712" y="165">plan.md</text></g>
+        <g class="g-node g-doc" id="d-tests"><rect x="700" y="250" width="120" height="40" rx="3" /><text class="nm" x="712" y="275">tests/</text></g>
+        <g class="g-node g-doc" id="d-src"><rect x="700" y="305" width="120" height="40" rx="3" /><text class="nm" x="712" y="330">src/</text></g>
+
+        <!-- historique git -->
+        <path class="g-main" d="M20 470 L830 470" />
+        <text class="g-lbl" x="20" y="460">main</text>
+        <path class="g-branche" id="branche" d="M110 470 C140 470 140 520 170 520 L720 520 C750 520 750 470 780 470" />
+        <text class="g-lbl" x="174" y="508">chantier/&lt;slug&gt; · worktree</text>
+        <text class="g-lbl" x="112" y="458">ouvrir.py</text>
+        <g class="g-commit" id="c1"><circle cx="250" cy="520" r="6" /><text x="250" y="546" text-anchor="middle">intent.md</text></g>
+        <g class="g-commit" id="c2"><circle cx="380" cy="520" r="6" /><text x="380" y="546" text-anchor="middle">spec + plan</text></g>
+        <g class="g-commit" id="c3"><circle cx="510" cy="520" r="6" /><text x="510" y="546" text-anchor="middle">tests</text></g>
+        <g class="g-commit" id="c4"><circle cx="640" cy="520" r="6" /><text x="640" y="546" text-anchor="middle">code · clos</text></g>
+        <g class="g-commit" id="c5"><circle cx="780" cy="470" r="6" /><text x="780" y="458" text-anchor="middle">merge --no-ff</text></g>
+        <g class="g-commit" id="c6"><circle cx="818" cy="470" r="4" /><text x="830" y="492" text-anchor="end">CLAUDE.md</text></g>
+
+        <g id="paquets"></g>
+      </svg>
+    </div>
+    <figcaption>
+      <div class="ctrl" role="group" aria-label="Contrôle de l'animation">
+        <button type="button" id="b-prec" aria-label="Étape précédente">◀</button>
+        <button type="button" id="b-jeu" aria-pressed="false">lecture</button>
+        <button type="button" id="b-suiv" aria-label="Étape suivante">▶</button>
+      </div>
+      <div class="ctrl phases" id="boutons-phases" role="group" aria-label="Phases du chantier"></div>
+      <div class="legende" aria-live="polite">
+        <span class="ph" id="l-ph">vue d'ensemble</span>
+        <p id="l-txt">Appuie sur lecture pour suivre un chantier de l'ouverture au merge, ou choisis une phase. Chaque agent est lancé par le coordinateur, n'écrit que son document, et tout passe par garde.py.</p>
+      </div>
+      <div class="cles"><span>échange actif</span><span class="lu">lecture seule</span><span class="bloque">écriture refusée par garde.py</span></div>
+    </figcaption>
+  </figure>
+
+  <h3>Règles qui valent à toute phase</h3>
+  <ul>
+    <li><strong>Un agent neuf par phase.</strong> Le coordinateur ne lui passe que le chemin absolu du dossier du chantier, ce qu'il doit produire et, en relance, la critique ou les réponses à intégrer. Jamais un résumé de la conversation : l'agent ne s'appuie que sur les fichiers amont, <code>CLAUDE.md</code> et le code. Une information qui lui manque est un défaut de ces fichiers.</li>
+    <li><strong>Dans une phase, on continue les mêmes agents.</strong> Une relance passe par <code>SendMessage</code> à l'agent déjà lancé, qui reprend depuis sa transcription. La relecture qui suit est faite par le même relecteur. À la phase suivante, des agents neufs.</li>
+    <li><strong>Un relecteur distinct par phase relue.</strong> Conception, plan et tests ont chacun leur <code>chantier-relecteur</code>, lancé neuf : une seule définition d'agent, trois instances qui ne se connaissent pas. Celui de la conception n'est pas repris pour relire <code>plan.md</code>, même si spec et plan passent la même porte. Intention et code n'ont pas de relecteur ; en phase Code, c'est le coordinateur qui vérifie la suite et la mesure.</li>
+    <li><strong>Deux relances par agent et par phase.</strong> Au-delà, escalade : le blocage, ce qui a été tenté, les options.</li>
+    <li><strong>Un aval ne modifie jamais un amont.</strong> Un agent qui signale <code>amont_a_rouvrir</code> déclenche une escalade si l'amont est <code>intent.md</code> ou si la correction change ce que l'utilisateur a validé ; sinon le coordinateur relance l'agent de l'amont puis le relecteur, et le note au journal.</li>
+    <li><strong>Commits délégués par chantier.</strong> La permission est donnée une fois à l'ouverture, pour la branche du chantier seulement. Messages d'une ligne, sans attribution à une IA.</li>
+    <li><strong><code>CLAUDE.md</code> ne change pas pendant un chantier.</strong> Les décisions qui valent pour tout le projet vont dans « Décisions à reporter » de <code>plan.md</code> et passent dans <code>CLAUDE.md</code> au merge, un chantier à la fois.</li>
+    <li><strong>Données partagées.</strong> Les dossiers non versionnés reliés entre worktrees sont communs : une commande qui y écrit ne se lance qu'avec l'accord de l'utilisateur, si aucune autre session n'en lance une.</li>
+    <li><strong>Écrire par Edit et Write, par chemin absolu dans le worktree</strong> : c'est ainsi que le hook juge l'écriture dans le bon worktree.</li>
+  </ul>
+
+  <h3>Trancher, régler ou informer</h3>
+  <p>Chaque agent termine par un rapport YAML (<code>questions</code>, <code>decisions_prises</code>, <code>amont_a_rouvrir</code>, <code>verification</code>). Le coordinateur trie chaque question et chaque remarque bloquante :</p>
+  <div class="cols">
+    <div class="box"><h4>il règle</h4><p>Les fichiers amont, <code>CLAUDE.md</code> ou le code y répondent : il relance l'agent avec la réponse et sa source, et note la décision au journal.</p></div>
+    <div class="box"><h4>l'utilisateur tranche</h4><p>Besoin, critère de réussite, périmètre ; choix entre options défendables sans critère amont ; contradiction ; amendement du plan qui change les tests ; budget épuisé ; données partagées ; conflit ; abandon.</p></div>
+    <div class="box"><h4>il informe</h4><p>Phase franchie, commit, remarque <code>a_signaler</code>, sortie de tests : au journal, sans interrompre.</p></div>
+  </div>
+  <p>Les questions pour l'utilisateur sont groupées, une fois par phase au plus, chacune avec deux à quatre options, la recommandation en premier et la raison pour laquelle elle lui revient.</p>
+
+  <h3>Le journal</h3>
+  <p><code>journal.md</code>, dans le dossier du chantier, est tenu par le coordinateur seul et commité avec chaque phase. Il sert à reprendre après un <code>/clear</code> ou dans une autre session, et à contester une décision.</p>
+<pre><b>permission_commits:</b> accordée AAAA-MM-JJ, branche chantier/&lt;slug&gt;
+<b>phase:</b> intention | conception | plan | tests | code | pret-a-merger | clos | abandonne
+<b>relances:</b> &lt;phase&gt; &lt;n&gt;/2
+<b>agents:</b> &lt;phase&gt; — &lt;agent&gt; &lt;identifiant&gt;, chantier-relecteur &lt;identifiant&gt;
+
+## En attente de l'utilisateur
+## Décisions prises seul        décision — source : fichier §section
+## À signaler (relecteur)
+## Déroulé                      agent lancé, relance, commit, escalade</pre>
+
+  <h3>Les commandes</h3>
+  <div class="wrap"><table>
+    <thead><tr><th>Commande</th><th>Effet</th></tr></thead>
+    <tbody>
+      <tr><td>/chantier</td><td>reprise : liste les chantiers ouverts de tous les worktrees, avec phase et questions en attente, sans rien démarrer</td></tr>
+      <tr><td>/chantier nouveau &lt;idée&gt;</td><td>ouverture, puis phases 1 à 5 d'affilée</td></tr>
+      <tr><td>/chantier &lt;slug&gt;</td><td>lit le journal et reprend à sa phase, en commençant par les questions en attente</td></tr>
+      <tr><td>/chantier merge</td><td>accorde l'approbation de merge pour la session, puis phase 6</td></tr>
+      <tr><td>/chantier bogue &lt;description&gt;</td><td>circuit raccourci</td></tr>
+      <tr><td>/chantier tests, /chantier code</td><td>repli manuel du verrou des tests, tapé à la demande du coordinateur</td></tr>
+    </tbody>
+  </table></div>
+  <p>Le circuit <strong>bogue</strong> n'a qu'une porte, le merge. <code>chantier-intention</code> écrit un <code>intent.md</code> minimal (symptôme, commande qui le reproduit, résultat attendu) portant <code>circuit: bogue</code> ; pour ce circuit, le hook n'exige que cet <code>intent.md</code> commité avant le code. Pas de spec ni de plan si la correction est locale ; sinon le circuit complet reprend. <code>chantier-tests</code> écrit le test qui reproduit le bogue et le voit échouer, puis <code>chantier-code</code> corrige sans toucher au test.</p>
+
+  <h3>Un worktree par chantier</h3>
+  <p><code>ouvrir.py</code>, lancé depuis le dossier principal, crée la branche <code>chantier/&lt;slug&gt;</code> et le worktree <code>.claude/worktrees/&lt;slug&gt;/</code>, relie les dossiers non versionnés partagés et installe l'environnement (par exemple <code>uv sync</code>, car le <code>.venv</code> n'est pas versionné et les hooks l'appellent). Le coordinateur reste dans la session de l'utilisateur, dans le dossier principal : ce sont les agents qui partent de zéro. Ce sont donc les hooks du dossier principal qui tournent ; <code>garde.py</code> juge une écriture par chemin absolu dans le worktree qui contient ce chemin. <code>lister.py</code> liste les chantiers ouverts de tous les worktrees, avec leur branche et les portes franchies.</p>
+
+  <h3>Verrous par agent</h3>
+  <p>Pour un appel fait par un sous-agent, Claude Code transmet au hook le champ <code>agent_type</code> (le nom de sa définition, par exemple <code>chantier-tests</code>) ; il est absent pour la session principale, qui partage le même <code>session_id</code>. <code>garde.py</code> fonde ses verrous sur ce champ :</p>
+  <div class="wrap"><table>
+    <thead><tr><th>Agent</th><th>Peut écrire</th></tr></thead>
+    <tbody>
+      <tr><td>chantier-intention</td><td>intent.md</td></tr>
+      <tr><td>chantier-conception</td><td>spec.md</td></tr>
+      <tr><td>chantier-plan</td><td>plan.md</td></tr>
+      <tr><td>chantier-relecteur</td><td>rien, shell compris</td></tr>
+      <tr><td>chantier-tests</td><td>le dossier de tests, une fois plan.md commité</td></tr>
+      <tr><td>chantier-code</td><td>le dossier de code, une fois les tests commités ; jamais les tests</td></tr>
+      <tr><td>tous</td><td>jamais de merge ni de push vers la branche principale</td></tr>
+    </tbody>
+  </table></div>
+  <p>Seule l'approbation de merge reste une commande au quotidien. Le hook <code>commande.py</code> se déclenche à l'envoi d'un message de l'utilisateur (<code>UserPromptSubmit</code>), avant que Claude le voie : <code>/chantier merge</code> pose un marqueur dans <code>.claude/etat/</code>, lié à la session et purgé après deux jours. <code>garde.py</code> interdit à Claude d'écrire dans ce dossier, ce qui garantit que seul l'utilisateur l'ouvre. La commande ne compte qu'au tout début du message, une fois retiré le contexte <code>&lt;ide_…&gt;</code> de l'extension VS Code ; un message venu d'une autre session (enveloppe <code>&lt;cross-session-message&gt;</code>) n'ouvre jamais rien.</p>
+  <p>Si <code>agent_type</code> n'arrive pas (version de Claude Code qui ne l'envoie pas), le coordinateur passe en repli : il demande à l'utilisateur de taper <code>/chantier tests</code>, puis <code>/chantier code</code> en fin de phase Tests, et dit toujours pourquoi.</p>
+
+  <h3>Ce que fait <code>garde.py</code></h3>
+  <div class="wrap"><table>
+    <thead><tr><th>Garde-fou</th><th>Mécanisme</th></tr></thead>
+    <tbody>
+      <tr><td>chemins protégés (verrou de dépendances, miroirs de données, code généré)</td><td>refus avant écriture</td></tr>
+      <tr><td><code>.claude/etat/</code></td><td>écriture refusée à Claude</td></tr>
+      <tr><td>dossier de tests</td><td>refusé à tout sous-agent autre que <code>chantier-tests</code> ; à la session principale sans <code>/chantier tests</code></td></tr>
+      <tr><td>dossier de code, sur une branche <code>chantier/&lt;slug&gt;</code></td><td>refus tant que <code>plan.md</code> n'est pas commité (<code>intent.md</code> en circuit bogue) ; refusé à tout sous-agent autre que <code>chantier-code</code>, et à celui-ci tant que des tests restent non commités</td></tr>
+      <tr><td>documents de <code>docs/chantiers/</code></td><td>chaque agent de phase n'écrit que le sien ; le relecteur rien</td></tr>
+      <tr><td><code>git merge</code>, <code>git push</code> vers main/master</td><td>refus sans <code>/chantier merge</code> pour la session, et toujours pour un sous-agent ; <code>git merge --abort</code> reste permis</td></tr>
+      <tr><td>entrée illisible ou panne du hook</td><td>appel refusé (code 2) plutôt qu'autorisé</td></tr>
+    </tbody>
+  </table></div>
+  <p>La garde est stricte pour Edit et Write, heuristique pour le shell : un script qui écrit hors de la vue du hook passe, et la relecture reste le filet. L'heuristique refuse parfois à tort (comparaison par sous-chaîne d'un chemin gardé, texte d'un heredoc pris pour des commandes). Les sources d'une copie ne sont que lues : seule la destination est contrôlée. Hors branche de chantier, la garde sur le code ne bloque rien.</p>
+
+  <h3>Le merge</h3>
+  <p>L'utilisateur seul, en tapant <code>/chantier merge</code>. Aucun agent ne fusionne ; c'est le coordinateur, depuis le dossier principal :</p>
+  <ul>
+    <li>Vérification : <code>intent.md</code> à <code>statut: clos</code>, worktree propre, suite complète verte, mesure de la spec atteinte, artefact déployé vérifié s'il en existe un.</li>
+    <li>Dans la même question que la confirmation : garder ou supprimer le worktree et la branche après le merge.</li>
+    <li>Fusion qui conserve l'historique des phases : <code>git merge --no-ff chantier/&lt;slug&gt;</code>, sans squash.</li>
+    <li>Report des décisions de <code>plan.md</code> dans la section « Décisions » de <code>CLAUDE.md</code>, dans un commit à part.</li>
+    <li>En cas de conflit : arrêt, fichiers en cause montrés, rien n'est résolu sans l'utilisateur.</li>
+  </ul>
+
+  <h3>Arborescence</h3>
+<pre>projet/
+├─ <b>CLAUDE.md</b>                  commandes, conventions, invariants, décisions
+├─ <b>REVIEW.md</b>                  passes de relecture avant commit
+├─ docs/
+│  └─ <b>chantiers/</b>
+│     └─ <b>AAAA-MM-slug/</b>        un dossier par chantier
+│        ├─ intent.md          le besoin, sans solution
+│        ├─ spec.md            la conception
+│        ├─ plan.md            l'exécution et les tests nommés
+│        └─ journal.md         tenu par le coordinateur
+├─ tests/                    écrits par chantier-tests seul
+└─ .claude/
+   ├─ settings.json          permissions et hooks
+   ├─ skills/chantier/       SKILL.md : le coordinateur
+   ├─ agents/                chantier-intention, -conception, -plan,
+   │                         -relecteur, -tests, -code
+   ├─ hooks/                 garde.py, commande.py
+   ├─ chantier/              ouvrir.py, lister.py
+   ├─ etat/                  approbations liées à la session, non versionné
+   └─ worktrees/             un worktree par chantier en cours, non versionné</pre>
+
+  <h3>Contenu des trois fichiers</h3>
+  <p>Un seul jeu de sections pour <code>intent.md</code>, <code>spec.md</code> et <code>plan.md</code>, avec ou sans le cycle de chantiers. Avec le cycle, les mêmes sections figurent dans les agents de phase.</p>
+  <details class="annexe">
+    <summary><h3>intent.md : le besoin</h3></summary>
+<pre>---
+statut: ouvert
+ouvert: AAAA-MM-JJ
+---
+# Titre
+
+## Besoin
+Le problème, tel qu'observé, pour qui ; un exemple concret.
+
+## Pourquoi maintenant
+Ce qui le rend utile ou urgent.
+
+## Critère de réussite
+Observable et vérifiable : un temps, un résultat de commande, une mesure.
+
+## Hors périmètre
+Ce qu'on ne fait pas.
+
+## Contraintes
+Stack, délais, conformité, données, budget : si elles comptent.
+
+## Questions ouvertes
+À trancher avant la spec.
+
+## Pistes notées en passant
+Solutions évoquées, non retenues ; la spec les examinera.</pre>
+    <p>Règle : aucune solution dans l'intention. Le critère de réussite doit pouvoir se vérifier par une commande ou une mesure.</p>
+  </details>
+  <details class="annexe">
+    <summary><h3>spec.md : la conception</h3></summary>
+<pre># Spec : titre
+
+## Approche retenue
+En quelques paragraphes : comportement, flux, interfaces, modèle de données.
+
+## Invariants de CLAUDE.md touchés
+Pour chacun, comment il est respecté. « Aucun » se justifie en une ligne.
+
+## Options écartées
+Une phrase chacune, avec la raison.
+
+## Comportement qui change
+Ce que l'utilisateur verra de différent : cela décide des tests à modifier.
+
+## Exigences transverses
+Sécurité, vie privée, accessibilité, performance, journalisation, politiques appliquées.
+
+## Contradictions et points signalés
+Conflits entre exigences ou politiques, non tranchés silencieusement.
+
+## Critères d'acceptation
+Liste testable.
+
+## Mesure qui tranchera
+La mesure et son seuil, fixés avant d'écrire le code.</pre>
+  </details>
+  <details class="annexe">
+    <summary><h3>plan.md : l'exécution</h3></summary>
+<pre># Plan : titre
+
+## Étapes et fichiers touchés
+Chemins, création ou modification, ordre ; réutiliser l'existant.
+
+## Tests
+Liste nominative des tests à ajouter, modifier ou supprimer, avec la raison
+de chacun et le critère d'acceptation couvert. Liste vide possible, à justifier.
+
+## Mise à jour de ce qui est visible
+Artefact déployé, documentation : si le comportement visible change.
+
+## Risques
+Ce qui pourrait casser, dépendances, migrations, retour arrière.
+
+## Vérification
+Commandes de CLAUDE.md et mesure de la spec.
+
+## Décisions à reporter
+Décisions valables pour tout le projet, reportées dans CLAUDE.md au merge.</pre>
+  </details>
+
+  <h3 id="installation">Installer la brique</h3>
+  <ol class="steps">
+    <li><span class="k">1</span><span class="t">Questions</span><p>Décideur des portes (seul ou équipe), délégation des commits de chaque chantier au coordinateur, branche principale, chemins protégés, dossiers de tests et de code, dossiers à partager, commande d'installation, commande de vérification complète, artefact « déployé » éventuel.</p></li>
+    <li><span class="k">2</span><span class="t">Adapter les modèles</span><p>Constantes « À ADAPTER » de <code>garde.py</code> et <code>ouvrir.py</code>, champs du skill et des six agents, copiés dans <code>.claude/agents/</code>. Les hooks ne sont pas élargis au-delà de ce que le projet demande.</p></li>
+    <li><span class="k">3</span><span class="t">Brancher les hooks</span><p>Fusion dans <code>.claude/settings.json</code> : <code>commande.py</code> sur <code>UserPromptSubmit</code> (sans matcher), <code>garde.py</code> sur <code>PreToolUse</code> pour Edit, Write, NotebookEdit, Bash et PowerShell. <code>.gitignore</code> : <code>/.claude/etat/</code> et <code>/.claude/worktrees/</code>.</p></li>
+    <li><span class="k">4</span><span class="t">Copier et lancer les tests</span><p>Pour chaque hook, un cas qui doit bloquer, un cas qui doit passer et une entrée illisible, plus la création de worktree et la liste des chantiers. Tous doivent passer ; la sortie réelle est montrée.</p></li>
+    <li><span class="k">5</span><span class="t">Vérifier en séance réelle</span><p>Les hooks ne se chargent que dans une nouvelle session. Taper <code>/chantier tests</code> et contrôler qu'un marqueur apparaît dans <code>.claude/etat/</code>, avec un fichier ouvert dans l'éditeur : seul le marqueur fait foi, pas ce que répond Claude. Puis, sur une branche de chantier au plan commité, faire écrire un test par <code>chantier-tests</code> (accepté) et par <code>chantier-code</code> (refusé). Un refus pour <code>chantier-tests</code> signifie que <code>agent_type</code> n'arrive pas : rester en repli.</p></li>
+    <li><span class="k">6</span><span class="t">Documenter</span><p>Une section « Cycle de développement » d'une demi-page dans <code>CLAUDE.md</code>. Aucun commit sans permission.</p></li>
+  </ol>
+  <div class="note warning">Le coordinateur est un skill, donc consultatif : c'est lui qui décide de ne pas déranger l'utilisateur. Les hooks garantissent seulement qu'un agent ne sort pas de son rôle et que le merge reste humain. La session principale garde le mode manuel (code après le plan, tests avec <code>/chantier tests</code>) : le skill interdit au coordinateur de s'en servir, pas le hook. Les hooks et <code>settings.json</code> ne sont pas protégés par défaut ; si le risque compte, les ajouter aux chemins protégés, et leur maintenance se fait alors à la main. Le lien vers les dossiers partagés (lien symbolique, ou jonction sous Windows) n'est pas couvert par les tests.</div>
+
+  <h2 id="principes">Principes appliqués partout</h2>
+  <ul>
+    <li><strong>Vérifier avant de dire « fini »</strong> : build, test et lint exécutés, sortie réelle collée, objectif quantifiable, aucun test supprimé pour passer au vert.</li>
+    <li><strong>Bug fix = test qui échoue d'abord</strong>, puis correction.</li>
+    <li><strong>Règle des deux erreurs</strong> : une erreur répétée entre dans « Things Claude gets wrong ».</li>
+    <li><strong>Config = code</strong> : versionnée et relue.</li>
+    <li><strong>Séparation des tâches</strong> : l'agent qui code n'approuve pas ; approbation de PR, merge et déploiement en production restent humains.</li>
+    <li><strong>Le merge est humain</strong>, sur la commande de l'utilisateur, posée par un hook à l'envoi de son message, jamais par Claude. Avec le cycle de chantiers, le verrou des tests suit l'agent qui écrit (<code>agent_type</code>), pas une commande.</li>
+    <li><strong>Hooks pour le déterministe, skills pour le consultatif</strong> ; sous Windows, pas de hooks supposant bash.</li>
+    <li><strong>Ne rien inventer</strong> : chiffres, URLs, API, commandes viennent du dépôt ou de l'utilisateur.</li>
+  </ul>
+
+  <h2 id="sortie">Sortie finale</h2>
+  <p>Un résumé court : mode retenu, décisions prises, fichiers créés ou modifiés, commandes de vérification lancées et leur résultat, points en suspens, prochaine étape suggérée : un premier chantier (<code>/chantier nouveau &lt;idée&gt;</code>) si le cycle est installé, sinon un premier <code>intent.md</code>, ou l'activation de la revue automatique des PR.</p>
+  <div class="note">Source du playbook : <a href="https://claude.com/blog/the-ai-native-sdlc-playbook">claude.com/blog/the-ai-native-sdlc-playbook</a>.</div>
+  </main>
+
+  <footer class="footer"><a href="/blog/">← Retour au blog</a></footer>
+
+  <script src="/assets/js/rr-theme.js"></script>
+  <script src="assets/graphe.js"></script>
+</body>
+</html>
