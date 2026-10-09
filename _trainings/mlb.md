@@ -1,74 +1,77 @@
 ---
-audience: Ingénieurs/chefs de projet souhaitant considérer les techniques d'apprentissage
-  automatique dans la résolution de problèmes industriels.
+audience: Ingénieurs et chefs de projet souhaitant appliquer l'apprentissage automatique
+  à des problèmes industriels.
 category: Machine Learning -- Data-science
 duration: 4j  -  28h00
 id: MLB
 objectives:
-- Comprendre les différents modèles d'apprentissage
-- Modéliser un problème pratique sous forme abstraite
-- Identifier les méthodes d'apprentissage pertinentes pour résoudre un problème
-- Appliquer et évaluer les méthodes identifiées sur un problème
-- Faire le lien entre les différentes techniques d'apprentissage
-prerequisites: "Connaissances de base en Python et en statistiques de base."
+- Choisir une famille d'algorithmes adaptée à un problème industriel
+- Modéliser un problème pratique sous forme d'une tâche d'apprentissage
+- Mettre en place un protocole d'évaluation et comparer des modèles
+- Entraîner des modèles fréquentistes et bayésiens avec Python
+- Déployer et suivre un modèle en production
+prerequisites: "Connaissances de base en Python. Connaissances de base en statistiques."
 price: 990.0
 program:
   parts:
-  - demo: Prise en main de l'environnement Spark avec Python à l'aide de Jupyter Notebook.
-      Visualiser plusieurs exemples de modèles fournis.
+  - demo: Prise en main de l'environnement Python (uv, JupyterLab, scikit-learn) et
+      visualisation de plusieurs exemples de modèles fournis.
     items:
-    - Le Big Data et le Machine Learning.
-    - Les algorithmes d'apprentissage supervisés, non supervisés et par renforcement.
+    - 'Le Machine Learning : définitions, usages industriels et limites.'
+    - 'Les apprentissages supervisé, non supervisé et par renforcement : panorama.'
     - Les étapes de construction d'un modèle prédictif.
     - Détecter les valeurs aberrantes et traiter les données manquantes.
-    - Comment choisir l'algorithme et les variables de l'algorithme ?
+    - Le choix de l'algorithme, des variables et des hyperparamètres.
     num: 1
     title: Introduction au Machine Learning
   - items:
-    - Les techniques de ré-échantillonnage en jeu d'apprentissage, de validation et
-      de test.
-    - Test de représentativité des données d'apprentissage.
-    - Mesures de performance des modèles prédictifs.
-    - Matrice de confusion, de coût et la courbe ROC et AUC.
+    - Découpage en jeux d'apprentissage, de validation et de test ; validation croisée.
+    - Fuite de données et représentativité de l'échantillon d'apprentissage.
+    - Métriques de régression (MAE, RMSE, R²).
+    - Matrice de confusion, précision, rappel, F1, courbe ROC et AUC.
+    - Matrice de coût et choix du seuil de décision.
+    - Surapprentissage et recherche d'hyperparamètres.
     num: 2
-    practice: Evaluation et comparaison des différents algorithmes sur les modèles
+    practice: Évaluation et comparaison des différents algorithmes sur les modèles
       fournis.
     title: Procédures d'évaluation de modèles
   - items:
-    - Apprentissage statistique.
-    - Conditionnement des données et réduction de dimension.
-    - Machines à vecteurs supports et méthodes à noyaux.
-    - Quantification vectorielle.
-    - Réseaux de neurones et Deep Learning.
-    - Ensemble learning et arbres de décision.
-    - Les algorithmes de Bandits, optimisme face à l'incertitude.
+    - Modèles linéaires et régularisation.
+    - Machines à vecteurs de support et méthodes à noyaux.
+    - Arbres de décision, forêts aléatoires et gradient boosting.
+    - Réseaux de neurones et introduction au Deep Learning.
+    - Réduction de dimension et quantification vectorielle (k-means).
+    - 'Les algorithmes de bandits : optimisme face à l''incertitude.'
     num: 3
-    practice: Mise en œuvre des familles d'algorithmes en utilisant des jeux de données
-      variés.
+    practice: Comparaison de modèles linéaires, SVM, ensembles et réseau de neurones
+      sur un cas industriel.
     title: Les modèles prédictifs, l'approche fréquentiste
   - items:
     - Principes d'inférence et d'apprentissage bayésiens.
     - 'Modèles graphiques : réseaux bayésiens, champs de Markov, inférence et apprentissage.'
-    - 'Méthodes bayésiennes : Naive Bayes, mélanges de gaussiennes, processus gaussiens.'
+    - 'Modèles probabilistes : Naive Bayes, mélanges de gaussiennes (EM), processus
+      gaussiens.'
     - 'Modèles markoviens : processus markoviens, chaînes de Markov, chaînes de Markov
       cachées, filtrage bayésien.'
     num: 4
-    practice: Mise en œuvre des familles d'algorithmes en utilisant des jeux de données
-      variés.
+    practice: 'Modélisation probabiliste d''un procédé : classification bayésienne
+      et détection d''états cachés par HMM.'
     title: Les modèles et apprentissages bayésiens
   - items:
-    - Les spécificités liées au développement d'un modèle en environnement distribué.
-    - Le déploiement Big Data avec Spark et la MLlib.
-    - 'Le Cloud : Amazon, Microsoft Azure ML, IBM Bluemix...'
-    - La maintenance du modèle.
+    - Les spécificités du développement d'un modèle en environnement distribué.
+    - L'entraînement distribué avec Spark et l'API spark.ml.
+    - Suivi d'expériences et registre de modèles (MLflow).
+    - 'Exposition d''un modèle : traitement par lots et service par API.'
+    - 'Les plateformes cloud de ML : Amazon SageMaker AI, Azure Machine Learning.'
+    - Surveillance de la dérive des données et réentraînement.
     num: 5
     practice: Mise en production d'un modèle prédictif avec l'intégration dans des
       processus de batch et dans des flux de traitements.
     title: Machine Learning en production
-short: Le Machine Learning couvre l'ensemble des méthodes et concepts qui permettent
-  d'extraire automatiquement à partir de données, des modèles de prédiction et de
-  prise de décision. Durant ce cours, vous mettrez en œuvre les différents algorithmes
-  du domaine et appréhendez les bonnes pratiques d'un projet Machine Learning.
+short: Le Machine Learning regroupe les méthodes qui permettent d'extraire automatiquement
+  des données des modèles de prédiction et de décision. Durant ce cours, vous mettrez
+  en œuvre les principaux algorithmes du domaine et appréhenderez les bonnes pratiques
+  d'un projet de Machine Learning, jusqu'à la mise en production.
 title: Machine learning, méthodes et solutions
 
----
+---

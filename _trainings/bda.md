@@ -1,82 +1,90 @@
 ---
-audience: Responsables Infocentre (datamining, marketing, qualité…), utilisateurs
-  et gestionnaires métiers de bases de données.
+audience: Analystes de données, chargés d'études, responsables BI et décisionnel
+  (datamining, marketing, qualité…), utilisateurs et gestionnaires métiers de bases
+  de données.
 category: Machine Learning -- Data-science
 duration: 4j  -  28h00
 id: BDA
 objectives:
-- Comprendre le principe de la modélisation statistique
-- Choisir entre la régression et la classification en fonction du type de données
-- Évaluer les performances prédictives d'un algorithme
-- Créer des sélections et des classements dans de grands volumes de données pour dégager
-  des tendances
+- Préparer et explorer un jeu de données tabulaire avec pandas
+- Choisir entre la régression et la classification selon la nature de la variable
+  cible
+- Entraîner et comparer des modèles supervisés avec scikit-learn
+- Évaluer un modèle avec un protocole adapté (validation croisée, métriques)
+- Segmenter des données et réduire leur dimension pour en interpréter la structure
+- Vectoriser un corpus de textes pour en explorer le contenu
 prerequisites: "Connaissances de base en Python. Connaissances de base en statistiques."
 price: 990.0
 program:
   parts:
   - items:
-    - Introduction au langage Python.
-    - Introduction au logiciel Jupiter Notebook.
-    - Les étapes de construction d'un modèle.
+    - Le cycle d'un projet d'analyse de données.
+    - L'environnement de travail (uv, JupyterLab ou VS Code).
+    - 'Manipulation de données avec pandas : import, nettoyage, sélections, tris
+      et agrégations.'
     - Les algorithmes supervisés et non supervisés.
     - Le choix entre la régression et la classification.
     num: 1
-    practice: Installation de Python 3, d'Anaconda et de Jupiter Notebook.
-    title: Introduction à la modélisation
+    practice: Mise en place de l'environnement de travail et exploration d'un jeu de
+      données métier avec pandas.
+    title: Démarche et préparation des données
   - items:
-    - Les techniques de ré-échantillonnage en jeu d'apprentissage, de validation et
-      de test.
-    - Test de représentativité des données d'apprentissage.
-    - Mesures de performance des modèles prédictifs.
-    - Matrice de confusion, de coût et la courbe ROC et AUC.
+    - 'Préparation des variables : valeurs manquantes, encodage, normalisation, pipelines
+      scikit-learn.'
+    - Découpage en jeux d'apprentissage, de validation et de test ; validation croisée.
+    - Métriques de régression (MAE, RMSE, R²).
+    - Matrice de confusion, précision, rappel, F1, courbe ROC et AUC.
+    - Matrice de coût et choix du seuil de décision.
+    - Surapprentissage et recherche d'hyperparamètres.
     num: 2
-    practice: Mise en place d'échantillonnage de jeux de donnes. Effectuer des tests
-      d'évaluations sur plusieurs modèles fournis.
+    practice: Mise en place d'un protocole d'évaluation et comparaison de plusieurs
+      modèles fournis.
     title: Procédures d'évaluation de modèles
   - items:
-    - Le principe de régression linéaire univariée.
+    - La régression linéaire univariée.
     - La régression multivariée.
     - La régression polynomiale.
-    - La régression régularisée.
-    - Le Naive Bayes.
-    - La régression logistique.
+    - La régression régularisée (Ridge, Lasso).
+    - L'interprétation des coefficients.
     num: 3
-    practice: Mise en œuvre des régressions et des classifications sur plusieurs types
-      de données.
-    title: Les algorithmes supervisés
+    practice: Mise en œuvre de régressions sur plusieurs types de données et
+      interprétation des résultats.
+    title: La régression
   - items:
-    - Le clustering hiérarchique.
-    - Le clustering non hiérarchique.
-    - Les approches mixtes.
+    - La régression logistique.
+    - Le Naive Bayes.
+    - Les k plus proches voisins.
+    - Les arbres de décision.
+    - Les forêts aléatoires et le gradient boosting.
+    - Les classes déséquilibrées et l'importance des variables.
     num: 4
-    practice: Traitements de clustering non supervisés sur plusieurs jeux de données.
-    title: Les algorithmes non supervisés
+    practice: Mise en œuvre et comparaison de classifieurs sur un cas métier.
+    title: La classification
   - items:
+    - Le clustering par partitionnement (k-means) et par densité (DBSCAN).
+    - Le clustering hiérarchique.
+    - Le choix du nombre de groupes (score de silhouette).
     - Analyse en composantes principales.
-    - Analyse factorielle des correspondances.
-    - Analyse des correspondances multiples.
-    - Analyse factorielle pour données mixtes.
-    - Classification hiérarchique sur composantes principales.
+    - Analyse factorielle des correspondances et analyse des correspondances multiples.
+    - L'interprétation des axes.
     num: 5
-    practice: Mise en œuvre de la diminution du nombre des variables et identification
-      des facteurs sous-jacents des dimensions associées à une variabilité importante.
-    title: Analyse en composantes
+    practice: Segmentation de jeux de données, réduction du nombre de variables et
+      identification des facteurs associés à une variabilité importante.
+    title: Algorithmes non supervisés et réduction de dimension
   - items:
-    - Collecte et prétraitement des données textuelles.
-    - Extraction d'entités primaires, d'entités nommées et résolution référentielle.
-    - Étiquetage grammatical, analyse syntaxique, analyse sémantique.
-    - Lemmatisation.
-    - Représentation vectorielle des textes.
+    - Collecte et prétraitement des données textuelles (tokenisation, lemmatisation
+      avec spaCy).
+    - Représentation vectorielle des textes (sac de mots).
     - Pondération term frequency-inverse document frequency (TF-IDF).
-    - ' Word2Vec.'
+    - Analyse sémantique latente.
+    - De Word2Vec aux plongements de phrases issus de modèles pré-entraînés.
     num: 6
-    practice: Explorer le contenu d'une base de textes en utilisant l'analyse sémantique
-      latente.
+    practice: Explorer le contenu d'une base de textes et regrouper les documents par
+      thème.
     title: Analyse de données textuelles
-short: 'Data analytics est un terme pour exprimer les démarches d''analyse de données,
-  afin d''être en mesure de prendre des décisions. Le langage Python dispose d''un
-  écosystème permettant les traitements statistiques : de la construction de modèles
-  d''analyse, à leur évaluation jusqu''à leur représentation.'
+short: 'Cette formation vous apprend à transformer vos données en décisions avec Python :
+  préparation, modélisation supervisée et non supervisée, évaluation rigoureuse et
+  interprétation des résultats.'
 title: Data Analytics avec Python
 
 ---

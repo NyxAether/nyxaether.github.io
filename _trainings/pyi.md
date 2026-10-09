@@ -1,72 +1,73 @@
 ---
-audience: Développeurs Python désirant s'approprier les principaux dispositifs d'apprentissage
-  automatisé et de traitement d'image.
+audience: Développeurs Python désirant s'approprier les principaux outils de traitement
+  d'image et d'apprentissage automatique.
 category: Machine Learning -- Data-science
 duration: 3j  -  21h00
 id: PYI
 objectives:
-- Approfondir ses connaissances en langage Python
-- Réaliser une analyse de données en Machine Learning en Python
-- Découvrir des bibliothèques Python de traitement d'image
-- Transformer une image
-- Extraire des informations d'une image
-prerequisites: "Pratique du langage Python et connaissances de NumPy et SciPy."
+- Manipuler une image comme un tableau NumPy et l'afficher
+- Appliquer des transformations et des filtres avec scikit-image et OpenCV
+- Segmenter une image et en extraire des mesures et des caractéristiques
+- Détecter des contours, des motifs et des objets dans une image
+- Entraîner et évaluer un classifieur d'images avec scikit-learn
+prerequisites: "Pratique du langage Python. Connaissances de base de NumPy."
 price: 850.0
 program:
   parts:
   - items:
-    - La bibliothèque Pillow pour transformer les images.
-    - Présentation de bibliothèques d'analyse d'image.
-    - Manipulations simple d'image avec NumPy.
-    - Présentation de Matplotlib pour l'affichage rapide.
+    - 'Représentation numérique d''une image : tableau NumPy, canaux, types et espaces
+      de couleur.'
+    - L'environnement de travail (uv, JupyterLab ou VS Code) et l'installation des
+      bibliothèques.
+    - Lecture, écriture et conversions avec Pillow et scikit-image.
+    - 'Manipulations avec NumPy : recadrage, masques, histogrammes.'
+    - Affichage rapide avec Matplotlib.
     num: 1
-    practice: Utilisation de Pip ou Conda, transformations simples et manuelles d'images
-      avec Numpy.
-    title: Le traitement de l'image
+    practice: Mise en place de l'environnement et transformations manuelles d'images
+      avec NumPy.
+    title: Les images en Python
   - items:
-    - Filtrage, analyse et recherche d'information avec Scikit-image.
-    - 'Présentation et transformations avec OpenCV. '
-    - 'OpenCV : détection de contours et de motifs.'
+    - 'Transformations géométriques : redimensionnement, rotation, transformations
+      affines.'
+    - 'Convolutions et filtres : flou, netteté, débruitage.'
+    - Exposition et égalisation d'histogramme.
+    - Morphologie mathématique.
+    - Restauration et amélioration d'image.
     num: 2
-    practice: Mise en place des bibliothèques, manipulation et analyse d'images avec
-      Scikit-image et OpenCV.
-    title: Traitement plus avancé des images
+    practice: Construction d'une chaîne de prétraitement avec scikit-image et OpenCV.
+    title: Filtrage et transformations
   - items:
-    - Mise en place de Scikit-learn.
-    - Exemple de données utilisables et classification des processus d'apprentissage
-      automatisé.
-    - Choix et utilisation d'un estimateur.
-    - Amélioration de l'apprentissage supervisé et transformateurs.
+    - Détection de contours et de coins.
+    - Seuillage et segmentation (Otsu, ligne de partage des eaux, superpixels).
+    - Étiquetage des régions et mesures.
+    - Recherche de motifs et appariement de points d'intérêt.
+    - Comparaison et assemblage d'images.
     num: 3
-    practice: Multiples apprentissages supervisés sur des ensembles de données avec
-      Scikit-learn.
-    title: Apprentissage automatisé
+    practice: Segmentation, comptage et mesure d'objets sur des images réelles.
+    title: Analyse et extraction d'information
   - items:
-    - Décomposition - analyse en composantes principales et analyse discriminante
-      linéaire.
-    - 'Apprentissage non supervisé : multiples approches.'
-    - Divers algorithmes de classification.
+    - Apprentissage supervisé et non supervisé.
+    - Choix d'un estimateur, préprocesseurs et pipelines.
+    - Découpage des données, validation croisée et métriques de classification.
+    - 'Réduction de dimension : analyse en composantes principales, analyse discriminante
+      linéaire.'
+    - Clustering.
     num: 4
-    practice: Utilisation d'algorithmes d'apprentissage additionnels de Scikit-learn.
-    title: Cas additionnels d'apprentissage automatisé
+    practice: Classification et regroupement d'un jeu de données d'images avec scikit-learn.
+    title: Apprentissage automatique avec scikit-learn
   - items:
-    - Classification d'image avec Scikit-learn, retour sur les algorithmes disponibles.
-    - Présentation et installation de scikit-image.
-    - 'Bibliothèque d''adaptation de l''apprentissage automatisé aux images numériques '
-    - Entrées et sorties de Scikit-image.
-    - ' Analyse des images avec Scikit-image : segmentation, détection, mesures.'
-    - 'Transformations simples d''image avec Scikit-learn : convolutions et autres
-      filtres. '
-    - 'Comparaison et assemblage d''images avec Scikit-image. '
-    - Amélioration d'image avec Scikit-image.
+    - 'Extraction de caractéristiques : HOG, LBP, histogrammes de couleur.'
+    - Classification d'images avec scikit-learn.
+    - Détection de visages et d'objets.
+    - Inférence avec un modèle pré-entraîné (module DNN d'OpenCV, ONNX).
+    - Choix entre approche classique et deep learning.
     num: 5
-    practice: Classification d'images, détection de visage, reconstitutions et améliorations
-      avec scikit-learn et scikit-image.
+    practice: Classification d'images et détection de visages, comparaison avec un
+      modèle pré-entraîné.
     title: Apprentissage pour les images
-short: Ce cours Python d’intelligence artificielle, vous permettra de réaliser des
-  analyses de données en machine learning. Vous apprendrez à transformer une image
-  et à en extraire des informations. Nous vous présenterons les bibliothèques de traitements
-  d'image les plus usitées dans les projets de deep learning.
-title: Traitement d’image avec Python
+short: 'Cette formation vous apprend à traiter et analyser des images avec Python :
+  manipulation avec NumPy, filtrage et segmentation avec scikit-image et OpenCV, puis
+  classification d''images avec scikit-learn.'
+title: Traitement d'image avec Python
 
----
+---

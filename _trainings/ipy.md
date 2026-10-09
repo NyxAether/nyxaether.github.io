@@ -4,74 +4,86 @@ category: Python
 duration: 3j  -  21h00
 id: IPY
 objectives:
-- Structurer des programmes selon un algorithme
-- Maîtriser les éléments de lexique et de syntaxe d'un langage pour écrire un programme
-- Exécuter un programme
-- Déboguer et tester un programme
+- Décrire un algorithme en pseudo-code et le traduire en Python
+- Écrire et exécuter un script Python utilisant variables, conditions, boucles et
+  fonctions
+- Organiser des données dans des listes et des dictionnaires
+- Rendre un programme lisible en appliquant les conventions de style
+- Localiser une erreur avec un débogueur et vérifier un programme par des tests unitaires
 prerequisites: Aucune connaissance particulière.
 price: 850.0
 program:
   parts:
   - items:
-    - Qu'est-ce qu'un programme ?
-    - Qu'est-ce qu'un langage ? Les différents paradigmes.
-    - Qu'est-ce qu'un algorithme ? Le pseudo-langage.
-    - Les compilateurs. Les exécutables.
+    - Qu'est-ce qu'un programme ? Qu'est-ce qu'un algorithme ?
+    - Décrire un algorithme en pseudo-code.
+    - Langages compilés et interprétés ; les paradigmes de programmation.
+    - Présentation de Python et de son écosystème.
     num: 1
-    title: Un programme
+    practice: Écriture en pseudo-code de l'algorithme d'un problème du quotidien.
+    title: Programme, algorithme et langage
   - items:
-    - 'Ecriture d''un programme : syntaxe et instructions.'
-    - Compilation et exécution du programme.
-    - Qu'est-ce qu'une librairie ? Son rôle, son usage.
+    - Installation de Python et de l'environnement de travail (uv, VS Code).
+    - L'interpréteur interactif et l'exécution d'un script.
+    - 'Syntaxe de base : instructions, indentation, commentaires.'
+    - Afficher et saisir des données.
     num: 2
-    title: Genèse d'un premier programme
+    practice: Écriture et exécution d'un premier script interactif.
+    title: Premier programme Python
   - items:
-    - Convention de nommage. Convention syntaxique.
-    - Utilisation des commentaires. Pourquoi commenter les développements ?
-    - 'Améliorer la lisibilité des programmes : indentation du code, découpage du
-      code...'
+    - Qu'est-ce qu'une variable ? Nommage et affectation.
+    - 'Les types de base : entiers, nombres à virgule flottante, chaînes de caractères,
+      booléens.'
+    - Conversion de type.
+    - Opérateurs arithmétiques, de comparaison et logiques ; priorité des opérateurs.
+    - Expressions booléennes.
     num: 3
-    title: Règles de programmation
+    practice: Calculs et conversions à partir de données saisies par l'utilisateur.
+    title: Variables, types et expressions
   - items:
-    - Qu'est-ce qu'une variable ?
-    - 'Les types primitifs : entiers, chaînes de caractères, nombres réels, autres.'
-    - Déclaration, définition et initialisation d'une variable. Les constantes.
-    - Saisie, affichage, affectation, conversion de type.
-    - Organiser ses données sous forme de tableaux.
+    - Les instructions conditionnelles (if, elif, else).
+    - Les blocs d'instructions et l'indentation.
+    - Les boucles while et for ; la fonction range.
+    - Interrompre une boucle (break, continue).
+    - Imbrication des structures de contrôle.
     num: 4
-    practice: Manipulation des variables.
-    title: Les variables
-  - items:
-    - Les différents opérateurs (addition, égalité...).
-    - Combinaison d'opérateurs.
-    - Expression booléenne.
-    num: 5
-    title: Opérateurs et expressions
-  - items:
-    - Les sélections alternatives (si, si-alors-sinon...).
-    - Les blocs d'instructions (notion de Début... Fin).
-    - Les boucles itératives (tant-que-répéter, répéter-jusqu'à, pour-de-à).
-    - Imbrication des instructions.
-    num: 6
+    practice: Traduction en Python des algorithmes écrits en pseudo-code.
     title: Les structures de contrôle
   - items:
-    - 'Définitions : procédure, fonction. Intérêt.'
-    - Le passage de paramètres.
-    - Le code retour d'une fonction. Appel de fonctions.
-    num: 7
-    title: Les procédures et les fonctions
+    - 'Les listes : création, accès, modification, parcours.'
+    - Les tuples.
+    - Les dictionnaires.
+    - Les chaînes de caractères comme séquences.
+    num: 5
+    practice: Gestion d'une petite collection de données (carnet de notes, inventaire).
+    title: Organiser ses données
   - items:
-    - Savoir interpréter les différents messages d'erreur.
-    - 'Utiliser un débogueur : exécution d''un programme pas à pas, points d''arrêt,
-      inspecter les variables.'
-    - Tests unitaires.
+    - Définir et appeler une fonction ; intérêt du découpage.
+    - Paramètres, valeurs par défaut et valeur de retour.
+    - Portée des variables.
+    - Importer un module de la bibliothèque standard ; installer un paquet externe.
+    num: 6
+    practice: Découpage d'un programme en fonctions réutilisables.
+    title: Fonctions et modules
+  - items:
+    - Conventions de nommage et de style (PEP 8).
+    - 'Commentaires et docstrings : pourquoi et quoi commenter.'
+    - Formatage et vérification automatiques du code avec Ruff.
+    num: 7
+    practice: Relecture et remise en forme d'un programme existant.
+    title: Écrire du code lisible
+  - items:
+    - Lire un message d'erreur et une trace d'appels.
+    - Gérer les erreurs prévisibles (try, except).
+    - 'Utiliser un débogueur : exécution pas à pas, points d''arrêt, inspection des
+      variables.'
+    - Écrire des tests unitaires avec pytest.
     num: 8
-    practice: Utilisation d'un débogueur pour contrôler l'exécution des programmes.
-    title: Maintenance, débogage et test des programmes
-short: Ce cours vous initiera aux bases de la programmation et de l'algorithmique.
-  Vous mettrez en œuvre les étapes clefs de la construction d'un programme informatique.
-  Vous découvrirez les éléments de syntaxe, l'organisation du code et les tests. Le
-  langage Python sera utilisé pour les exemples et les travaux pratiques.
+    practice: Correction d'un programme défectueux à l'aide du débogueur et de tests.
+    title: Déboguer et tester
+short: 'Cette formation vous apprend à concevoir un algorithme et à le programmer en
+  Python : variables, structures de contrôle, données, fonctions, puis débogage et
+  tests de vos programmes.'
 title: Apprendre à programmer (avec Python)
 
----
+---

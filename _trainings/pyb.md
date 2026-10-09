@@ -1,55 +1,70 @@
 ---
-audience: Contrôleurs de gestion, chefs de projet, comptables, responsables financier,
-  RH et toute personne maîtrisant les macros d’Excel et souhaitant développer des
-  résultats automatiquement.
+audience: Contrôleurs de gestion, chefs de projet, comptables, responsables financiers
+  et RH, et toute personne pratiquant Excel et souhaitant automatiser ses traitements
+  de données et ses rapports.
 category: Python
 duration: 3j  -  21h00
 id: PYB
 objectives:
-- Connaître les bases de Python
-- Savoir manipuler des données Excel/CSV/SQL avec Python
-- Savoir visualiser des données avec Python
-prerequisites: "Pratique d'Excel. Savoir programmer avec des macros Excel ou connaître\
-  \ l’algorithmique."
+- Écrire des scripts Python simples (variables, conditions, boucles, fonctions)
+- Lire, nettoyer et consolider des données Excel, CSV et SQL avec pandas
+- Automatiser le traitement d'un lot de fichiers jusqu'à la production d'un classeur
+  Excel
+- Représenter des données sous forme de graphiques et de cartes
+prerequisites: "Pratique d'Excel. Pratique des macros Excel ou notions d'algorithmique."
 price: 850.0
 program:
   parts:
   - items:
-    - Qu’est-ce qu’un programme ?
-    - 'Écriture d’un programme : syntaxe et instructions.'
-    - Qu'est-ce qu’une fonction, une librairie ? Son rôle, son usage.
     - Présentation du langage Python et de son écosystème.
+    - L'environnement de travail (uv, JupyterLab ou VS Code).
+    - 'Écriture et exécution d''un script : syntaxe, indentation, commentaires.'
+    - 'Variables et types de base : entiers, réels, chaînes de caractères, booléens.'
+    - Opérateurs et expressions.
+    - 'Structures de contrôle : conditions et boucles.'
     num: 1
-    title: Les principes d’un programme
+    practice: Installation de l'environnement et écriture de premiers scripts de calcul.
+    title: Premiers pas avec Python
   - items:
-    - Qu’est-ce qu’une variable ?
-    - 'Les types de variables : entiers, réels, chaînes de caractères...'
-    - Déclaration, définition et initialisation d’une variable.
-    - Les différents opérateurs.
-    - Les structures de contrôles (boucles, tests).
-    - Les structures de données avancées (tuples, listes, dictionnaires).
-    - Les fonctions les plus utiles.
+    - Listes, tuples et dictionnaires.
+    - 'Écrire ses propres fonctions : paramètres et valeurs de retour.'
+    - Les fonctions et méthodes natives courantes (chaînes, listes, dates).
+    - Importer et utiliser une bibliothèque.
+    - Gérer les erreurs avec try/except.
     num: 2
-    title: Les fondamentaux des langages et Python
+    practice: Transposition en Python d'une macro Excel ou d'un algorithme fourni.
+    title: Structurer son code
   - items:
-    - Utiliser une distribution Python.
-    - Les librairies pour démarrer un projet d’analyse de données.
-    - Utiliser les notebooks Jupyter pour explorer ses données.
-    - Importer et exporter des données provenant de différentes sources (texte, CSV,
-      JSON, Excel…).
-    - Manipuler des données avec Pandas  (recherche, transformation, calculs simples).
+    - Lire et écrire des fichiers CSV, Excel et JSON.
+    - Interroger une base de données SQL et charger le résultat dans un DataFrame.
+    - Sélectionner, filtrer et trier des données.
+    - 'Nettoyer les données : valeurs manquantes, types, dates, doublons.'
+    - Fusionner des tables (équivalent de RECHERCHEV) et concaténer des fichiers.
+    - Agréger avec groupby et pivot_table (tableaux croisés dynamiques).
     num: 3
-    title: Python et le traitement de données
+    practice: Consolidation de plusieurs extractions Excel et CSV en un tableau de synthèse.
+    title: Manipuler des données avec pandas
   - items:
-    - Tracés de courbes, histogrammes et autres graphiques.
-    - Visualiser ses données sur une carte interactive avec Folium.
-    - Graphiques interactifs avec panel.
+    - Parcourir des dossiers et traiter des fichiers par lot (pathlib).
+    - Produire un classeur Excel mis en forme (openpyxl).
+    - Transformer un notebook en script réutilisable et paramétrable.
+    - Planifier l'exécution d'un script (planificateur de tâches).
     num: 4
-    title: Visualisation des données avec Python
-short: Vous maîtrisez Excel et ses limites, vous souhaitez extraire des données, les
-  filtrer, les retravailler, les présenter de manière attractive. Avec Python c'est
-  possible. Sans être développeur, ce cours vous permet d'apprendre le b.a-ba afin
-  de mettre en place des tâches automatiques pour faciliter votre travail.
+    practice: Automatisation d'un reporting mensuel, des fichiers sources au classeur
+      de sortie.
+    title: Automatiser ses traitements de fichiers
+  - items:
+    - Courbes, barres et histogrammes avec Matplotlib et pandas.
+    - Graphiques interactifs avec Plotly.
+    - Cartes interactives avec Folium.
+    - Intégration des graphiques dans un rapport (image, HTML ou classeur Excel).
+    num: 5
+    practice: Réalisation des graphiques d'un tableau de bord à partir des données
+      consolidées.
+    title: Visualiser ses données
+short: Vous maîtrisez Excel et ses limites ? Cette formation vous apprend, sans être
+  développeur, à extraire, nettoyer, consolider et représenter vos données avec Python,
+  puis à automatiser ces traitements pour gagner du temps chaque semaine.
 title: Python, automatisez vos traitements de fichiers
 
----
+---
